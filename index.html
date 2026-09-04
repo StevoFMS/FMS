@@ -33,6 +33,86 @@
     font-family:'Courier New', 'DejaVu Sans Mono', monospace;
     padding:16px;
   }
+  .guide-panel{
+    width:340px;
+    max-width:88vw;
+    max-height:94vh;
+    background:linear-gradient(160deg,#1a1d20,#111315);
+    border-radius:14px;
+    box-shadow:0 20px 60px rgba(0,0,0,.6), inset 0 0 0 1px #000;
+    margin-left:16px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    font-family:'Courier New', 'DejaVu Sans Mono', monospace;
+  }
+  .guide-header{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:12px 14px;
+    background:#000;
+    border-bottom:1px solid var(--field-border);
+    flex-shrink:0;
+  }
+  .guide-title{color:var(--white); font-weight:bold; font-size:13px; letter-spacing:.5px;}
+  .guide-progress{color:var(--grey); font-size:10.5px; margin-top:2px;}
+  .guide-close{cursor:pointer; color:var(--grey); font-size:16px; padding:0 4px; line-height:1;}
+  .guide-close:hover{color:var(--white);}
+  .guide-body{overflow-y:auto; padding:8px 14px 16px; flex:1; background:#000;}
+  .guide-section-title{color:var(--cyan); font-size:11px; font-weight:bold; letter-spacing:.4px; margin:14px 0 6px;}
+  .guide-block-hdr{
+    display:flex; align-items:center; gap:7px;
+    padding:9px 4px; cursor:pointer;
+    font-size:13px; font-weight:bold; color:var(--white);
+    border-top:1px solid var(--field-border); border-bottom:1px solid var(--field-border);
+    background:#0c0e10;
+  }
+  .guide-block-hdr:first-child{border-top:none; margin-top:0;}
+  .guide-block-hdr:hover{background:#171a1d;}
+  .guide-block-hdr .chevron{color:var(--cyan); width:11px; flex-shrink:0;}
+  .guide-block-count{margin-left:auto; color:var(--grey); font-size:10.5px; font-weight:normal;}
+  .guide-block-body{padding:4px 2px 8px;}
+  .guide-section-title:first-child{margin-top:2px;}
+  .guide-item{
+    display:flex; align-items:flex-start; gap:8px;
+    padding:4px 2px;
+    cursor:pointer;
+    font-size:11.5px;
+    line-height:1.3;
+    color:var(--white);
+  }
+  .guide-item:hover{background:#14171a;}
+  .guide-item.sensed{cursor:default;}
+  .guide-item.sensed:hover{background:none;}
+  .guide-item .box{
+    flex-shrink:0; width:13px; height:13px; margin-top:1px;
+    border:1px solid var(--field-border);
+    display:flex; align-items:center; justify-content:center;
+    font-size:9px; font-weight:bold; color:var(--green);
+  }
+  .guide-item.done .box{border-color:var(--green);}
+  .guide-item.done{color:var(--green);}
+  .guide-item.overridden{color:#5a5f64; opacity:.65;}
+  .guide-item.overridden .box{border-color:#5a5f64; color:#5a5f64;}
+  .guide-group-hdr{
+    display:flex; align-items:center; gap:6px;
+    padding:5px 2px; cursor:pointer;
+    font-size:11.5px; font-weight:bold; color:var(--white);
+  }
+  .guide-group-hdr:hover{background:#14171a;}
+  .guide-group-hdr .chevron{color:var(--cyan); width:10px; flex-shrink:0;}
+  .guide-group-body{padding-left:16px; border-left:1px solid var(--field-border); margin:0 0 4px 4px;}
+  .guide-group-note{color:var(--grey); font-size:10.5px; font-style:italic; padding:3px 2px 5px; line-height:1.3;}
+  .guide-reopen{
+    position:fixed; top:50%; right:0; transform:translateY(-50%);
+    background:#1a1d20; color:var(--white); border:1px solid var(--field-border); border-right:none;
+    border-radius:8px 0 0 8px;
+    padding:14px 6px; cursor:pointer;
+    font-family:'Courier New', monospace; font-size:11px; font-weight:bold; letter-spacing:1px;
+    writing-mode:vertical-rl;
+    box-shadow:-4px 0 16px rgba(0,0,0,.4);
+    z-index:80;
+  }
+  .guide-reopen:hover{color:var(--cyan); border-color:var(--cyan);}
   .bezel{
     position:relative;
     width:min(660px, 97vw, calc(94vh * 660 / 760));
@@ -239,7 +319,6 @@
   }
   .radio.on .dot{border-color:var(--yellow);}
   .radio.on .dot::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--yellow);}
-  .radio.on span.txt{color:var(--yellow);}
   .checkbox{
     display:inline-flex;align-items:center;gap:8px;cursor:pointer;
   }
@@ -1264,6 +1343,17 @@
   </div>
 </div>
 </div>
+<div class="guide-panel" id="guidePanel">
+  <div class="guide-header">
+    <div>
+      <div class="guide-title">FMS GUIDE</div>
+      <div class="guide-progress" id="guideProgress"></div>
+    </div>
+    <span class="guide-close" onclick="closeGuidePanel()">✕</span>
+  </div>
+  <div class="guide-body" id="guideBody"></div>
+</div>
+<div class="guide-reopen" id="guideReopen" style="display:none;" onclick="openGuidePanel()">GUIDE</div>
 
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
@@ -1309,6 +1399,13 @@ let state = {
   scratch: {text:'', error:false},
   // Mandatory startup initialization dialog (ORIGIN + BLOCK FUEL)
   initDlg: {done:false, origin:'', entry:{fuel:''}},
+  // GNSS ramp position from the init dialog — separate from the FPLN.INIT
+  // ORIGIN field, which must be manually entered by the pilot (per the real
+  // aircraft: GNSS position initializes automatically; FPLN ORIGIN does not).
+  gnssOrigin: '',
+  // FMS setup guide side panel — open by default, manual-item ticks stored by
+  // key, right-click "override" (N/A, greyed out) stored separately by key
+  guide: {open:true, manual:{}, override:{}, expanded:{}, setupOpen:true, crewOpen:true},
   main: 'DBASE',
   sub: 'STATUS',
   chklSub: 'SUMMARY',
@@ -4261,18 +4358,16 @@ function pageDbaseStatus(){
 
   <div class="row" style="margin-bottom:6px;">
     <span class="lbl">ACTIVE PERIOD</span>
-    <span class="grey" style="font-size:10px;">multi-state toggle — inactive when airborne (PG 10-13)</span>
     <span class="right" style="margin-left:auto;"><span class="btn" onclick="state.fms.airborne=!state.fms.airborne; render();">SIM: ${state.fms.airborne?'AIRBORNE':'ON GROUND'}</span></span>
   </div>
   <div class="stack" style="margin-bottom:6px; ${state.fms.airborne?'opacity:.45;':''}">
     <div class="radio ${state.activePeriod===0?'on':''}" onclick="${state.fms.airborne?'':'state.activePeriod=0; render();'}">
-      <div class="dot"></div><span class="txt ${state.activePeriod===0?'green':'val'}">15MAR10&nbsp;&nbsp;12APR10</span>
+      <div class="dot"></div><span class="txt ${state.activePeriod===0?'yellow':'val'}">06AUG26&nbsp;&nbsp;03SEP26</span>
     </div>
     <div class="radio ${state.activePeriod===1?'on':''}" onclick="${state.fms.airborne?'':'state.activePeriod=1; render();'}">
-      <div class="dot"></div><span class="txt ${state.activePeriod===1?'green':'val'}">12APR10&nbsp;&nbsp;10MAY10</span>
+      <div class="dot"></div><span class="txt ${state.activePeriod===1?'yellow':'val'}">03SEP26&nbsp;&nbsp;01OCT26</span>
     </div>
   </div>
-  <div class="grey" style="font-size:9.5px; margin-bottom:20px;">In normal operation on the ground the active NAV database selection shows in green; when the wrong database is selected it shows in yellow. Selection of the active period is disabled for the SEC FPLN.</div>
 
   <div class="lbl center" style="margin-bottom:6px;">DATA BASES</div>
   <table class="simple">
@@ -4461,7 +4556,7 @@ const AIRPORT_ELEV = {
   YPAD: 20
 };
 function fmsPosCoord(){
-  const o = (state.fpln.entry.origin || '').toUpperCase();
+  const o = (state.gnssOrigin || '').toUpperCase();
   return AIRPORT_COORDS[o] || '----°--.--  ----°--.--';
 }
 function pagePosFms(){
@@ -4714,9 +4809,8 @@ function pagePerfDep(){
   <div class="row" style="margin-bottom:14px;">
     <span class="lbl">APR</span>
     ${state.toThrust==='TO'
-      ? `${ddDisabled('DISARM')}<span class="grey" style="font-size:10.5px;">TO mode active — APR is DISARM and grayed out (PG 5-4)</span>`
-      : `<span class="dropdown" onclick="state.apr=!state.apr; state.fms.vspeedStatus=''; state.vspeedsComplete=false; render(); event.stopPropagation();">${state.apr?'ARMED':'DISARM'} <span class="arrow">▾</span></span>
-         <span class="grey" style="font-size:10.5px;">default ARMED when available</span>`}
+      ? `${ddDisabled('DISARM')}`
+      : `<span class="dropdown" onclick="state.apr=!state.apr; state.fms.vspeedStatus=''; state.vspeedsComplete=false; render(); event.stopPropagation();">${state.apr?'ARMED':'DISARM'} <span class="arrow">▾</span></span>`}
   </div>
 
   <div class="row" style="align-items:flex-end; margin-bottom:14px;">
@@ -4752,7 +4846,7 @@ function pagePerfDep(){
   </div>
 
   <div class="hr"></div>
-  <div class="row" style="margin-bottom:8px;"><span class="lbl">DEP PROFILE</span>${ddSel('depProfile')} <span class="grey" style="font-size:10.5px;">HT/ALT entry below sets thrust reduction height (PG 10-49)</span></div>
+  <div class="row" style="margin-bottom:8px;"><span class="lbl">DEP PROFILE</span>${ddSel('depProfile')}</div>
   ${state.fms.depProfile==='NADP' ? (function(){
     if(!state.perf.entry.accelHt){
       const elev = AIRPORT_ELEV[(state.fpln.entry.origin||'').toUpperCase()];
@@ -4855,10 +4949,9 @@ function pagePerfArr(){
     <span class="stack"><span class="btn" onclick="openTempComp()">TEMP COMP...</span><span class="${state.fms.tempComp==='ON'?'green':'grey'}" style="font-size:10px;">${state.fms.tempComp}</span></span>
   </div>
   <div class="lbl">AIRPORT (PERF)</div>
-  <div class="row" style="margin-bottom:4px;">
+  <div class="row" style="margin-bottom:14px;">
     <span class="dropdown" onclick="state.arrAirport = (state.arrAirport==='DEST'?'ORIG':'DEST'); render(); event.stopPropagation();">${state.arrAirport==='ORIG'?`${state.fpln.entry.origin||'----'} (ORIG)`:`${state.fpln.entry.dest||'----'} (DEST)`} <span class="arrow">▾</span></span>
   </div>
-  <div class="grey" style="font-size:9.5px; margin-bottom:14px;">Selects the arrival airport used to compute VREF. On the ground this defaults automatically to the destination airport. Airborne it defaults to the origin airport when within 50 NM of origin or beyond half the distance to destination, and to the destination airport otherwise (PG 10-70).</div>
   <div class="grid g4" style="margin-bottom:14px;">
     <div><div class="lbl">OAT</div>${pfField('oatArr')}</div>
     <div><div class="lbl">RWY WIND</div>${pfField('rwyWindArr')} <span class="grey" style="font-size:9.5px;">H11/R9</span></div>
@@ -5401,6 +5494,7 @@ function render(){
   renderBottom();
   renderScratchBar();
   if(!state.initDlg.done) renderInitDialog();
+  renderGuidePanel();
   const actBox = document.querySelector('.act');
   if(actBox) actBox.style.display = (state.app==='FMS' || state.app==='MAP') ? 'flex' : 'none';
   const content = document.getElementById('content');
@@ -5458,7 +5552,7 @@ function renderInitDialog(){
 }
 function confirmInit(){
   if(!state.initDlg.origin || !state.initDlg.entry.fuel) return;
-  state.fpln.entry.origin = state.initDlg.origin;
+  state.gnssOrigin = state.initDlg.origin;
   state.fpln.entry.fob = state.initDlg.entry.fuel;
   state.initDlg.done = true;
   document.getElementById('initOverlay').style.display = 'none';
@@ -5469,8 +5563,250 @@ function openInitDialog(){
   renderInitDialog();
 }
 
+/* ================= FMS Setup Guide (side panel) =================
+   Transcribed from the operator-supplied setup procedure. Each item is
+   either "sensed" (a function reading live app state — turns green
+   automatically, not tappable) or manual (no corresponding app state to
+   read — e.g. cross-checks against an OFP/chart that doesn't exist in this
+   simulator, or steps that are read-only info with nothing to "complete").
+   Manual items are tapped to toggle green, stored in state.guide.manual
+   keyed by the item's `key`. Clicking any item's text navigates to the
+   relevant page.                                                         */
+const GUIDE_SECTIONS = [
+  { title: 'DBASE — STATUS', page:{app:'FMS',main:'DBASE',sub:'STATUS'}, items:[
+    {key:'dbase_ac',   label:'AIRCRAFT VARIANT checked'},
+    {key:'dbase_eng',  label:'ENGINE VARIANT checked'},
+    {key:'dbase_nav',  label:'NAV DATA BASE checked'},
+    {key:'dbase_per',  label:'ACTIVE PERIOD current (green) unless deferred under MEL'},
+    {key:'dbase_mdl',  label:'AC MODEL confirmed — BD-500-1A11'},
+  ]},
+  { title: 'POS — FMS', page:{app:'FMS',main:'POS',sub:'FMS'}, items:[
+    {key:'pos_latlon', label:'LAT and LONG info checked'},
+    {key:'pos_sat',    label:'SAT DESELECT (if required)'},
+    {key:'pos_init',   label:'INITIALIZE AIRPORT (if required)'},
+  ]},
+  { title: 'FPLN — INIT', page:{app:'FMS',main:'FPLN',sub:'INIT'}, items:[
+    {key:'init_origin', label:'ORIGIN set (DEP airport)', sense:()=> !!state.fpln.entry.origin},
+    {key:'init_fltno',  label:'FLT NUMBER set', sense:()=> !!state.fpln.entry.fltNumber},
+    {key:'init_dest',   label:'DEST set (DES airport)', sense:()=> !!state.fpln.entry.dest},
+    {key:'init_crzalt', label:'CRZ ALT set', sense:()=> !!state.fpln.entry.crzAlt},
+    {key:'init_etd',    label:'ETD set', sense:()=> (state.fpln.entry.etd||'').length===4},
+    {key:'init_dep',    label:'DEPARTURE — RWY/SID/TRANS set'},
+    {key:'init_arr',    label:'ARRIVAL — TRANS/STAR/APPR set'},
+    {key:'init_altn',   label:'ALTN set (filed ALTN airport)', sense:()=> !!state.fpln.entry.altn},
+    {key:'init_altncrz',label:'ALTN CRZ ALT set', sense:()=> !!state.fpln.entry.altnCrzAlt},
+    {key:'init_wind',   label:'AVG WIND set (CLB/CRZ/DES)',
+      sense:()=> !!(state.fpln.entry.avgWindClb && state.fpln.entry.avgWindCrz && state.fpln.entry.avgWindDes)},
+    {key:'init_isa',    label:'AVG ∆ISA set', sense:()=> !!state.fpln.entry.avgIsa},
+  ]},
+  { title: 'FPLN — FUEL', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, items:[
+    {key:'fuel_calc',   label:'FMS FOB MODE on CALC'},
+    {key:'fuel_zfw',    label:'ZFW set', sense:()=> !!state.fpln.entry.zfwWt},
+    {key:'fuel_zfwcg',  label:'ZFW CG left empty until Final Loadsheet'},
+    {key:'fuel_block',  label:'BLOCK FUEL set', sense:()=> !!state.fpln.entry.fob},
+    {key:'fuel_taxi',   label:'TAXI FUEL set or left at default', sense:()=> !!state.fpln.entry.fuelTaxi},
+    {key:'fuel_reserve',label:'RESERVE FUEL quantity/percentage set', sense:()=> !!state.fpln.entry.fuelReserve},
+    {key:'fuel_pax',    label:'NUMBER OF PAX cleared, left empty until Final Loadsheet'},
+  ]},
+  { title: 'PERF — DEP', page:{app:'FMS',main:'PERF',sub:'DEP'}, items:[
+    {key:'dep_tothrust',label:'TO THRUST selected'},
+    {key:'dep_oat',     label:'OAT set (per ATIS/AWIS)', sense:()=> !!state.perf.entry.oat},
+    {key:'dep_flex',    label:'FLEX set (after OAT)', sense:()=> !!state.perf.entry.flex},
+    {key:'dep_rwywind', label:'RWY WIND set (per ATIS/AWIS)', sense:()=> !!state.perf.entry.rwyWind},
+    {key:'dep_clbthrust',label:'CLB THRUST selected'},
+    {key:'dep_apr',     label:'APR reviewed (TO-1/-2/-3 only)'},
+    {key:'dep_slatflap',label:'SLAT/FLAP selected'},
+    {key:'dep_bleed',   label:'BLEED SOURCE selected'},
+    {key:'dep_wingai',  label:'WING ANTI-ICE selected'},
+    {key:'dep_cowlai',  label:'COWL ANTI-ICE selected'},
+    {key:'dep_profile', label:'DEP PROFILE / NADP — ACCEL HT and THR RED HT set as required'},
+    {key:'dep_vspeeds', label:'V1, VR, V2 set (not yet posted with SET VSPEEDS)',
+      sense:()=> !!(state.perf.entry.v1 && state.perf.entry.vr && state.perf.entry.v2)},
+  ]},
+  { title: 'PERF — CLB', page:{app:'FMS',main:'PERF',sub:'CLB'}, items:[
+    {key:'clb_spd',     label:'SPD reviewed (default 275/M0.74)'},
+    {key:'clb_limit',   label:'SPD/ALT LIMIT reviewed'},
+    {key:'clb_transalt',label:'TRANS ALT set or left at default', sense:()=> !!state.perf.entry.transAlt},
+  ]},
+  { title: 'PERF — CRZ', page:{app:'FMS',main:'PERF',sub:'CRZ'}, items:[
+    {key:'crz_spd',     label:'SPD reviewed'},
+  ]},
+  { title: 'PERF — DES', page:{app:'FMS',main:'PERF',sub:'DES'}, items:[
+    {key:'des_spd',     label:'SPD reviewed (default M0.76/290)'},
+  ]},
+  { title: 'ROUTE — VIA/TO', page:{app:'FMS',main:'ROUTE',sub:'VIA/TO'}, items:[
+    {key:'via_origin',  label:'ORIGIN AIRPORT set (if not auto populated)', sense:()=> !!state.fpln.entry.origin},
+    {key:'via_route',   label:'VIA/TO ROUTE programmed', sense:()=> !!state.fpln.entry.viaTo2Via},
+    {key:'via_dest',    label:'DEST AIRPORT set (if not auto populated)', sense:()=> !!state.fpln.entry.dest},
+    {key:'via_altn',    label:'ALTN AIRPORT set (if not auto populated)', sense:()=> !!state.fpln.entry.altn},
+  ]},
+  { title: 'ROUTE — VIA/TO (ALTERNATE)', page:{app:'FMS',main:'ROUTE',sub:'VIA/TO'}, items:[
+    {key:'via_alt_route', label:'ALTN routing entered — last point of Missed Approach to first waypoint of STAR'},
+  ]},
+  { title: 'ROUTE — LEGS', page:{app:'FMS',main:'ROUTE',sub:'LEGS'}, items:[
+    {key:'legs_chart',  label:'Planned departure checked against Jeppesen/company chart'},
+    {key:'legs_seqauto',label:'SEQ AUTO active'},
+    {key:'legs_verify', label:'Flight plan legs verified (route waypoints)'},
+    {key:'legs_track',  label:'Direct/Flex tracks and lat-long track/distance cross-checked against OFP'},
+    {key:'legs_restr',  label:'Speed and altitude restrictions verified/modified'},
+    {key:'legs_sec',    label:'COPY TO SEC (if required)'},
+    {key:'legs_fix',    label:'FIX PAGE — relevant fixes set (CDP etc.)'},
+    {key:'legs_plan',   label:'NAV display set to PLAN — DTG/ETE/ETA/FUEL checked against OFP'},
+  ]},
+];
+/* Crew cross-checks — a separate, independently-collapsible block from the
+   FMS SETUP GUIDE above (not one of its sections). Same expandable-group
+   mechanism, same sensing rules (only typed-value fields are auto-sensed). */
+const GUIDE_CREW_CHECKS = [
+  { type:'group', key:'grp_fpc', label:'Flight plan Check (PF)', items:[
+    {key:'fpc_callsign', label:'Callsign (crosscheck with CTP)', page:{app:'FMS',main:'FPLN',sub:'INIT'},
+      sense:()=> !!state.fpln.entry.fltNumber},
+    {key:'fpc_depdest',  label:'Departure & destination', page:{app:'FMS',main:'FPLN',sub:'INIT'},
+      sense:()=> !!(state.fpln.entry.origin && state.fpln.entry.dest)},
+    {key:'fpc_finalalt', label:'Final altitude', page:{app:'FMS',main:'FPLN',sub:'INIT'},
+      sense:()=> !!state.fpln.entry.crzAlt},
+    {key:'fpc_route',    label:'Loaded route (ROUTE — VIA/TO)', page:{app:'FMS',main:'ROUTE',sub:'VIA/TO'},
+      sense:()=> !!state.fpln.entry.viaTo2Via},
+    {key:'fpc_dtgete',   label:'DTG / ETE / (Arrival) FUEL (KG) reviewed', page:{app:'FMS',main:'ROUTE',sub:'VIA/TO'}},
+  ]},
+  { type:'group', key:'grp_floadsheet', label:'Final Loadsheet',
+    note:'CM1 inserts ZFW, ZFWCG, NUMBER OF PAX and updates BLOCK FUEL as per actual fuel on board into the FPLN-FUEL tab. The passenger count entry includes both cabin crew and passengers.', items:[
+    {key:'floadsheet_zfw',   label:'ZFW', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> !!state.fpln.entry.zfwWt},
+    {key:'floadsheet_zfwcg', label:'ZFW CG', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> (state.fpln.entry.zfwCg||'').length===3},
+    {key:'floadsheet_pax',   label:'NUMBER OF PAX', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> !!state.fpln.entry.numPax},
+    {key:'floadsheet_block', label:'BLOCK FUEL updated (actual fuel on board)', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> !!state.fpln.entry.fuelBlock},
+    {key:'floadsheet_stab',  label:'STAB TRIM set (PERF — DEP tab)', page:{app:'FMS',main:'PERF',sub:'DEP'}},
+  ]},
+  { type:'group', key:'grp_lsc', label:'Loadsheet check — CM1',
+    note:'CM1 reads from FMS FPLN – FUEL tab. CM2 confirms on the final loadsheet.', items:[
+    {key:'lsc_zfw',   label:'ZFW', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> !!state.fpln.entry.zfwWt},
+    {key:'lsc_zfwcg', label:'ZFW CG', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> (state.fpln.entry.zfwCg||'').length===3},
+    {key:'lsc_tow',   label:'TOW', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
+    {key:'lsc_towcg', label:'TOW CG', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
+    {key:'lsc_lw',    label:'LW', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
+    {key:'lsc_block', label:'BLOCK (FUEL)', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> !!state.fpln.entry.fuelBlock},
+    {key:'lsc_stab',  label:'STAB TRIM (PERF — DEP tab)', page:{app:'FMS',main:'PERF',sub:'DEP'}},
+  ]},
+  { type:'group', key:'grp_perfc', label:'Performance Check — CM1',
+    note:'CM1 reads from FMS PERF – DEP tab.', items:[
+    {key:'perfc_origin',  label:'ORIGIN', page:{app:'FMS',main:'PERF',sub:'DEP'}, sense:()=> !!state.fpln.entry.origin},
+    {key:'perfc_rwy',     label:'RWY (full length/intersection, Dry or Wet as applicable)', page:{app:'FMS',main:'PERF',sub:'DEP'}},
+    {key:'perfc_tow',     label:'TOW', page:{app:'FMS',main:'PERF',sub:'DEP'}},
+    {key:'perfc_tothrust',label:'TO THRUST', page:{app:'FMS',main:'PERF',sub:'DEP'}},
+    {key:'perfc_flex',    label:'FLEX (if required)', page:{app:'FMS',main:'PERF',sub:'DEP'}, sense:()=> !!state.perf.entry.flex},
+    {key:'perfc_slatflap',label:'SLAT/FLAP', page:{app:'FMS',main:'PERF',sub:'DEP'}},
+    {key:'perfc_bleed',   label:'BLEED SOURCE', page:{app:'FMS',main:'PERF',sub:'DEP'}},
+    {key:'perfc_wingai',  label:'WING ANTI-ICE', page:{app:'FMS',main:'PERF',sub:'DEP'}},
+    {key:'perfc_cowlai',  label:'COWL ANTI-ICE', page:{app:'FMS',main:'PERF',sub:'DEP'}},
+    {key:'perfc_stab',    label:'STAB TRIM (confirm set on EICAS)', page:{app:'FMS',main:'PERF',sub:'DEP'}},
+    {key:'perfc_vspeeds', label:'V1, VR, V2', page:{app:'FMS',main:'PERF',sub:'DEP'},
+      sense:()=> !!(state.perf.entry.v1 && state.perf.entry.vr && state.perf.entry.v2)},
+  ]},
+];
+function guideItemDone(item){
+  return item.sense ? !!item.sense() : !!state.guide.manual[item.key];
+}
+function toggleGuideItem(key){
+  state.guide.manual[key] = !state.guide.manual[key];
+  renderGuidePanel();
+}
+function toggleGuideOverride(key){
+  state.guide.override[key] = !state.guide.override[key];
+  renderGuidePanel();
+  return false; // suppress the browser's native context menu
+}
+function toggleGuideGroup(key){
+  state.guide.expanded[key] = !state.guide.expanded[key];
+  renderGuidePanel();
+}
+function guideGoTo(app, main, sub){
+  selectApp(app);
+  if(main){ setMain(main); state.sub = sub; render(); }
+}
+function renderGuideLeafItem(item, sectionPage, counter){
+  const isOverridden = !!state.guide.override[item.key];
+  const isDone = guideItemDone(item);
+  const page = item.page || sectionPage;
+  if(!isOverridden){ counter.total++; if(isDone) counter.done++; }
+  const sensedCls = item.sense ? ' sensed' : '';
+  const goTo = page ? `guideGoTo('${page.app}','${page.main||''}','${page.sub||''}');` : '';
+  const clickAction = item.sense ? goTo : `toggleGuideItem('${item.key}'); ${goTo}`;
+  const cls = isOverridden ? ' overridden' : (isDone ? ' done' : '');
+  const mark = isOverridden ? '–' : (isDone ? '✓' : '');
+  return `<div class="guide-item${cls}${sensedCls}" onclick="${clickAction}" oncontextmenu="return toggleGuideOverride('${item.key}');" title="Right-click to mark as N/A">
+    <span class="box">${mark}</span><span>${item.label}</span>
+  </div>`;
+}
+function renderGuideGroup(group, counter){
+  const expanded = !!state.guide.expanded[group.key];
+  let html = `<div class="guide-group-hdr" onclick="toggleGuideGroup('${group.key}')">
+    <span class="chevron">${expanded?'▾':'▸'}</span><span>${group.label}</span>
+  </div>`;
+  if(expanded){
+    html += `<div class="guide-group-body">`;
+    if(group.note) html += `<div class="guide-group-note">${group.note}</div>`;
+    group.items.forEach(sub=>{ html += renderGuideLeafItem(sub, null, counter); });
+    html += `</div>`;
+  }
+  return html;
+}
+function toggleGuideBlock(name){
+  state.guide[name] = !state.guide[name];
+  renderGuidePanel();
+}
+function renderGuidePanel(){
+  const body = document.getElementById('guideBody');
+  const progressEl = document.getElementById('guideProgress');
+  if(!body) return;
+  const counter = {total:0, done:0};
+
+  // ---- Block 1: FMS SETUP GUIDE ----
+  const setupCounter = {total:0, done:0};
+  let setupHtml = '';
+  GUIDE_SECTIONS.forEach(section=>{
+    setupHtml += `<div class="guide-section-title">${section.title}</div>`;
+    section.items.forEach(item=>{
+      setupHtml += (item.type==='group') ? renderGuideGroup(item, setupCounter) : renderGuideLeafItem(item, section.page, setupCounter);
+    });
+  });
+  const setupOpen = !!state.guide.setupOpen;
+  let html = `<div class="guide-block-hdr" onclick="toggleGuideBlock('setupOpen')">
+    <span class="chevron">${setupOpen?'▾':'▸'}</span><span>FMS SETUP GUIDE</span>
+    <span class="guide-block-count">${setupCounter.done} / ${setupCounter.total}</span>
+  </div>`;
+  if(setupOpen) html += `<div class="guide-block-body">${setupHtml}</div>`;
+  counter.total += setupCounter.total; counter.done += setupCounter.done;
+
+  // ---- Block 2: CREW CHECKS (separate from, not nested under, FMS SETUP GUIDE) ----
+  const crewCounter = {total:0, done:0};
+  let crewHtml = '';
+  GUIDE_CREW_CHECKS.forEach(group=>{ crewHtml += renderGuideGroup(group, crewCounter); });
+  const crewOpen = !!state.guide.crewOpen;
+  html += `<div class="guide-block-hdr" onclick="toggleGuideBlock('crewOpen')">
+    <span class="chevron">${crewOpen?'▾':'▸'}</span><span>CREW CHECKS</span>
+    <span class="guide-block-count">${crewCounter.done} / ${crewCounter.total}</span>
+  </div>`;
+  if(crewOpen) html += `<div class="guide-block-body">${crewHtml}</div>`;
+  counter.total += crewCounter.total; counter.done += crewCounter.done;
+
+  body.innerHTML = html;
+  if(progressEl) progressEl.textContent = `${counter.done} / ${counter.total} complete`;
+}
+function openGuidePanel(){
+  state.guide.open = true;
+  document.getElementById('guidePanel').style.display = 'flex';
+  document.getElementById('guideReopen').style.display = 'none';
+  renderGuidePanel();
+}
+function closeGuidePanel(){
+  state.guide.open = false;
+  document.getElementById('guidePanel').style.display = 'none';
+  document.getElementById('guideReopen').style.display = 'block';
+}
+
 render();
 openInitDialog();
+renderGuidePanel();
 
 /* Keep the ACARS clock (and UTC DATE) live. Only the affected text nodes are
    rewritten rather than calling render(), so an in-progress field entry keeps
