@@ -1097,6 +1097,36 @@
     display:flex; flex-direction:column;
     pointer-events:auto;
   }
+  /* Mandatory startup init dialog — covers the tabs/content area but leaves
+     the scratchpad bar and bottom buttons reachable underneath, so Block
+     Fuel can be entered with the same scratchpad-paste mechanism used
+     everywhere else in the app. Not dismissible until both fields are set. */
+  .init-overlay{
+    display:none;
+    position:absolute; top:14px; left:14px; right:14px; bottom:78px;
+    z-index:95;
+    background:rgba(0,0,0,.88);
+    align-items:center; justify-content:center;
+  }
+  .init-box{
+    width:100%; max-width:420px;
+    background:#0a0c0d;
+    border:1px solid var(--grey);
+    box-shadow:0 20px 50px rgba(0,0,0,.7);
+    font-family:'Courier New', monospace;
+    padding:18px;
+  }
+  .init-title{color:var(--white); font-weight:bold; font-size:14px; letter-spacing:.5px; text-align:center; margin-bottom:6px;}
+  .init-sub{color:var(--grey); font-size:10px; text-align:center; margin-bottom:16px;}
+  .init-lbl{color:var(--grey); font-size:11px; letter-spacing:.4px; margin:14px 0 6px;}
+  .init-origin-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;}
+  .init-origin-opt{
+    border:1px solid var(--field-border); background:#2f343a; color:var(--white);
+    text-align:center; padding:9px 0; font-size:13px; font-weight:bold; cursor:pointer;
+  }
+  .init-origin-opt:hover{border-color:var(--cyan);}
+  .init-origin-opt.sel{border-color:var(--cyan); background:#123047; color:var(--cyan);}
+  .init-btn-row{margin-top:20px; display:flex; justify-content:center;}
   .corner-header{
     display:flex; justify-content:space-between; align-items:baseline;
     background:#000; border-bottom:1px solid var(--field-border);
@@ -1229,6 +1259,9 @@
   <div class="corner-overlay" id="cornerOverlay">
     <div class="corner-box" id="cornerBox"></div>
   </div>
+  <div class="init-overlay" id="initOverlay">
+    <div class="init-box" id="initBox"></div>
+  </div>
 </div>
 </div>
 
@@ -1274,6 +1307,8 @@ let state = {
   // Global scratchpad: typed text lands here first; clicking a field pastes
   // the scratchpad content into that field (real-CDU style entry).
   scratch: {text:'', error:false},
+  // Mandatory startup initialization dialog (ORIGIN + BLOCK FUEL)
+  initDlg: {done:false, origin:'', entry:{fuel:''}},
   main: 'DBASE',
   sub: 'STATUS',
   chklSub: 'SUMMARY',
@@ -1305,8 +1340,8 @@ let state = {
   // PERF page enterable text fields (all start blank / dashed)
   perf: {
     entry: { flex:'', oat:'', rwyWind:'', v1:'', vr:'', v2:'', transAlt:'10000', transFL:'FL110', vpa:'250',
-              accelHt:'1000', thrRedHt:'1000', thrRedTouched:false,
-              oatArr:'', rwyWindArr:'', qnhArr:'', altArr:'', vref:'', vrefAdd:'', vac:'', vga:'' }
+              accelHt:'', thrRedHt:'1000', thrRedTouched:false,
+              oatArr:'', rwyWindArr:'', qnhArr:'', altArr:'', vref:'', vrefAdd:'' }
   },
   landingVspeedsComplete: false,
 
@@ -1318,11 +1353,11 @@ let state = {
   fms: {
     clbThrust:  'CLB',            // PG 10-49
     slatFlapTO: '4',              // PG 5-5: "4 is the default slat/flap setting"
-    slatFlapLDG:'5',
+    slatFlapLDG:'4',
     wingAntiIce:'OFF',            // PG 5-5 step 11
     cowlAntiIce:'OFF',            // PG 5-5 step 12
     bleedSource:'OFF',            // default per operator confirmation
-    depProfile: 'STANDARD',       // PG 10-49: STANDARD or NADP
+    depProfile: 'NADP',           // PG 10-49: STANDARD or NADP
     spdStratCLB:'SEL',            // PG 10-51: "This is the only selection"
     spdStratCRZ:'SEL',            // PG 10-57
     spdStratDES:'SEL',            // PG 10-62
@@ -1402,12 +1437,13 @@ let state = {
       windWpt1Alt:'', windWpt1Oat:'', windWpt1Wind:'',
       windDes0Alt:'', windDes0Oat:'', windDes0Wind:'',
       windDes1Alt:'', windDes1Oat:'', windDes1Wind:'',
-      zfwWt:'', zfwCg:'', gwtCg:'', towCg:'', lwCg:'', fuelBlock:'', fuelTaxi:'45', fuelReserve:'', numPax:'', fob:'',
+      zfwWt:'', zfwCg:'', fuelBlock:'', fuelTaxi:'45', fuelReserve:'', numPax:'', fob:'',
       viaTo2Via:'', viaTo2To:'', viaTo3Via:'', viaTo3To:'', viaTo4Via:'', viaTo4To:'',
       viaTo5Via:'', viaTo5To:'', viaTo6Via:'', viaTo6To:'', viaTo7Via:'', viaTo7To:'',
       viaTo8Via:'', viaTo8To:'', viaTo9Via:'', viaTo9To:'', viaTo10Via:'', viaTo10To:''
     },
-    dep: {rwy:'', sid:'', trans:''}
+    dep: {rwy:'', sid:'', trans:''},
+    arr: {rwy:'', star:'', trans:''}
   },
 
   cns: {
@@ -2433,13 +2469,25 @@ function dlkAction(it, src){
 function maskCap(mask){ return (mask.match(/n/g)||[]).length; }
 function renderMask(mask, value, ph, focused){
   let out='', i=0;
+  const hasValue = value.length > 0;
   for(const m of mask){
-    if(m !== 'n'){ out += `<span class="init-sep">${m}</span>`; continue; }
+    if(m !== 'n'){
+      // Literal separators (':', '/', 'T'...) only render once entry has
+      // actually reached that point in the mask — no trailing separators
+      // dangling after the last typed character.
+      if(!hasValue || i <= value.length) out += `<span class="init-sep">${m}</span>`;
+      continue;
+    }
     const ch = value[i];
     const caret = focused && i === value.length;
-    out += (ch !== undefined)
-      ? `<span class="init-ch">${ch}</span>`
-      : `<span class="init-ph${caret?' caret':''}">${ph}</span>`;
+    if(ch !== undefined){
+      out += `<span class="init-ch">${ch}</span>`;
+    } else if(!hasValue){
+      // Only a completely untouched field shows the dashed "input required"
+      // placeholder across its full width. Once something has been typed,
+      // remaining empty slots show nothing rather than trailing dashes.
+      out += `<span class="init-ph${caret?' caret':''}">${ph}</span>`;
+    }
     i++;
   }
   return out;
@@ -2497,12 +2545,9 @@ const FPLN_FIELDS = {
   windDes0Alt:{mask:'nnnnn'}, windDes0Oat:{mask:'nnn'}, windDes0Wind:{mask:'nnnT/nnn'},
   windDes1Alt:{mask:'nnnnn'}, windDes1Oat:{mask:'nnn'}, windDes1Wind:{mask:'nnnT/nnn'},
 
-  fob:        {mask:'nnnn', suffix:' KG'},
+  fob:        {mask:'nnnnn', suffix:' KG'},
   zfwWt:      {mask:'nnnnn'},
   zfwCg:      {mask:'nn.n'},
-  gwtCg:      {mask:'nn.n'},
-  towCg:      {mask:'nn.n'},
-  lwCg:       {mask:'nn.n'},
   fuelBlock:  {mask:'nnnnn'},
   fuelTaxi:   {mask:'nnn'},
   fuelReserve:{mask:'nnnn'},
@@ -2532,19 +2577,21 @@ const PERF_FIELDS = {
   qnhArr:    {mask:'nn.nn'},
   altArr:    {mask:'nnnn'},
   vref:      {mask:'nnn'},
-  vrefAdd:   {mask:'nn'},
-  vac:       {mask:'nnn'},
-  vga:       {mask:'nnn'}
+  vrefAdd:   {mask:'nn'}
 };
+// Mandatory startup init dialog — Block Fuel entry (see openInitDialog below)
+const INITDLG_FIELDS = { fuel: {mask:'nnnnn'} };
 
 function scratchRegistry(bucketName){
   if(bucketName === 'cnsInit') return INIT_FIELDS;
   if(bucketName === 'fplnEntry') return FPLN_FIELDS;
+  if(bucketName === 'initDlg') return INITDLG_FIELDS;
   return PERF_FIELDS;
 }
 function scratchBucket(bucketName){
   if(bucketName === 'cnsInit') return state.cns.init;
   if(bucketName === 'fplnEntry') return state.fpln.entry;
+  if(bucketName === 'initDlg') return state.initDlg.entry;
   return state.perf.entry;
 }
 function scratchFieldHtml(bucketName, key){
@@ -2595,6 +2642,33 @@ function thrRedClick(){
 function thrRedFieldHtml(){
   const v = state.perf.entry.thrRedHt || '';
   return `<span class="field init-val" onclick="thrRedClick()">${renderMask(PERF_FIELDS.thrRedHt.mask, v, '-', false)}</span>`;
+}
+/* PERF.DEP FLEX — OAT must be entered before FLEX; entering FLEX first is
+   rejected outright (a deliberate quirk, not silently accepted then wiped).
+   FLEX must also be at least OAT+5°C or the entry is rejected. */
+function flexReject(){
+  state.scratch.error = true;
+  render();
+  clearTimeout(window.__scratchErrTimer);
+  window.__scratchErrTimer = setTimeout(()=>{ state.scratch.error = false; render(); }, 1600);
+}
+function flexClick(){
+  if(!state.scratch.text) return;
+  const cap = maskCap(PERF_FIELDS.flex.mask);
+  if(state.scratch.text.length > cap){ flexReject(); return; }
+  const oatRaw = state.perf.entry.oat;
+  if(!oatRaw){ flexReject(); return; }         // OAT not entered yet — FLEX rejected
+  const oatNum = parseInt(oatRaw, 10);
+  const flexNum = parseInt(state.scratch.text, 10);
+  if(isNaN(oatNum) || isNaN(flexNum) || flexNum < oatNum + 5){ flexReject(); return; }
+  state.perf.entry.flex = state.scratch.text;
+  state.scratch.text = '';
+  state.scratch.error = false;
+  render();
+}
+function flexFieldHtml(){
+  const v = state.perf.entry.flex || '';
+  return `<span class="field init-val" onclick="flexClick()">${renderMask(PERF_FIELDS.flex.mask, v, '-', false)}</span><span class="init-sep"> °C</span>`;
 }
 /* Shared scratchpad-editing primitives — used by both the physical-keyboard
    handler (scratchKey) and the mobile virtual-keyboard bridge below, so the
@@ -3481,7 +3555,7 @@ const FMS_ENUMS = {
   legsCol1:   {opts:['UTC','FUEL'],                 src:'PG 10-73 — left LEGS drop down'},
   legsCol2:   {opts:['SPD/ALT VPA+RNP','SPD/ALT VPA','OAT/WIND TAS/GS'], src:'PG 10-73 — right LEGS drop down'},
   slatFlapTO: {opts:['2','3','4'],                  src:'PG 5-5 — "4 is the default slat/flap setting"; range 2-4 per operator confirmation'},
-  slatFlapLDG:{opts:['1','2','3','4','5'],          src:'A220 OM-B Flight Crew Operating, Fig 22-02-4X — PERF ARR page capture confirms landing SLAT/FLAP options 1-5'},
+  slatFlapLDG:{opts:['4','5'],                      src:'Operator confirmed: only 4 and 5 are used for landing on this fleet, default 4 (earlier 1-5 range from Fig 22-02-4X superseded)'},
   bleedSource:{opts:['OFF','APU','ENG'],            src:'Bleed source for departure — OFF (default), APU, ENG, per operator confirmation'}
 };
 
@@ -3642,11 +3716,70 @@ const DEPARTURES_DATA = {
       {name:'STUIE1', full:'STUIE ONE (JET) (RNAV)',               rwy:null}
     ],
     trans: []
-  }
+  },
+  YMML: {
+    runways: ['RW09','RW16','RW27','RW34'],
+    sids: [
+      {name:'MELBOURNE6', full:'MELBOURNE SIX DEPARTURE (RADAR)', rwy:null},
+      {name:'CORRS1', full:'CORRS ONE (JET) (RNAV)', rwy:null},
+      {name:'CRENA3', full:'CRENA THREE, ESDIG FIVE (JET) (RNAV)', rwy:null},
+      {name:'DOSEL2', full:'DOSEL TWO, MNG FOUR, NONIX FOUR (JET) (RNAV)', rwy:null},
+      {name:'KEPPA3', full:'KEPPA THREE (JET) (RNAV)', rwy:null},
+      {name:'PEDNI1', full:'PEDNI ONE (JET) (RNAV)', rwy:null},
+      {name:'ISPEG1', full:'ISPEG ONE (JET) (RNAV)', rwy:'RW16'},
+      {name:'SUNTI4', full:'SUNTI FOUR (JET) (RNAV)', rwy:null},
+    ],
+    trans: []
+  },
+  YBBN: {
+    runways: ['RW01L','RW01R','RW19L','RW19R'],
+    sids: [
+      {name:'BRISBANE4', full:'BRISBANE FOUR DEPARTURE (RADAR)', rwy:null},
+      {name:'BIXAD2', full:'BIXAD TWO DEPARTURE (RNAV)', rwy:['RW01L','RW19L','RW19R']},
+      {name:'BIXAD2', full:'BIXAD TWO DEPARTURE (RNAV)', rwy:'RW01R'},
+      {name:'GUMKI2', full:'GUMKI TWO DEPARTURE (RNAV)', rwy:['RW01R','RW19L']},
+      {name:'SANEG2', full:'SANEG TWO DEPARTURE (RNAV)', rwy:['RW01R','RW19L']},
+      {name:'SCOTT4', full:'SCOTT FOUR DEPARTURE (RNAV)', rwy:['RW01R','RW19L']},
+      {name:'WACKO4', full:'WACKO FOUR DEPARTURE (RNAV)', rwy:['RW01R','RW19L','RW19R']},
+    ],
+    trans: []
+  },
+  YBCS: {
+    runways: ['RW15','RW33'],
+    sids: [
+      {name:'CAIRNS2', full:'CAIRNS TWO DEPARTURE (RADAR)', rwy:null},
+      {name:'AKROM1', full:'AKROM ONE (JET)', rwy:'RW15'},
+      {name:'NONUM1', full:'NONUM ONE (NON-JET)', rwy:'RW15'},
+      {name:'EAZEE3', full:'EAZEE THREE (JET)', rwy:'RW33'},
+    ],
+    trans: []
+  },
+  YSCB: {
+    runways: ['RW12','RW17','RW30','RW35'],
+    sids: [
+      {name:'CANBERRA3', full:'CANBERRA THREE DEPARTURE (RADAR)', rwy:['RW12','RW17','RW35']},
+      {name:'DUBUS3', full:'DUBUS THREE (NON-JET) (RNAV)', rwy:null},
+      {name:'IDROP1', full:'IDROP ONE (NON-JET) (RNAV)', rwy:null},
+      {name:'NORTH', full:'NORTH (JET) (RNAV)', rwy:['RW17','RW35']},
+      {name:'SOUTHWEST', full:'SOUTH & WEST (JET) (RNAV)', rwy:['RW17','RW35']},
+    ],
+    trans: []
+  },
+  YPAD: {
+    runways: ['RW05','RW12','RW23','RW30'],
+    sids: [
+      {name:'ADELAIDE5', full:'ADELAIDE FIVE DEPARTURE (RADAR)', rwy:null},
+      {name:'ORBUN5', full:'ORBUN FIVE (JET) (RNAV)', rwy:null},
+      {name:'EAST', full:'RWYS EAST (JET) (RNAV)', rwy:null},
+      {name:'WEST', full:'RWYS WEST (JET) (RNAV)', rwy:null},
+      {name:'UPROT2', full:'UPROT TWO (JET) (RNAV)', rwy:null},
+    ],
+    trans: []
+  },
 };
 function depFilteredSids(data){
   const rwy = state.fpln.dep.rwy;
-  return rwy ? data.sids.filter(s => s.rwy===null || s.rwy===rwy) : data.sids;
+  return rwy ? data.sids.filter(s => s.rwy===null || s.rwy===rwy || (Array.isArray(s.rwy) && s.rwy.includes(rwy))) : data.sids;
 }
 function depSelectRwy(r){ state.fpln.dep.rwy=r; refreshDeparturesDialog(); }
 function depSelectSid(s){ state.fpln.dep.sid=s; refreshDeparturesDialog(); }
@@ -3703,35 +3836,146 @@ function openDeparturesDialog(){
 }
 function depSelectTrans(t){ state.fpln.dep.trans=t; refreshDeparturesDialog(); }
 
+/* ---------- ARRIVALS_DATA — same transcription/short-code convention as
+   DEPARTURES_DATA above. STAR "TRANS" here groups the lettered transition
+   suffixes published for that STAR (e.g. ATNAR ONE ALPHA/VICTOR/WHISKEY/ZULU
+   all collapse to STAR ATNAR1 with trans A/V/W/Z), matching how the RWYS/
+   STAR/TRANS three-column picker already works for DEPARTURES.            */
+const ARRIVALS_DATA = {
+YSSY: {
+    runways: ['RW07','RW16L','RW16R','RW25','RW34L','RW34R'],
+    stars: [
+      {name:'AKMIR1', full:'AKMIR ONE ARRIVAL (RNAV)', rwy:null, trans:[]},
+      {name:'BOREE5', full:'BOREE FIVE ALPHA ARRIVAL (RNAV)', rwy:null, trans:['A','P']},
+      {name:'MARLN6', full:'MARLN SIX ARRIVAL (RNAV)', rwy:null, trans:[]},
+      {name:'MEPIL4', full:'MEPIL FOUR ARRIVAL (RNAV)', rwy:null, trans:[]},
+      {name:'RIVET5', full:'RIVET FIVE ARRIVAL (RNAV)', rwy:null, trans:[]},
+    ]
+  },
+  YMML: {
+    runways: ['RW09','RW16','RW27','RW34'],
+    stars: [
+      {name:'ALAXO1', full:'ALAXO ONE ALPHA ARRIVAL (RNAV)', rwy:['RW09','RW16','RW27','RW34'], trans:['A','P']},
+      {name:'ARBEY8', full:'ARBEY EIGHT ALPHA ARRIVAL (RNAV)', rwy:['RW09','RW16','RW27','RW34'], trans:['A']},
+      {name:'BOOIN1', full:'BOOIN ONE ALPHA ARRIVAL (RNAV)', rwy:['RW09','RW16','RW27','RW34'], trans:['A','V']},
+      {name:'BOYSE9', full:'BOYSE NINE ALPHA ARRIVAL (NON-JET) (RNAV)', rwy:['RW09','RW16','RW27','RW34'], trans:['A','V']},
+      {name:'PORTS8', full:'PORTS EIGHT ALPHA ARRIVAL (RNAV)', rwy:null, trans:['A']},
+      {name:'RAZZI1', full:'RAZZI ONE ALPHA ARRIVAL (RNAV)', rwy:['RW09','RW16','RW27','RW34'], trans:['A','M','V']},
+    ]
+  },
+  YBBN: {
+    runways: ['RW01L','RW01R','RW19L','RW19R'],
+    stars: [
+      {name:'BLAKA9', full:'BLAKA NINE ALPHA ARRIVAL (RNAV)', rwy:['RW01L','RW01R','RW19L','RW19R'], trans:['A','X']},
+      {name:'ENLIP3', full:'ENLIP THREE ALPHA ARRIVAL (RNAV)', rwy:['RW01L','RW01R','RW19L','RW19R'], trans:['A','X']},
+      {name:'GOMOL5', full:'GOMOL FIVE ALPHA ARRIVAL (RNAV)', rwy:['RW01L','RW01R','RW19L','RW19R'], trans:['A','V','X']},
+      {name:'ISPON2', full:'ISPON TWO ARRIVAL (RNAV)', rwy:'RW19R', trans:[]},
+      {name:'MORBI3', full:'MORBI THREE ALPHA ARRIVAL (RNAV)', rwy:['RW01L','RW01R','RW19L','RW19R'], trans:['A','V']},
+      {name:'SMOKA2', full:'SMOKA TWO ALPHA ARRIVAL (RNAV)', rwy:['RW01L','RW01R','RW19L','RW19R'], trans:['A','M','X']},
+      {name:'TEBOT3', full:'TEBOT THREE ALPHA ARRIVAL (RNAV)', rwy:['RW01L','RW01R','RW19L','RW19R'], trans:['A','X']},
+      {name:'UGTUG3', full:'UGTUG THREE ALPHA ARRIVAL (RNAV)', rwy:['RW01L','RW01R','RW19L','RW19R'], trans:['A','X']},
+      {name:'WOODY3', full:'WOODY THREE ALPHA ARRIVAL (RNAV)', rwy:['RW01L','RW01R','RW19L','RW19R'], trans:['A','V']},
+    ]
+  },
+  YBCS: {
+    runways: ['RW15','RW33'],
+    stars: [
+      {name:'CODIE1', full:'CODIE ONE ALPHA X-RAY ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','X','Z']},
+      {name:'HENDO2', full:'HENDO TWO ALPHA YANKEE ARRIVAL (RNAV)', rwy:null, trans:['A','Y']},
+      {name:'KASPI1', full:'KASPI ONE BRAVO ARRIVAL (RNAV)', rwy:null, trans:['B','V']},
+      {name:'KEEWI4', full:'KEEWI FOUR ALPHA ARRIVAL (RNAV)', rwy:null, trans:['A','V','X','Y']},
+      {name:'NONUM5', full:'NONUM FIVE ALPHA, BRAVO, ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','B','V','W','Z']},
+      {name:'TOTTY5', full:'TOTTY FIVE WHISKEY ARRIVAL (RNAV)', rwy:null, trans:['W']},
+      {name:'UPOLO2', full:'UPOLO TWO ALPHA, BRAVO, ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','B','V','X','Z']},
+    ]
+  },
+  YSCB: {
+    runways: ['RW12','RW17','RW30','RW35'],
+    stars: [
+      {name:'AVBEG6', full:'AVBEG SIX ALPHA ARRIVAL (RNAV)', rwy:null, trans:['A']},
+      {name:'BUNGO5', full:'BUNGO FIVE ALPHA ARRIVAL (NON-JET) (RNAV)', rwy:null, trans:['A','V','W','Y']},
+      {name:'LEECE1', full:'LEECE ONE ALPHA ARRIVAL (JET) (RNAV)', rwy:null, trans:['A','V','W','Y']},
+      {name:'MANDA3', full:'MANDA THREE ALPHA, X-RAY, ARRIVAL (RNAV)', rwy:null, trans:['A','X']},
+      {name:'POLLI9', full:'POLLI NINE ALPHA ARRIVAL (RNAV)', rwy:null, trans:['A','X']},
+    ]
+  },
+  YPAD: {
+    runways: ['RW05','RW12','RW23','RW30'],
+    stars: [
+      {name:'ATNAR1', full:'ATNAR ONE ALPHA, ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','V','W','Z']},
+      {name:'ATPIP3', full:'ATPIP THREE ARRIVAL (NON-JET) (RNAV)', rwy:null, trans:[]},
+      {name:'BEVSO1', full:'BEVSO ONE ARRIVAL (NON-JET) (RNAV)', rwy:null, trans:[]},
+      {name:'BUGSU1', full:'BUGSU ONE ALPHA, ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','V','W','Z']},
+      {name:'DRINA1', full:'DRINA ONE ALPHA ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','V','Z']},
+      {name:'ELROX6', full:'ELROX SIX ALPHA, ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','V','Z']},
+      {name:'GULFS8', full:'GULFS EIGHT VICTOR ARRIVAL (NON-JET) (RNAV)', rwy:null, trans:['V']},
+      {name:'INTOG1', full:'INTOG ONE VICTOR ARRIVAL (RNAV)', rwy:null, trans:['V','X','Z']},
+      {name:'KAKLU1', full:'KAKLU ONE ALPHA, ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','V','X','Z']},
+      {name:'PAMMY7', full:'PAMMY SEVEN VICTOR ARRIVAL (NON-JET) (RNAV)', rwy:null, trans:['V']},
+      {name:'RAYNA3', full:'RAYNA THREE ALPHA, ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','V','Z']},
+      {name:'SURGN4', full:'SURGN FOUR ARRIVAL (NON-JET) (RNAV)', rwy:null, trans:[]},
+    ]
+  }
+};
+function arrFilteredStars(data){
+  const rwy = state.fpln.arr.rwy;
+  return rwy ? data.stars.filter(s => s.rwy===null || s.rwy===rwy || (Array.isArray(s.rwy) && s.rwy.includes(rwy))) : data.stars;
+}
+function arrSelectRwy(r){ state.fpln.arr.rwy=r; refreshArrivalsDialog(); }
+function arrSelectStar(s){ state.fpln.arr.star=s; refreshArrivalsDialog(); }
+function arrSelectTrans(t){ state.fpln.arr.trans=t; refreshArrivalsDialog(); }
+function arrViewAll(){ state.fpln.arr = {rwy:'', star:'', trans:''}; refreshArrivalsDialog(); }
+function refreshArrivalsDialog(){ render(); openArrivalsDialog(); }
 function openArrivalsDialog(){
-  let tbl = '<table class="simple" style="margin-bottom:12px;"><tr><th>TERMINAL PROCEDURE</th><th>FMS</th></tr>';
-  APPR_DESIG.forEach(([a,b])=>{ tbl += `<tr><td class="grey">${a}</td><td class="val">${b}</td></tr>`; });
-  tbl += '</table>';
-  const html = `
-    <div class="grid g4" style="margin-bottom:4px;">
-      <div class="lbl">TRANS</div><div class="lbl">STARS</div><div class="lbl">TRANS</div><div class="lbl">APPR</div>
+  const origin = (state.arrAirport==='ORIG' ? state.fpln.entry.origin : (state.fpln.entry.dest || state.fpln.entry.origin) || '').toUpperCase();
+  const data = ARRIVALS_DATA[origin];
+  const header = `<div class="corner-header">
+      <span class="t">ARRIVALS&nbsp;-&nbsp;<span class="ap">${origin || '----'}</span></span>
+      <span class="mod">${state.fplnMode==='SEC' ? 'SEC' : 'MOD'} FPLN</span>
+    </div>`;
+  if(!data){
+    const body = `
+      <div class="grey" style="font-size:11px; margin-bottom:12px;">No arrival data is loaded for ${origin || 'this airport'}. Only YSSY, YMML, YBBN, YBCS, YSCB and YPAD have been transcribed so far.</div>
+      <div class="row" style="margin-bottom:10px;"><span class="lbl">OTHER AIRPORT</span>${field('----', {blank:true})}</div>
+      <div class="row">
+        <span class="btn" onclick="closeCornerPopup(); openDeparturesDialog();">DEPARTURES...</span>
+        <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeCornerPopup()">DONE</span></span>
+      </div>`;
+    openCornerPopup(header, body);
+    return;
+  }
+  const stars = arrFilteredStars(data);
+  const col = (title, count, items, selected, onClick) => {
+    let html = `<div class="dep-col-hdr">${title}&nbsp;&nbsp;<b>(${count})</b></div>`;
+    html += `<div class="dep-col-sel">${selected || ''}</div>`;
+    html += `<div class="dep-list">`;
+    if(items.length===0){
+      html += `<div class="dep-item empty">—</div>`;
+    } else {
+      items.forEach(it=>{
+        const val = it.value, label = it.label;
+        html += `<div class="dep-item${val===selected?' on':''}" onclick="${onClick}('${val}')" title="${it.title||''}">${label}</div>`;
+      });
+    }
+    html += `</div>`;
+    return html;
+  };
+  const selStar = data.stars.find(s=>s.name===state.fpln.arr.star);
+  const transOpts = selStar ? selStar.trans : [...new Set(stars.flatMap(s=>s.trans))].sort();
+  const body = `
+    <div class="dep-cols">
+      ${col('RWYS', data.runways.length, data.runways.map(r=>({value:r,label:r})), state.fpln.arr.rwy, 'arrSelectRwy')}
+      ${col('STAR', stars.length, stars.map(s=>({value:s.name,label:s.name,title:s.full})), state.fpln.arr.star, 'arrSelectStar')}
+      ${col('TRANS', transOpts.length, transOpts.map(t=>({value:t,label:t})), state.fpln.arr.trans, 'arrSelectTrans')}
     </div>
-    <div class="grid g4" style="margin-bottom:12px;">
-      ${field('-----',{blank:true})}${field('-----',{blank:true})}${field('-----',{blank:true})}${field('-----',{blank:true})}
-    </div>
-    <div class="grey" style="font-size:10px; margin-bottom:12px;">Each column scrolls independently and shows its total count next to the title. FMS-generated approaches are listed after the published instrument approaches. As selections are made the lists filter automatically — use VIEW ALL to remove the filters.</div>
-    <div class="row" style="margin-bottom:10px;"><span class="lbl">OTHER AIRPORT</span>${field('----',{blank:true})}</div>
-    <div class="row" style="margin-bottom:10px;">
-      <span class="lbl">STEEP APPR</span><span class="checkbox"><span class="box"></span></span>
-      <span class="grey" style="font-size:10px;">available where a steep VPA is coded in the NAV database</span>
-    </div>
-    <div class="row" style="margin-bottom:4px;"><span class="lbl">RWY EXT</span>${field('5.0 NM')}</div>
-    <div class="grey" style="font-size:9.5px; margin-bottom:12px;">Active for visual approaches only. Default 5.0 NM, up to 25.0 NM. A VPA of 4.5° or greater shows yellow until STEEP APPR is selected.</div>
-    <div class="hr"></div>
-    <div class="lbl" style="margin:10px 0 6px;">PROCEDURE NAME CROSS-REFERENCE (PG 10-89)</div>
-    ${tbl}
+    <div class="row" style="margin-bottom:12px;"><span class="lbl">OTHER AIRPORT</span>${field('----', {blank:true})}</div>
     <div class="row">
-      <span class="btn" onclick="infoDialog('DEPARTURES','<div class=&quot;grey&quot;>Runways, departures and transitions for the origin airport, in alphanumeric order. Selections show in green. Lists filter as selections are made; VIEW ALL restores them.</div>')">DEPARTURES...</span>
+      <span class="btn" onclick="closeCornerPopup(); openDeparturesDialog();">DEPARTURES...</span>
       <span class="btn" onclick="openArrivalData()">ARRIVAL DATA...</span>
-      <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeModal()">VIEW ALL</span></span>
-    </div>
-  `;
-  openModal('ARRIVALS', html);
+      <span class="btn" onclick="arrViewAll()">VIEW ALL</span>
+      <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeCornerPopup()">DONE</span></span>
+    </div>`;
+  openCornerPopup(header, body);
 }
 function openArrivalData(){
   const html = `
@@ -4196,13 +4440,25 @@ function toggleDefaultsSelect(ev){
    YMML Melbourne 37°40.40'S 144°50.60'E
    YSCB Canberra 35°18.42'S 149°11.70'E
    YBBN Brisbane 27°23.00'S 153°07.10'E
-   YBCS Cairns   16°53.15'S 145°45.32'E                                     */
+   YBCS Cairns   16°53.15'S 145°45.32'E
+   YPAD Adelaide 34°56.70'S 138°31.83'E                                     */
 const AIRPORT_COORDS = {
   YSSY: 'S33°56.77  E151°10.63',
   YMML: 'S37°40.40  E144°50.60',
   YSCB: 'S35°18.42  E149°11.70',
   YBBN: 'S27°23.00  E153°07.10',
-  YBCS: 'S16°53.15  E145°45.32'
+  YBCS: 'S16°53.15  E145°45.32',
+  YPAD: 'S34°56.70  E138°31.83'
+};
+/* Airport elevation, feet AMSL. Source: SkyVector, cross-checked against
+   published ARP data — same confirmed-only policy as AIRPORT_COORDS above. */
+const AIRPORT_ELEV = {
+  YSSY: 21,
+  YMML: 434,
+  YSCB: 1886,
+  YBBN: 15,
+  YBCS: 10,
+  YPAD: 20
 };
 function fmsPosCoord(){
   const o = (state.fpln.entry.origin || '').toUpperCase();
@@ -4244,10 +4500,11 @@ function pagePosFms(){
 }
 
 function pagePosIrs(){
+  const c = fmsPosCoord();
   const rows = [
-    ['IRS1','N35°58.55 W115°17.66','0.0','NAVIGATION'],
-    ['IRS2','N35°58.56 W115°17.65','0.0','NAVIGATION'],
-    ['IRS3','N35°58.57 W115°17.63','0.0','NAVIGATION']
+    ['IRS1', c, '0.0', 'NAVIGATION'],
+    ['IRS2', c, '0.0', 'NAVIGATION'],
+    ['IRS3', c, '0.0', 'NAVIGATION']
   ];
   let html = '';
   rows.forEach(r=>{
@@ -4329,8 +4586,8 @@ function pageFplnInit(){
     <div class="right"><div class="lbl">RWY&nbsp;&nbsp;&nbsp;SID&nbsp;&nbsp;&nbsp;TRANS</div><span class="val">${state.fpln.dep.rwy||'----'}&nbsp; ${state.fpln.dep.sid||'-----'}&nbsp; ${state.fpln.dep.trans||'---'}</span></div>
   </div>
   <div class="row" style="margin-bottom:14px;">
-    <span class="btn" onclick="infoDialog('ARRIVALS','<div class=&quot;lbl&quot;>TRANS&nbsp;&nbsp;STAR&nbsp;&nbsp;&nbsp;TRANS&nbsp;&nbsp;APPR</div><div class=&quot;val&quot; style=&quot;margin-top:6px;&quot;>BYLAW&nbsp; BENKY2</div><div class=&quot;right&quot; style=&quot;margin-top:14px;&quot;><span class=&quot;btn&quot;>VIEW ALL</span></div>')">ARRIVALS...</span>
-    <div class="right"><div class="lbl">TRANS&nbsp;&nbsp;STAR&nbsp;&nbsp;&nbsp;TRANS&nbsp;&nbsp;APPR</div><span class="val">BYLAW&nbsp; BENKY2</span></div>
+    <span class="btn" onclick="openArrivalsDialog()">ARRIVALS...</span>
+    <div class="right"><div class="lbl">RWY&nbsp;&nbsp;&nbsp;STAR&nbsp;&nbsp;&nbsp;TRANS</div><span class="val">${state.fpln.arr.rwy||'----'}&nbsp; ${state.fpln.arr.star||'-----'}&nbsp; ${state.fpln.arr.trans||'---'}</span></div>
   </div>
   <div class="grid g2" style="margin-bottom:14px;">
     <div><div class="lbl">ALTN</div>${fpField('altn')} <span class="cyan">○</span></div>
@@ -4388,6 +4645,12 @@ function pageFplnFuel(){
   const gwt = hasZfw ? zfw + fob : null;
   const tow = hasZfw ? gwt - taxi : null;
   const lw  = hasZfw ? tow - 2000 : null;
+  // ZFW CG (mask 'nn.n') is the only CG the crew enters; GWT/TOW/LW CG are
+  // not independently entered — once ZFW CG is in, they show the same
+  // figure as a reasonable placeholder (no real CG-shift model is modeled).
+  const zfwCgRaw = state.fpln.entry.zfwCg || '';
+  const hasZfwCg = zfwCgRaw.length === 3;
+  const zfwCgTxt = hasZfwCg ? (zfwCgRaw.slice(0,2) + '.' + zfwCgRaw.slice(2)) : '--.-';
   return `
   <div class="right" style="margin-bottom:10px;"><span class="lbl">FUEL QTY</span> <span class="val">${state.fms.fobMode==='CALC' ? (state.fpln.entry.fob || '----') : '3756'} KG</span></div>
   <div class="row" style="margin-bottom:14px;">
@@ -4401,9 +4664,9 @@ function pageFplnFuel(){
     <table class="simple">
       <tr><th></th><th>WT(KG)</th><th>CG(%MAC)</th></tr>
       <tr><td class="grey">ZFW</td><td>${fpField('zfwWt')}</td><td>${fpField('zfwCg')}</td></tr>
-      <tr><td class="grey">GWT</td><td class="val">${hasZfw ? gwt : '-----'}</td><td>${fpField('gwtCg')}</td></tr>
-      <tr><td class="grey">TOW</td><td class="val">${hasZfw ? tow : '-----'}</td><td>${fpField('towCg')}</td></tr>
-      <tr><td class="grey">LW</td><td class="val">${hasZfw ? lw : '-----'}</td><td>${fpField('lwCg')}</td></tr>
+      <tr><td class="grey">GWT</td><td class="val">${hasZfw ? gwt : '-----'}</td><td class="val">${zfwCgTxt}</td></tr>
+      <tr><td class="grey">TOW</td><td class="val">${hasZfw ? tow : '-----'}</td><td class="val">${zfwCgTxt}</td></tr>
+      <tr><td class="grey">LW</td><td class="val">${hasZfw ? lw : '-----'}</td><td class="val">${zfwCgTxt}</td></tr>
     </table>
     <table class="simple">
       <tr><th colspan="2">FUEL PLANNING(KG)</th></tr>
@@ -4415,7 +4678,6 @@ function pageFplnFuel(){
     </table>
   </div>
   <div class="row" style="margin-top:12px; justify-content:flex-start; gap:16px;"><span class="lbl">NUMBER OF PAX</span>${fpField('numPax')}</div>
-  <div class="grey" style="font-size:10.5px; margin-top:6px;">If fuel plan is insufficient, MSG... flags CHECK FUEL AT DEST/ALTN (FCOM 22-02-47).</div>
   <div class="hr"></div>
   <table class="simple">
     <tr><th></th><th>DTG</th><th>ETE</th><th>ETA</th><th>FUEL (KG)</th></tr>
@@ -4444,7 +4706,7 @@ function pagePerfDep(){
   <div class="hr"></div>
   <div class="grid g5" style="margin-bottom:14px; align-items:end;">
     <div><div class="lbl">TO THRUST</div>${ddSel('toThrust')}</div>
-    <div><div class="lbl">FLEX</div>${pfField('flex')}</div>
+    <div><div class="lbl">FLEX</div>${flexFieldHtml()}</div>
     <div><div class="lbl">OAT</div>${pfField('oat')}</div>
     <div><div class="lbl">RWY WIND</div>${pfField('rwyWind')}</div>
     <div><div class="lbl">CLB THRUST</div>${ddSel('clbThrust')}</div>
@@ -4492,11 +4754,15 @@ function pagePerfDep(){
   <div class="hr"></div>
   <div class="row" style="margin-bottom:8px;"><span class="lbl">DEP PROFILE</span>${ddSel('depProfile')} <span class="grey" style="font-size:10.5px;">HT/ALT entry below sets thrust reduction height (PG 10-49)</span></div>
   ${state.fms.depProfile==='NADP' ? (function(){
+    if(!state.perf.entry.accelHt){
+      const elev = AIRPORT_ELEV[(state.fpln.entry.origin||'').toUpperCase()];
+      state.perf.entry.accelHt = (elev != null) ? String(elev + 1000) : '1000';
+    }
     const accelHt = parseInt(state.perf.entry.accelHt,10) || 0;
     const thrRedHt = parseInt(state.perf.entry.thrRedHt,10) || 0;
     const distant = state.perf.entry.thrRedTouched;
     return `
-    <div class="grey" style="font-size:11px; margin:0 0 8px 2px;">${distant?'DISTANT':'CLOSE-IN'}</div>
+    <div class="val" style="font-size:11px; margin:0 0 8px 2px;">${distant?'DISTANT':'CLOSE-IN'}</div>
     <table class="simple">
       <tr><th></th><th>HT/ALT</th><th>PITCH</th><th>SPD</th><th>THRUST</th></tr>
       <tr><td class="grey">ACCEL</td><td>${pfField('accelHt')}</td><td class="val">${accelHt+434}</td><td class="val">VFLC</td><td class="val">FMS CLB ${distant?'TO':'CLB-2'}</td></tr>
@@ -4576,6 +4842,11 @@ function pagePerfDes(){
 }
 
 function pagePerfArr(){
+  const vrefNum = parseInt(state.perf.entry.vref, 10);
+  const hasVref = !isNaN(vrefNum);
+  const addNum = parseInt(state.perf.entry.vrefAdd, 10) || 0;
+  const vac = hasVref ? (vrefNum + addNum + 1) : null;
+  const vga = hasVref ? (vrefNum + addNum + 11) : null;
   return `
   <div class="lbl" style="margin-bottom:6px;">TRANS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPR</div>
   <div class="row" style="margin-bottom:14px;">
@@ -4619,13 +4890,13 @@ function pagePerfArr(){
   <div class="hr"></div>
   <div class="lbl" style="margin-bottom:6px;">GO AROUND</div>
   <div class="row" style="margin-bottom:6px;">
-    <div><div class="lbl">VAC</div><span class="magenta-entry">${pfField('vac')}</span></div>
+    <div><div class="lbl">VAC</div><span class="magenta val">${hasVref ? vac : '---'}</span></div>
     <table class="simple" style="flex:1; margin-left:20px;">
       <tr><th>F3</th><th>F2</th><th>F1</th><th>F0</th><th>GD</th></tr>
       <tr><td class="grey">-</td><td class="grey">-</td><td class="grey">-</td><td class="grey">-</td><td class="grey">-</td></tr>
     </table>
   </div>
-  <div class="row"><span class="lbl">VGA</span>${pfField('vga')}</div>
+  <div class="row"><span class="lbl">VGA</span><span class="val">${hasVref ? vga : '---'}</span></div>
   `;
 }
 
@@ -4704,6 +4975,11 @@ function seededFrac(seed){
   for(let i=0;i<seed.length;i++) h = (h*31 + seed.charCodeAt(i)) | 0;
   return (Math.abs(h) % 10000) / 10000;
 }
+// Random-but-stable DTG (100-400 NM), seeded from the airport code so it
+// doesn't change on every re-render, only when the code itself changes.
+function randDtg(seed){
+  return Math.round(100 + seededFrac(seed) * 300);
+}
 function legsWaypoints(){
   const list = [];
   const sidTo = (state.fpln.dep.sid || '').replace(/\d+$/, '');
@@ -4739,11 +5015,13 @@ function generateLegs(){
     };
   });
 }
-function destAltnRow(label, code, dtg, ete, eta, fuel){
+function destAltnRow(label, code, dtg, ete, eta, fuel, blankIfEmpty){
   const has = !!code;
+  const ph = blankIfEmpty ? '' : '-----';
+  const phEte = blankIfEmpty ? '' : '----';
   return `<tr><td class="val">${label}&nbsp;<span class="val">${code || '----'}</span> <span class="cyan">○</span></td>`+
-    `<td class="val">${has?dtg:'-----'}</td><td class="val">${has?ete:'----'}</td>`+
-    `<td class="val">${has?eta:'-----'}</td><td class="val">${has?fuel:'-----'}</td></tr>`;
+    `<td class="val">${has?dtg:ph}</td><td class="val">${has?ete:phEte}</td>`+
+    `<td class="val">${has?eta:ph}</td><td class="val">${has?fuel:ph}</td></tr>`;
 }
 function viaToRowCount(){
   let n = 2;
@@ -4784,8 +5062,8 @@ function pageRouteViaTo(){
   <div class="hr"></div>
   <table class="simple">
     <tr><th></th><th>DTG</th><th>ETE</th><th>ETA</th><th>FUEL (KG)</th></tr>
-    ${destAltnRow('DEST', state.fpln.entry.dest, '1331','3:05','18:26 -01','8459 +826')}
-    ${destAltnRow('ALTN', state.fpln.entry.altn, '1501','3:37','18:59 -02','7253 +930')}
+    ${destAltnRow('DEST', state.fpln.entry.dest, randDtg((state.fpln.entry.dest||'')+'destdtg')+'', '0:45', '18:26 -01', '3150', false)}
+    ${destAltnRow('ALTN', state.fpln.entry.altn, randDtg((state.fpln.entry.altn||'')+'altndtg')+'', '0:45', '18:59 -02', '3150', true)}
   </table>
   `;
 }
@@ -5122,6 +5400,7 @@ function render(){
   renderTabs();
   renderBottom();
   renderScratchBar();
+  if(!state.initDlg.done) renderInitDialog();
   const actBox = document.querySelector('.act');
   if(actBox) actBox.style.display = (state.app==='FMS' || state.app==='MAP') ? 'flex' : 'none';
   const content = document.getElementById('content');
@@ -5147,7 +5426,51 @@ function render(){
   }
 }
 
+/* ================= Mandatory startup init dialog =================
+   ORIGIN sets state.fpln.entry.origin (the same field used everywhere else
+   — DEPARTURES, PERF.DEP, POS.FMS coordinates, etc. all key off this).
+   BLOCK FUEL sets state.fpln.entry.fob, which drives the FUEL QTY readout
+   on FPLN.FUEL (in CALC mode). It intentionally does NOT set the separate
+   BLOCK line in the fuel planning table — that stays its own field. Uses
+   the same scratchpad-paste mechanism as every other entry field in the
+   app, so the bottom scratchpad bar is left reachable beneath the overlay
+   rather than duplicating a private input widget.                        */
+const INIT_ORIGINS = ['YSSY','YMML','YBBN','YBCS','YPAD','YSCB'];
+function selectInitOrigin(code){
+  state.initDlg.origin = code;
+  renderInitDialog();
+}
+function renderInitDialog(){
+  const box = document.getElementById('initBox');
+  if(!box) return;
+  const originHtml = INIT_ORIGINS.map(function(c){
+    return '<div class="init-origin-opt'+(state.initDlg.origin===c?' sel':'')+'" onclick="selectInitOrigin(\''+c+'\')">'+c+'</div>';
+  }).join('');
+  const ready = !!state.initDlg.origin && !!state.initDlg.entry.fuel;
+  box.innerHTML =
+    '<div class="init-title">FMS INITIALIZATION</div>'+
+    '<div class="init-sub">Select ORIGIN and enter BLOCK FUEL to continue</div>'+
+    '<div class="init-lbl">ORIGIN</div>'+
+    '<div class="init-origin-grid">'+originHtml+'</div>'+
+    '<div class="init-lbl">BLOCK FUEL (KG)</div>'+
+    scratchFieldHtml('initDlg','fuel')+
+    '<div class="init-btn-row"><span class="btn'+(ready?'':' disabled')+'"'+(ready?' onclick="confirmInit()"':'')+'>INIT</span></div>';
+}
+function confirmInit(){
+  if(!state.initDlg.origin || !state.initDlg.entry.fuel) return;
+  state.fpln.entry.origin = state.initDlg.origin;
+  state.fpln.entry.fob = state.initDlg.entry.fuel;
+  state.initDlg.done = true;
+  document.getElementById('initOverlay').style.display = 'none';
+  render();
+}
+function openInitDialog(){
+  document.getElementById('initOverlay').style.display = 'flex';
+  renderInitDialog();
+}
+
 render();
+openInitDialog();
 
 /* Keep the ACARS clock (and UTC DATE) live. Only the affected text nodes are
    rewritten rather than calling render(), so an in-progress field entry keeps
