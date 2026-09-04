@@ -319,6 +319,8 @@
   }
   .radio.on .dot{border-color:var(--yellow);}
   .radio.on .dot::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--yellow);}
+  .radio.green-radio.on .dot{border-color:var(--green);}
+  .radio.green-radio.on .dot::after{background:var(--green);}
   .checkbox{
     display:inline-flex;align-items:center;gap:8px;cursor:pointer;
   }
@@ -1182,7 +1184,7 @@
      everywhere else in the app. Not dismissible until both fields are set. */
   .init-overlay{
     display:none;
-    position:absolute; top:14px; left:14px; right:14px; bottom:78px;
+    position:absolute; top:14px; left:14px; right:14px; bottom:92px;
     z-index:95;
     background:rgba(0,0,0,.88);
     align-items:center; justify-content:center;
@@ -1405,7 +1407,7 @@ let state = {
   gnssOrigin: '',
   // FMS setup guide side panel — open by default, manual-item ticks stored by
   // key, right-click "override" (N/A, greyed out) stored separately by key
-  guide: {open:true, manual:{}, override:{}, expanded:{}, setupOpen:true, crewOpen:true},
+  guide: {open:true, manual:{}, override:{}, expanded:{}, setupOpen:true, crewOpen:true, visitedPages:{}},
   main: 'DBASE',
   sub: 'STATUS',
   chklSub: 'SUMMARY',
@@ -4364,8 +4366,8 @@ function pageDbaseStatus(){
     <div class="radio ${state.activePeriod===0?'on':''}" onclick="${state.fms.airborne?'':'state.activePeriod=0; render();'}">
       <div class="dot"></div><span class="txt ${state.activePeriod===0?'yellow':'val'}">06AUG26&nbsp;&nbsp;03SEP26</span>
     </div>
-    <div class="radio ${state.activePeriod===1?'on':''}" onclick="${state.fms.airborne?'':'state.activePeriod=1; render();'}">
-      <div class="dot"></div><span class="txt ${state.activePeriod===1?'yellow':'val'}">03SEP26&nbsp;&nbsp;01OCT26</span>
+    <div class="radio ${state.activePeriod===1?'on':''} green-radio" onclick="${state.fms.airborne?'':'state.activePeriod=1; render();'}">
+      <div class="dot"></div><span class="txt ${state.activePeriod===1?'green':'val'}">03SEP26&nbsp;&nbsp;01OCT26</span>
     </div>
   </div>
 
@@ -4395,8 +4397,8 @@ function pageDbaseSearch(){
       </div>
     </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
-      <span class="btn" onclick="infoDialog('RUNWAYS','<div class=&quot;val&quot;>07L/25R  9100 FT&nbsp;&nbsp;&nbsp;07R/25L  8500 FT</div>')">RUNWAYS</span>
-      <span class="btn" onclick="infoDialog('LOC','<div class=&quot;val&quot;>ILS 07L  109.10&nbsp;&nbsp;&nbsp;ILS 25R  110.30</div>')">LOC</span>
+      <span class="btn" onclick="infoDialog('RUNWAYS','<div class=&quot;grey&quot;>Runway data not modeled for ${state.searchQuery}.</div>')">RUNWAYS</span>
+      <span class="btn" onclick="infoDialog('LOC','<div class=&quot;grey&quot;>Localizer data not modeled for ${state.searchQuery}.</div>')">LOC</span>
       <span class="btn" onclick="infoDialog('TERM WPTS','<div class=&quot;val&quot;>List of terminal waypoints for ${state.searchQuery}</div>')">TERM WPTS</span>
       <span class="btn" onclick="infoDialog('TERM NDBS','<div class=&quot;val&quot;>List of terminal NDBs for ${state.searchQuery}</div>')">TERM NDBS</span>
       <span class="btn" onclick="infoDialog('GATES','<div class=&quot;val&quot;>Gate information for ${state.searchQuery}</div>')">GATES</span>
@@ -4792,6 +4794,20 @@ function pageFplnEtp(){
 /* ================= PERF ================= */
 function pagePerfDep(){
   const vspeedsReady = state.perf.entry.v1 && state.perf.entry.vr && state.perf.entry.v2;
+  // TOW here must track the same ZFW + FOB − taxi calc as FPLN.FUEL (PG 10-32/10-39) —
+  // previously this was a fixed literal, which meant PERF.DEP and FPLN.FUEL could show
+  // two different TOW figures for the same flight plan. TOW CG mirrors FPLN.FUEL's own
+  // placeholder convention (ZFW CG figure carried through, since no real CG-shift model
+  // is implemented). STAB TRIM has no CG/trim table modeled at all, so it stays a
+  // "not specified" placeholder rather than an invented number — the crew-check items
+  // that reference it on the FMS Setup Guide/loadsheet panels are manual-only anyway.
+  const depZfw  = parseInt(state.fpln.entry.zfwWt, 10);
+  const depHasZfw = !isNaN(depZfw);
+  const depFob  = parseInt(state.fpln.entry.fob, 10) || 0;
+  const depTaxi = parseInt(state.fpln.entry.fuelTaxi, 10) || 0;
+  const depTow  = depHasZfw ? (depZfw + depFob - depTaxi) : null;
+  const depZfwCgRaw = state.fpln.entry.zfwCg || '';
+  const depZfwCgTxt = depZfwCgRaw.length === 3 ? (depZfwCgRaw.slice(0,2) + '.' + depZfwCgRaw.slice(2)) : null;
   return `
   <div class="grid g3" style="margin-bottom:10px;">
     <div><div class="lbl">ORIGIN</div><span class="val">${state.fpln.entry.origin || '----'}</span></div>
@@ -4840,9 +4856,9 @@ function pagePerfDep(){
   </div>
 
   <div class="grid g3" style="margin-bottom:14px;">
-    <div><div class="lbl">TOW</div><span class="val">52113 KG</span></div>
-    <div><div class="lbl">TOW CG</div><span class="val">22.0 %MAC</span></div>
-    <div><div class="lbl">STAB TRIM</div><span class="val">ND 5.1</span></div>
+    <div><div class="lbl">TOW</div><span class="val">${depHasZfw ? depTow+' KG' : '----- KG'}</span></div>
+    <div><div class="lbl">TOW CG</div><span class="val">${depZfwCgTxt ? depZfwCgTxt+' %MAC' : '--.- %MAC'}</span></div>
+    <div><div class="lbl">STAB TRIM</div><span class="grey">not specified</span></div>
   </div>
 
   <div class="hr"></div>
@@ -5494,6 +5510,7 @@ function render(){
   renderBottom();
   renderScratchBar();
   if(!state.initDlg.done) renderInitDialog();
+  markGuidePageVisited();
   renderGuidePanel();
   const actBox = document.querySelector('.act');
   if(actBox) actBox.style.display = (state.app==='FMS' || state.app==='MAP') ? 'flex' : 'none';
@@ -5659,52 +5676,57 @@ const GUIDE_SECTIONS = [
    mechanism, same sensing rules (only typed-value fields are auto-sensed). */
 const GUIDE_CREW_CHECKS = [
   { type:'group', key:'grp_fpc', label:'Flight plan Check (PF)', items:[
-    {key:'fpc_callsign', label:'Callsign (crosscheck with CTP)', page:{app:'FMS',main:'FPLN',sub:'INIT'},
-      sense:()=> !!state.fpln.entry.fltNumber},
-    {key:'fpc_depdest',  label:'Departure & destination', page:{app:'FMS',main:'FPLN',sub:'INIT'},
-      sense:()=> !!(state.fpln.entry.origin && state.fpln.entry.dest)},
-    {key:'fpc_finalalt', label:'Final altitude', page:{app:'FMS',main:'FPLN',sub:'INIT'},
-      sense:()=> !!state.fpln.entry.crzAlt},
-    {key:'fpc_route',    label:'Loaded route (ROUTE — VIA/TO)', page:{app:'FMS',main:'ROUTE',sub:'VIA/TO'},
-      sense:()=> !!state.fpln.entry.viaTo2Via},
+    {key:'fpc_callsign', label:'Callsign (crosscheck with CTP)', page:{app:'FMS',main:'FPLN',sub:'INIT'}},
+    {key:'fpc_depdest',  label:'Departure & destination', page:{app:'FMS',main:'FPLN',sub:'INIT'}},
+    {key:'fpc_finalalt', label:'Final altitude', page:{app:'FMS',main:'FPLN',sub:'INIT'}},
+    {key:'fpc_route',    label:'Loaded route (ROUTE — VIA/TO)', page:{app:'FMS',main:'ROUTE',sub:'VIA/TO'}},
     {key:'fpc_dtgete',   label:'DTG / ETE / (Arrival) FUEL (KG) reviewed', page:{app:'FMS',main:'ROUTE',sub:'VIA/TO'}},
   ]},
   { type:'group', key:'grp_floadsheet', label:'Final Loadsheet',
     note:'CM1 inserts ZFW, ZFWCG, NUMBER OF PAX and updates BLOCK FUEL as per actual fuel on board into the FPLN-FUEL tab. The passenger count entry includes both cabin crew and passengers.', items:[
-    {key:'floadsheet_zfw',   label:'ZFW', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> !!state.fpln.entry.zfwWt},
-    {key:'floadsheet_zfwcg', label:'ZFW CG', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> (state.fpln.entry.zfwCg||'').length===3},
-    {key:'floadsheet_pax',   label:'NUMBER OF PAX', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> !!state.fpln.entry.numPax},
-    {key:'floadsheet_block', label:'BLOCK FUEL updated (actual fuel on board)', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> !!state.fpln.entry.fuelBlock},
+    {key:'floadsheet_zfw',   label:'ZFW', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
+    {key:'floadsheet_zfwcg', label:'ZFW CG', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
+    {key:'floadsheet_pax',   label:'NUMBER OF PAX', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
+    {key:'floadsheet_block', label:'BLOCK FUEL updated (actual fuel on board)', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
     {key:'floadsheet_stab',  label:'STAB TRIM set (PERF — DEP tab)', page:{app:'FMS',main:'PERF',sub:'DEP'}},
   ]},
   { type:'group', key:'grp_lsc', label:'Loadsheet check — CM1',
     note:'CM1 reads from FMS FPLN – FUEL tab. CM2 confirms on the final loadsheet.', items:[
-    {key:'lsc_zfw',   label:'ZFW', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> !!state.fpln.entry.zfwWt},
-    {key:'lsc_zfwcg', label:'ZFW CG', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> (state.fpln.entry.zfwCg||'').length===3},
+    {key:'lsc_zfw',   label:'ZFW', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
+    {key:'lsc_zfwcg', label:'ZFW CG', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
     {key:'lsc_tow',   label:'TOW', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
     {key:'lsc_towcg', label:'TOW CG', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
     {key:'lsc_lw',    label:'LW', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
-    {key:'lsc_block', label:'BLOCK (FUEL)', page:{app:'FMS',main:'FPLN',sub:'FUEL'}, sense:()=> !!state.fpln.entry.fuelBlock},
+    {key:'lsc_block', label:'BLOCK (FUEL)', page:{app:'FMS',main:'FPLN',sub:'FUEL'}},
     {key:'lsc_stab',  label:'STAB TRIM (PERF — DEP tab)', page:{app:'FMS',main:'PERF',sub:'DEP'}},
   ]},
   { type:'group', key:'grp_perfc', label:'Performance Check — CM1',
     note:'CM1 reads from FMS PERF – DEP tab.', items:[
-    {key:'perfc_origin',  label:'ORIGIN', page:{app:'FMS',main:'PERF',sub:'DEP'}, sense:()=> !!state.fpln.entry.origin},
+    {key:'perfc_origin',  label:'ORIGIN', page:{app:'FMS',main:'PERF',sub:'DEP'}},
     {key:'perfc_rwy',     label:'RWY (full length/intersection, Dry or Wet as applicable)', page:{app:'FMS',main:'PERF',sub:'DEP'}},
     {key:'perfc_tow',     label:'TOW', page:{app:'FMS',main:'PERF',sub:'DEP'}},
     {key:'perfc_tothrust',label:'TO THRUST', page:{app:'FMS',main:'PERF',sub:'DEP'}},
-    {key:'perfc_flex',    label:'FLEX (if required)', page:{app:'FMS',main:'PERF',sub:'DEP'}, sense:()=> !!state.perf.entry.flex},
+    {key:'perfc_flex',    label:'FLEX (if required)', page:{app:'FMS',main:'PERF',sub:'DEP'}},
     {key:'perfc_slatflap',label:'SLAT/FLAP', page:{app:'FMS',main:'PERF',sub:'DEP'}},
     {key:'perfc_bleed',   label:'BLEED SOURCE', page:{app:'FMS',main:'PERF',sub:'DEP'}},
     {key:'perfc_wingai',  label:'WING ANTI-ICE', page:{app:'FMS',main:'PERF',sub:'DEP'}},
     {key:'perfc_cowlai',  label:'COWL ANTI-ICE', page:{app:'FMS',main:'PERF',sub:'DEP'}},
     {key:'perfc_stab',    label:'STAB TRIM (confirm set on EICAS)', page:{app:'FMS',main:'PERF',sub:'DEP'}},
-    {key:'perfc_vspeeds', label:'V1, VR, V2', page:{app:'FMS',main:'PERF',sub:'DEP'},
-      sense:()=> !!(state.perf.entry.v1 && state.perf.entry.vr && state.perf.entry.v2)},
+    {key:'perfc_vspeeds', label:'V1, VR, V2', page:{app:'FMS',main:'PERF',sub:'DEP'}},
   ]},
 ];
-function guideItemDone(item){
-  return item.sense ? !!item.sense() : !!state.guide.manual[item.key];
+function pageKey(page){
+  return page ? `${page.app}.${page.main||''}.${page.sub||''}` : null;
+}
+function markGuidePageVisited(){
+  const key = `${state.app}.${state.main||''}.${state.sub||''}`;
+  if(!state.guide.visitedPages[key]) state.guide.visitedPages[key] = true;
+}
+function guideItemDone(item, page){
+  if(!item.sense) return !!state.guide.manual[item.key];
+  const key = pageKey(page);
+  const visited = key ? !!state.guide.visitedPages[key] : true;
+  return visited && !!item.sense();
 }
 function toggleGuideItem(key){
   state.guide.manual[key] = !state.guide.manual[key];
@@ -5725,8 +5747,8 @@ function guideGoTo(app, main, sub){
 }
 function renderGuideLeafItem(item, sectionPage, counter){
   const isOverridden = !!state.guide.override[item.key];
-  const isDone = guideItemDone(item);
   const page = item.page || sectionPage;
+  const isDone = guideItemDone(item, page);
   if(!isOverridden){ counter.total++; if(isDone) counter.done++; }
   const sensedCls = item.sense ? ' sensed' : '';
   const goTo = page ? `guideGoTo('${page.app}','${page.main||''}','${page.sub||''}');` : '';
