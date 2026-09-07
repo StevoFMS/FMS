@@ -1385,13 +1385,43 @@ const ECL_NORMAL_ORDER = ['Power-on','Preflight','Before start','Before taxi','B
 const ECL_DATA = {"Power-on": {"title": "Power-on", "items": [{"label": "PARK BRAKE", "action": "ON"}, {"label": "BATT 1", "action": "AUTO"}, {"label": "BATT 2", "action": "AUTO"}, {"label": "ECL", "action": "DU2"}, {"label": "PTU", "action": "AUTO"}, {"label": "HYD 3A", "action": "AUTO"}, {"label": "HYD 3B", "action": "AUTO"}, {"label": "HYD 2B", "action": "AUTO"}, {"label": "Landing gear lever", "action": "DN"}, {"label": "Thrust levers", "action": "IDLE"}, {"label": "L ENG run", "action": "OFF"}, {"label": "R ENG run", "action": "OFF"}, {"label": "APU or external power", "action": "As required"}, {"label": "EQUIP COOLING, INLET", "action": "Select auto"}]}, "Preflight": {"title": "Preflight", "items": [{"label": "Airplane documents", "action": "On board and checked"}, {"label": "Emergency equipment", "action": "Checked"}, {"label": "Gear pins", "action": "On board"}, {"label": "Overhead panel", "action": "Checked"}, {"label": "Glareshield", "action": "Checked"}, {"label": "Displays", "action": "Checked"}, {"label": "\u2666 Ice detector test", "action": "Complete"}, {"label": "\u2666 Circuit breakers", "action": "Checked"}, {"label": "EICAS and INFO", "action": "Checked"}, {"label": "Altimeters", "action": "()Set and cross-checked"}, {"label": "Center Panel", "action": "Checked"}, {"label": "Pedestal", "action": "Checked"}, {"label": "\u2666 Rudder trim", "action": "Checked"}, {"label": "Sidesticks", "action": "Checked"}, {"label": "\u2666 Oxygen masks <TC> or <EASA>", "action": "Checked"}, {"label": "\u2666 FDRAS test", "action": "Complete"}]}, "Before start": {"title": "Before start", "items": [{"label": "Takeoff briefing", "action": "Complete"}, {"label": "APU or external power", "action": "As required"}, {"label": "SEAT BELTS", "action": "ON"}, {"label": "Doors", "action": "Closed and locked"}, {"label": "BEACON", "action": "ON"}, {"label": "PARK BRAKE", "action": "As required"}]}, "Before taxi": {"title": "Before taxi", "items": [{"label": "APU", "action": "As required"}, {"label": "FLAP", "action": "() selected"}, {"label": "\u2666\u2666 Wing anti-ice test", "action": "Complete"}, {"label": "ANTI-ICE, COWL", "action": "AUTO or ON"}, {"label": "ANTI-ICE, WING", "action": "AUTO or ON"}, {"label": "Flight controls", "action": "Checked"}, {"label": "NOSE STEER", "action": "Select on"}, {"label": "EICAS and INFO", "action": "Checked"}]}, "Before takeoff": {"title": "Before takeoff", "items": [{"label": "APU BLEED", "action": "OFF, if OAT is at or below 15oC"}, {"label": "FMS", "action": "Set"}, {"label": "SEAT BELTS", "action": "ON"}, {"label": "Trims", "action": "Set"}, {"label": "FLAP", "action": "Set"}, {"label": "Anti-ice", "action": "As required"}, {"label": "AUTOBRAKE", "action": "As required"}, {"label": "EICAS and INFO", "action": "Checked"}, {"label": "Cabin", "action": "Ready"}, {"label": "Runway", "action": "() confirmed"}]}, "After Takeoff": {"title": "After takeoff", "items": [{"label": "Landing gear", "action": "UP"}, {"label": "FLAP", "action": "0"}, {"label": "ANTI-ICE, L COWL", "action": "AUTO"}, {"label": "ANTI-ICE, WING", "action": "AUTO"}, {"label": "ANTI-ICE, R COWL", "action": "AUTO"}, {"label": "APU BLEED", "action": "Select auto"}, {"label": "EICAS", "action": "Checked"}]}, "High Altitude Climb Check": {"title": "High altitude climb check (before reaching 35000')", "items": [{"label": "ANTI-ICE, WING", "action": "OFF"}, {"label": "Avoid icing conditions", "action": ""}]}, "Descent and approach": {"title": "Descent and approach", "items": [{"label": "ANTI-ICE, WING (below 35000 feet)", "action": "AUTO"}, {"label": "FMS", "action": "Set"}, {"label": "Minima", "action": "Set"}, {"label": "AUTOBRAKE", "action": "As required"}, {"label": "EICAS", "action": "Checked"}, {"label": "Approach briefing", "action": "Complete"}]}, "Before landing": {"title": "Before landing", "items": [{"label": "Altimeters", "action": "() Set and coss-checked"}, {"label": "Landing gear", "action": "DN"}, {"label": "FLAP", "action": "() indicating"}, {"label": "Cabin", "action": "Ready"}]}, "After go-around": {"title": "After go-around", "items": [{"label": "Landing gear", "action": "UP"}, {"label": "FLAP", "action": "0"}, {"label": "EICAS", "action": "Checked"}]}, "After landing": {"title": "After landing", "items": [{"label": "FLAP", "action": "0"}]}, "Shutdown": {"title": "Shutdown", "items": [{"label": "PARK BRAKE", "action": "ON"}, {"label": "NOSE STEER", "action": "OFF"}, {"label": "APU and/or external power", "action": "As required"}, {"label": "L ENG run", "action": "OFF"}, {"label": "R ENG run", "action": "OFF"}, {"label": "SEAT BELTS", "action": "OFF"}, {"label": "BEACON", "action": "OFF"}, {"label": "\u2666\u2666 Flight control test", "action": "Complete"}]}, "Power-off": {"title": "Power-off", "items": [{"label": "ECL", "action": "DU2"}, {"label": "EQUIP COOLING, INLET", "action": "OFF"}, {"label": "EMER LTS", "action": "OFF"}, {"label": "HYD 3A", "action": "OFF"}, {"label": "HYD 3B", "action": "OFF"}, {"label": "HYD 2B", "action": "OFF"}, {"label": "APU", "action": "OFF"}, {"label": "EXT PWR (if connected)", "action": "AVAIL"}, {"label": "DOME", "action": "Select off"}, {"label": "BATT 1", "action": "OFF"}, {"label": "BATT 2", "action": "OFF"}]}};
 
 // Small nav database used to demonstrate DBASE SEARCH behavior (FCOM 22-02-22..27)
+// Top 15 Australian airports by revenue passenger traffic, BITRE FY2024-25
+// (https://en.wikipedia.org/wiki/List_of_the_busiest_airports_in_Australia),
+// plus YCFS and NZWN — the two QantasLink Airbus A220 destinations (Coffs
+// Harbour and Wellington NZ) not already covered by the top-15 list.
+// Coordinates and longest-runway length cross-checked against SkyVector and
+// Wikipedia (agreed to within rounding on every entry). MAG VAR sourced as follows:
+//  - YSSY, YMML, YBBN, YPPH, YPAD, YBCG, YBCS, YMHB, YPDN, YBSU, YCFS: read
+//    directly off the official Airservices Australia AIP aerodrome charts
+//    (primary source).
+//  - YSCB, YBTL, YMLT, YWLM, YBMK: single-source (universalweather.com airport
+//    data), not independently cross-checked against an AIP chart — treat these
+//    five as lower-confidence than the other ten AU entries.
+//  - NZWN: sources disagree (21-23 E across SkyVector-linked, Navigraph, and
+//    airport-data aggregators), most likely reflecting different survey years
+//    since magnetic variation drifts over time. Used Navigraph's figure
+//    (23.0E) as the most recently-dated source, but flagged here as the least
+//    certain MAG VAR value in this table. Runway length reflects the EMAS
+//    safety-zone upgrade completed March 2026, which increased declared
+//    distances from the prior 1815 m to approximately 1947 m.
 const NAVDB = {
-  'SCCI': {kind:'airport', name:'CARLOS IBANEZ DEL CAMPO INTL', loc:'S53°00.22 W070°51.22', longrwy:'9100 FT', magvar:'E13.4', elev:'139 FT'},
-  'KJFK': {kind:'airport', name:'JOHN F KENNEDY INTL', loc:'N40°38.36 W073°46.72', longrwy:'14511 FT', magvar:'W13.2', elev:'13 FT'},
-  'LAS':  {kind:'navaid', name:'LAS VOR/DME', loc:'N36°04.78 W115°09.59', freq:'116.90', decl:'E15.0', elev:'2178 FT', type:'VOR/DME', ident:'LAS', dme:'LAS'},
-  'BLD':  {kind:'navaid', name:'BOULDER CITY VOR/DME', loc:'N35°56.16 W114°51.72', freq:'116.70', decl:'E14.0', elev:'2872 FT', type:'VOR/DME', ident:'BLD', dme:'BLD'},
-  'DVC':  {kind:'waypoint', name:'DVC', loc:'N35°52.98 W113°45.66', wtype:'FIX', variation:'E13.0'},
-  'COTON':{kind:'waypoint', name:'COTON', loc:'N42°19.19 W089°18.73', wtype:'FIX', variation:'W03.5'}
+  'YSSY': {kind:'airport', name:'SYDNEY (KINGSFORD SMITH)',   loc:'S33°56.77 E151°10.63', longrwy:'13002 FT', magvar:'E13.0', elev:'21 FT'},
+  'YMML': {kind:'airport', name:'MELBOURNE (TULLAMARINE)',    loc:'S37°40.40 E144°50.60', longrwy:'11998 FT', magvar:'E12.0', elev:'434 FT'},
+  'YBBN': {kind:'airport', name:'BRISBANE',                   loc:'S27°23.05 E153°07.05', longrwy:'11680 FT', magvar:'E11.0', elev:'15 FT'},
+  'YPPH': {kind:'airport', name:'PERTH',                      loc:'S31°56.42 E115°58.02', longrwy:'11299 FT', magvar:'W2.0',  elev:'67 FT'},
+  'YPAD': {kind:'airport', name:'ADELAIDE',                   loc:'S34°56.70 E138°31.83', longrwy:'10171 FT', magvar:'E8.0',  elev:'20 FT'},
+  'YBCG': {kind:'airport', name:'GOLD COAST (COOLANGATTA)',   loc:'S28°09.87 E153°30.28', longrwy:'8176 FT',  magvar:'E11.0', elev:'21 FT'},
+  'YBCS': {kind:'airport', name:'CAIRNS',                     loc:'S16°53.15 E145°45.32', longrwy:'10354 FT', magvar:'E7.0',  elev:'10 FT'},
+  'YMHB': {kind:'airport', name:'HOBART',                     loc:'S42°50.17 E147°30.62', longrwy:'8947 FT',  magvar:'E15.0', elev:'13 FT'},
+  'YSCB': {kind:'airport', name:'CANBERRA',                   loc:'S35°18.42 E149°11.70', longrwy:'10771 FT', magvar:'E12.0', elev:'1886 FT'},
+  'YPDN': {kind:'airport', name:'DARWIN',                     loc:'S12°24.88 E130°52.60', longrwy:'11004 FT', magvar:'E2.0',  elev:'103 FT'},
+  'YBTL': {kind:'airport', name:'TOWNSVILLE',                 loc:'S19°15.15 E146°45.92', longrwy:'7999 FT',  magvar:'E8.0',  elev:'18 FT'},
+  'YBSU': {kind:'airport', name:'SUNSHINE COAST',             loc:'S26°36.20 E153°05.50', longrwy:'8038 FT',  magvar:'E11.0', elev:'15 FT'},
+  'YMLT': {kind:'airport', name:'LAUNCESTON',                 loc:'S41°32.72 E147°12.85', longrwy:'6499 FT',  magvar:'E14.0', elev:'562 FT'},
+  'YWLM': {kind:'airport', name:'NEWCASTLE (WILLIAMTOWN)',    loc:'S32°47.70 E151°50.07', longrwy:'10033 FT', magvar:'E12.0', elev:'31 FT'},
+  'YBMK': {kind:'airport', name:'MACKAY',                     loc:'S21°10.28 E149°10.78', longrwy:'6499 FT',  magvar:'E9.0',  elev:'19 FT'},
+  'YCFS': {kind:'airport', name:'COFFS HARBOUR',              loc:'S30°19.23 E153°06.98', longrwy:'6824 FT',  magvar:'E12.0', elev:'18 FT'},
+  'NZWN': {kind:'airport', name:'WELLINGTON (NZ)',            loc:'S41°19.63 E174°48.32', longrwy:'6388 FT',  magvar:'E23.0', elev:'41 FT'}
 };
 
 let state = {
@@ -1427,8 +1457,7 @@ let state = {
 
   // DBASE
   defaultsSelect: 'FPLN/PERF',
-  searchQuery: 'SCCI',
-  searchInput: 'SCCI',
+  dbase: { entry: { ident: '' } },
 
   // PERF/DEP
   toThrust: 'TO',
@@ -1474,6 +1503,12 @@ let state = {
     windReqSent:false,
     vspeedStatus:''               // UPDATE | COMPLETE | FAILED  (PG 10-70)
   },
+
+  // ROUTE.LEGS — SPD/ALT constraints entered by the crew (PG 10-72), keyed by
+  // waypoint name since the leg list itself is regenerated on every render.
+  // Present in this map means "user-entered constraint" (shown in white,
+  // overriding the FMS-predicted green default); absent means no override.
+  route: { legConstraints: {} },
 
   modalTitle: '',
   modalBody: '',
@@ -2632,17 +2667,26 @@ const FPLN_FIELDS = {
   etd:        {mask:'nn:nn'},
   altn:       {mask:'nnnn'},
   altnCrzAlt: {mask:'nnnnn'},
-  avgWindClb: {mask:'nnnT/nnn'},
-  avgWindCrz: {mask:'nnnT/nnn'},
-  avgWindDes: {mask:'nnnT/nnn'},
+  // Wind entries (direction/speed, e.g. "230/05") use a plain 7-slot free-text
+  // mask rather than an auto-inserted literal separator — operator confirmed
+  // the "/" must be typed by the crew as part of the scratchpad entry itself
+  // (PG 5-16: "Winds can be entered as a direction and speed, for example
+  // 280/25"), not auto-formatted the way ':' is on ETD or '.' is on ZFW CG.
+  // phMask keeps the old decorative "T" template visible only while the
+  // field is blank, as a format hint — the "T" itself is never part of what
+  // the crew actually types; once anything is entered, plain 'mask' takes
+  // over and nothing is auto-inserted, so the "/" must be typed manually.
+  avgWindClb: {mask:'nnnnnnn', phMask:'nnnT/nnn'},
+  avgWindCrz: {mask:'nnnnnnn', phMask:'nnnT/nnn'},
+  avgWindDes: {mask:'nnnnnnn', phMask:'nnnT/nnn'},
   avgIsa:     {mask:'nnn', suffix:' °C'},
 
-  windClb0Alt:{mask:'nnnnn'}, windClb0Oat:{mask:'nnn'}, windClb0Wind:{mask:'nnnT/nnn'},
-  windClb1Alt:{mask:'nnnnn'}, windClb1Oat:{mask:'nnn'}, windClb1Wind:{mask:'nnnT/nnn'},
-  windWpt0Alt:{mask:'nnnnn'}, windWpt0Oat:{mask:'nnn'}, windWpt0Wind:{mask:'nnnT/nnn'},
-  windWpt1Alt:{mask:'nnnnn'}, windWpt1Oat:{mask:'nnn'}, windWpt1Wind:{mask:'nnnT/nnn'},
-  windDes0Alt:{mask:'nnnnn'}, windDes0Oat:{mask:'nnn'}, windDes0Wind:{mask:'nnnT/nnn'},
-  windDes1Alt:{mask:'nnnnn'}, windDes1Oat:{mask:'nnn'}, windDes1Wind:{mask:'nnnT/nnn'},
+  windClb0Alt:{mask:'nnnnn'}, windClb0Oat:{mask:'nnn'}, windClb0Wind:{mask:'nnnnnnn', phMask:'nnnT/nnn'},
+  windClb1Alt:{mask:'nnnnn'}, windClb1Oat:{mask:'nnn'}, windClb1Wind:{mask:'nnnnnnn', phMask:'nnnT/nnn'},
+  windWpt0Alt:{mask:'nnnnn'}, windWpt0Oat:{mask:'nnn'}, windWpt0Wind:{mask:'nnnnnnn', phMask:'nnnT/nnn'},
+  windWpt1Alt:{mask:'nnnnn'}, windWpt1Oat:{mask:'nnn'}, windWpt1Wind:{mask:'nnnnnnn', phMask:'nnnT/nnn'},
+  windDes0Alt:{mask:'nnnnn'}, windDes0Oat:{mask:'nnn'}, windDes0Wind:{mask:'nnnnnnn', phMask:'nnnT/nnn'},
+  windDes1Alt:{mask:'nnnnn'}, windDes1Oat:{mask:'nnn'}, windDes1Wind:{mask:'nnnnnnn', phMask:'nnnT/nnn'},
 
   fob:        {mask:'nnnnn', suffix:' KG'},
   zfwWt:      {mask:'nnnnn'},
@@ -2662,7 +2706,10 @@ for(let i=2;i<=10;i++){
 const PERF_FIELDS = {
   flex:    {mask:'nnn', suffix:' °C'},
   oat:     {mask:'nnn', suffix:' °C'},
-  rwyWind: {mask:'nnn°/nnn'},
+  // RWY WIND (direction/speed, e.g. "230/05") — free-text mask, crew types
+  // the "/" themselves; see the matching comment on avgWindClb above. phMask
+  // restores the old "°" placeholder template shown only while blank.
+  rwyWind: {mask:'nnnnnnn', phMask:'nnn°/nnn'},
   v1:      {mask:'nnn'},
   vr:      {mask:'nnn'},
   v2:      {mask:'nnn'},
@@ -2672,7 +2719,7 @@ const PERF_FIELDS = {
   accelHt: {mask:'nnnn'},
   thrRedHt:{mask:'nnnn'},
   oatArr:    {mask:'nnn', suffix:' °C'},
-  rwyWindArr:{mask:'nnn°/nnn'},
+  rwyWindArr:{mask:'nnnnnnn', phMask:'nnn°/nnn'},
   qnhArr:    {mask:'nn.nn'},
   altArr:    {mask:'nnnn'},
   vref:      {mask:'nnn'},
@@ -2680,24 +2727,34 @@ const PERF_FIELDS = {
 };
 // Mandatory startup init dialog — Block Fuel entry (see openInitDialog below)
 const INITDLG_FIELDS = { fuel: {mask:'nnnnn'} };
+// DBASE.SEARCH — identifier entry, same free-text waypoint-length mask used
+// by ROUTE.VIA/TO's TO column (up to 7 chars covers airport/navaid/fix idents)
+const DBASE_FIELDS = { ident: {mask:'nnnnnnn', ph:'-'} };
 
 function scratchRegistry(bucketName){
   if(bucketName === 'cnsInit') return INIT_FIELDS;
   if(bucketName === 'fplnEntry') return FPLN_FIELDS;
   if(bucketName === 'initDlg') return INITDLG_FIELDS;
+  if(bucketName === 'dbaseSearch') return DBASE_FIELDS;
   return PERF_FIELDS;
 }
 function scratchBucket(bucketName){
   if(bucketName === 'cnsInit') return state.cns.init;
   if(bucketName === 'fplnEntry') return state.fpln.entry;
   if(bucketName === 'initDlg') return state.initDlg.entry;
+  if(bucketName === 'dbaseSearch') return state.dbase.entry;
   return state.perf.entry;
 }
 function scratchFieldHtml(bucketName, key){
   const f = scratchRegistry(bucketName)[key];
   const ph = f.ph || '-';
   const v = scratchBucket(bucketName)[key] || '';
-  const html = renderMask(f.mask, v, ph, false);
+  // Wind fields (see avgWindClb comment) keep a decorative phMask showing the
+  // "T"/"°" template while blank, purely as a visual format hint — neither
+  // character is actually part of what the crew types. Once anything is
+  // entered, f.mask (plain free-text) takes over so nothing is auto-inserted.
+  const maskToUse = (!v && f.phMask) ? f.phMask : f.mask;
+  const html = renderMask(maskToUse, v, ph, false);
   return `<span class="field init-val" onclick="scratchClick('${bucketName}','${key}')">${html}</span>`+
          (f.suffix ? `<span class="init-sep">${f.suffix}</span>` : '');
 }
@@ -2773,7 +2830,9 @@ function flexFieldHtml(){
    handler (scratchKey) and the mobile virtual-keyboard bridge below, so the
    two input paths can't drift out of sync with each other. */
 function scratchAppendChar(ch){
-  if(/^[a-zA-Z0-9]$/.test(ch)){
+  // '/' is a normal appendable character (not a toggle like '-') — needed for
+  // wind entries (e.g. "230/05") and other slash-separated scratchpad input.
+  if(/^[a-zA-Z0-9\/]$/.test(ch)){
     if(state.scratch.text.length < SCRATCH_MAX) state.scratch.text += ch.toUpperCase();
     state.scratch.error = false;
   } else if(ch === '-'){
@@ -2788,7 +2847,7 @@ function scratchClear(){ state.scratch.text = ''; state.scratch.error = false; }
 function scratchKey(e){
   if(e.metaKey || e.ctrlKey || e.altKey) return;
   let handled = true;
-  if(/^[a-zA-Z0-9]$/.test(e.key) || e.key === '-'){
+  if(/^[a-zA-Z0-9\/]$/.test(e.key) || e.key === '-'){
     scratchAppendChar(e.key);
   } else if(e.key === 'Backspace'){
     scratchBackspace();
@@ -3565,10 +3624,6 @@ function openHoldDialog(){
   `;
   openModal('HOLD', html);
 }
-function openRtaDialog(){
-  const html = `<div class="lbl">RTA WAYPOINT</div>${field('-----', {blank:true})}<div class="lbl" style="margin-top:8px;">RTA TIME</div>${field('--:--:--', {blank:true})}`;
-  openModal('RTA', html);
-}
 function openFixDialog(){
   /* PG 10-104..106 FIX dialog box — six fix types, up to 10 fix waypoints */
   const html = `
@@ -3610,12 +3665,6 @@ function activateSec(){
 }
 
 /* ---------- DBASE SEARCH lookups (FCOM 22-02-22..27) ---------- */
-function runSearch(){
-  const q = document.getElementById('searchBox').value.trim().toUpperCase();
-  state.searchInput = q;
-  if(NAVDB[q]) state.searchQuery = q;
-  render();
-}
 
 /* ---------- generic helpers ---------- */
 function field(txt, opts){
@@ -3875,6 +3924,123 @@ const DEPARTURES_DATA = {
     ],
     trans: []
   },
+  // The following 9 airports were transcribed from the operator's AIP DAP
+  // index (DAP 188, effective 03-Sep-26) supplied 2026-09-06, using the same
+  // mechanical short-code convention as the 6 above (fix name + spelled-out
+  // number -> digit; not verified against a real nav database — see Known
+  // Gaps). Runway lists cross-checked against Wikipedia/SkyVector. YCFS
+  // (Coffs Harbour) is deliberately absent — the index has no SID/STAR for
+  // it at all, only approach charts, so there's nothing to transcribe.
+  YPDN: {
+    runways: ['RW11','RW29','RW18','RW36'],
+    sids: [
+      {name:'DARWIN8', full:'DARWIN EIGHT DEPARTURE (RADAR)', rwy:null},
+      {name:'HELLI6', full:'HELLI SIX (JET) (RNAV)', rwy:null},
+      {name:'JULIE6', full:'JULIE SIX (JET) (RNAV)', rwy:null},
+      {name:'LAKUP6', full:'LAKUP SIX (NON-JET) (RNAV)', rwy:null},
+      {name:'OCTOB9', full:'OCTOB NINE (JET) (RNAV)', rwy:null},
+      {name:'OLTAS2', full:'OLTAS TWO (NON-JET) (RNAV)', rwy:null},
+      {name:'RUPEG3', full:'RUPEG THREE (JET) (RNAV)', rwy:null},
+      {name:'RUSKA7', full:'RUSKA SEVEN (NON-JET) (RNAV)', rwy:null},
+      {name:'VANDI9', full:'VANDI NINE (NON-JET) (RNAV)', rwy:null},
+    ],
+    trans: []
+  },
+  YBCG: {
+    runways: ['RW14','RW32'],
+    sids: [
+      {name:'GOLDCOAST7', full:'GOLD COAST SEVEN DEPARTURE (RADAR)', rwy:['RW14','RW32']},
+      {name:'CUDGN4', full:'RW14 RNAV (RNP 0.3) CUDGN FOUR', rwy:'RW14'},
+      {name:'BURLI5', full:'RW32 RNAV (RNP 0.3) BURLI FIVE', rwy:'RW32'},
+      {name:'SOUTH', full:'RWY 14/32 SOUTH (JET) (RNAV)', rwy:['RW14','RW32']},
+    ],
+    trans: []
+  },
+  YMHB: {
+    runways: ['RW12','RW30'],
+    sids: [
+      {name:'KANLI3', full:'KANLI THREE (NON-JET) (RNAV)', rwy:null},
+      {name:'LATUM2', full:'LATUM TWO (JET) (RNAV)', rwy:null},
+      {name:'LAVOP1', full:'LAVOP ONE (RNAV)', rwy:null},
+      {name:'RIBLI1', full:'RIBLI ONE (RNAV)', rwy:null},
+    ],
+    trans: []
+  },
+  YMLT: {
+    runways: ['RW14R','RW32L'],
+    sids: [
+      {name:'LAUNCESTON1', full:'LAUNCESTON ONE DEPARTURE (RADAR)', rwy:'RW14R'},
+      {name:'CHARLIE', full:'RWY 14R CHARLIE (NON-JET)', rwy:'RW14R'},
+      {name:'BRAVO', full:'RWY 14R NORTH BRAVO', rwy:'RW14R'},
+      {name:'ALPHA', full:'RWY 14R/32L NORTH ALPHA', rwy:['RW14R','RW32L']},
+      {name:'SOUTH', full:'RWY 14R/32L SOUTH', rwy:['RW14R','RW32L']},
+    ],
+    trans: []
+  },
+  YBMK: {
+    runways: ['RW14','RW32'],
+    sids: [
+      {name:'MACKAY2', full:'MACKAY TWO DEPARTURE (RADAR)', rwy:null},
+      {name:'CLIFT3', full:'CLIFT THREE (RNAV)', rwy:null},
+      {name:'MUNAR1', full:'MUNAR ONE (RNAV)', rwy:null},
+    ],
+    trans: []
+  },
+  YPPH: {
+    runways: ['RW03','RW06','RW21','RW24'],
+    sids: [
+      {name:'PERTH7', full:'PERTH SEVEN DEPARTURE (RADAR)', rwy:null},
+      {name:'AMANA5', full:'AMANA FIVE (JET) (RNAV)', rwy:null},
+      {name:'AVNEX5', full:'AVNEX FIVE (JET) (RNAV)', rwy:null},
+      {name:'EKEPO1', full:'EKEPO ONE (RNAV)', rwy:null},
+      // one published chart covers all 4 named departures together — kept as
+      // a single entry rather than guessing which runway each applies to
+      {name:'HECTO5', full:'HECTO FIVE, MEMUP FIVE, MUBID FOUR, YNRV FIVE (JET) (RNAV)', rwy:null},
+      {name:'LENVU1', full:'LENVU ONE, PUMRY SEVEN (NON-JET) (RNAV)', rwy:null},
+      {name:'OLMAM1', full:'OLMAM ONE, SOLUS SIX (RNAV)', rwy:null},
+      {name:'OPEGA1', full:'OPEGA ONE (RNAV)', rwy:null},
+      {name:'OTLED5', full:'OTLED FIVE (NON-JET) (RNAV)', rwy:null},
+      {name:'REPOK1', full:'REPOK ONE (NON-JET) (RNAV)', rwy:null},
+    ],
+    trans: []
+  },
+  YBSU: {
+    runways: ['RW13','RW31'],
+    sids: [
+      {name:'MOOLO2', full:'MOOLO TWO (RNAV)', rwy:null},
+      {name:'TAPET1', full:'TAPET ONE (RNAV)', rwy:null},
+    ],
+    trans: []
+  },
+  YBTL: {
+    runways: ['RW01','RW19'],
+    sids: [
+      {name:'KVALM2', full:'KVALM TWO DEPARTURE', rwy:null},
+      {name:'CARMN1', full:'RWY 01 CARMN ONE (RNAV)', rwy:'RW01'},
+      {name:'ADNOD1', full:'RWY 01/19 ADNOD ONE (RNAV)', rwy:['RW01','RW19']},
+      {name:'ANRUB1', full:'RWY 01/19 ANRUB ONE (RNAV)', rwy:['RW01','RW19']},
+      {name:'CATEY1', full:'RWY 01/19 CATEY ONE (RNAV)', rwy:['RW01','RW19']},
+      {name:'JEMMA3', full:'RWY 01/19 JEMMA THREE (RNAV)', rwy:['RW01','RW19']},
+      {name:'WALTA2', full:'RWY 01/19 WALTA TWO (RNAV)', rwy:['RW01','RW19']},
+      {name:'IGBIK1', full:'RWY 19 IGBIK ONE (RNAV)', rwy:'RW19'},
+      {name:'RURTO1', full:'RWY 19 RURTO ONE (RNAV)', rwy:'RW19'},
+      {name:'TOWNSVILLEEAST3', full:'TOWNSVILLE EAST THREE DEPARTURE - RWY 01', rwy:'RW01'},
+      {name:'TOWNSVILLENORTH4', full:'TOWNSVILLE NORTH FOUR DEPARTURE - RWY 01', rwy:'RW01'},
+    ],
+    trans: []
+  },
+  YWLM: {
+    runways: ['RW12','RW30'],
+    sids: [
+      {name:'WILLY4', full:'WILLY FOUR DEPARTURE (RADAR)', rwy:null},
+      {name:'KEXAR1', full:'KEXAR ONE DEPARTURE (RNAV)', rwy:['RW12','RW30']},
+      {name:'LIMLO1', full:'LIMLO ONE DEPARTURE (RNAV)', rwy:['RW12','RW30']},
+      {name:'MONDO1', full:'MONDO ONE DEPARTURE (RNAV)', rwy:['RW12','RW30']},
+      {name:'UBSON1A', full:'UBSON ONE ALPHA DEPARTURE (RNAV)', rwy:['RW12','RW30']},
+      {name:'UBSON1B', full:'UBSON ONE BRAVO DEPARTURE (RNAV)', rwy:'RW12'},
+    ],
+    trans: []
+  },
 };
 function depFilteredSids(data){
   const rwy = state.fpln.dep.rwy;
@@ -3893,7 +4059,7 @@ function openDeparturesDialog(){
     </div>`;
   if(!data){
     const body = `
-      <div class="grey" style="font-size:11px; margin-bottom:12px;">No departure data is loaded for ${origin || 'this airport'}. Only YSSY has been transcribed so far.</div>
+      <div class="grey" style="font-size:11px; margin-bottom:12px;">No departure data is loaded for ${origin || 'this airport'}.</div>
       <div class="row" style="margin-bottom:10px;"><span class="lbl">OTHER AIRPORT</span>${field('----', {blank:true})}</div>
       <div class="row">
         <span class="btn" onclick="closeCornerPopup(); openArrivalsDialog();">ARRIVALS...</span>
@@ -4014,6 +4180,84 @@ YSSY: {
       {name:'RAYNA3', full:'RAYNA THREE ALPHA, ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','V','Z']},
       {name:'SURGN4', full:'SURGN FOUR ARRIVAL (NON-JET) (RNAV)', rwy:null, trans:[]},
     ]
+  },
+  // Same 9-airport transcription as DEPARTURES_DATA above, from the uploaded
+  // AIP DAP index. YMLT has no published STAR at all in the index (only
+  // approach charts) — its entry is kept with an empty stars list rather
+  // than omitted, since SID data does exist for it.
+  YPDN: {
+    runways: ['RW11','RW29','RW18','RW36'],
+    stars: [
+      {name:'ANUPA2', full:'ANUPA TWO ALPHA, X-RAY ARRIVAL (RNAV)', rwy:null, trans:['A','X']},
+      {name:'GATOR4', full:'GATOR FOUR ALPHA, X-RAY ARRIVAL (RNAV)', rwy:null, trans:['A','X']},
+      {name:'VEGPU1', full:'VEGPU ONE ALPHA, WHISKEY, X-RAY ARRIVAL (RNAV)', rwy:null, trans:['A','W','X']},
+      {name:'WANGI5', full:'WANGI FIVE ALPHA, WHISKEY, X-RAY ARRIVAL (RNAV)', rwy:null, trans:['A','W','X']},
+    ]
+  },
+  YBCG: {
+    runways: ['RW14','RW32'],
+    stars: [
+      {name:'BERNI4', full:'BERNI FOUR ALPHA, VICTOR, YANKEE ARRIVAL (RNAV)', rwy:['RW14','RW32'], trans:['A','V','Y']},
+      {name:'LAMSI3', full:'LAMSI THREE ALPHA, YANKEE ARRIVAL (RNAV)', rwy:null, trans:['A','Y']},
+    ]
+  },
+  YMHB: {
+    runways: ['RW12','RW30'],
+    stars: [
+      {name:'IPLET8', full:'IPLET EIGHT ALPHA, VICTOR, WHISKEY ARRIVAL (RNAV)', rwy:null, trans:['A','V','W']},
+      {name:'MORGO4', full:'MORGO FOUR ALPHA, VICTOR, WHISKEY ARRIVAL (RNAV)', rwy:null, trans:['A','V','W']},
+    ]
+  },
+  YMLT: {
+    runways: ['RW14R','RW32L'],
+    stars: []
+  },
+  YBMK: {
+    runways: ['RW14','RW32'],
+    stars: [
+      {name:'DAGSI1', full:'DAGSI ONE ARRIVAL (RNAV)', rwy:null, trans:[]},
+      {name:'WELKE1', full:'WELKE ONE ARRIVAL (RNAV)', rwy:null, trans:[]},
+    ]
+  },
+  YPPH: {
+    runways: ['RW03','RW06','RW21','RW24'],
+    stars: [
+      {name:'DAYLR5', full:'DAYLR FIVE ALPHA, VICTOR, X-RAY ARRIVAL (NON-JET) (RNAV)', rwy:null, trans:['A','V','X']},
+      {name:'IPMOR2', full:'IPMOR TWO ALPHA ARRIVAL (RNAV)', rwy:['RW03','RW21','RW06','RW24'], trans:['A']},
+      {name:'JULIM8', full:'JULIM EIGHT ALPHA, VICTOR, X-RAY ARRIVAL (JET) (RNAV)', rwy:['RW03','RW06','RW21','RW24'], trans:['A','V','X']},
+      {name:'KABLI3', full:'KABLI THREE ALPHA, VICTOR, X-RAY ARRIVAL (JET) (RNAV)', rwy:['RW03','RW06','RW21','RW24'], trans:['A','V','X']},
+      {name:'LAVEX3', full:'LAVEX THREE ALPHA, VICTOR, X-RAY ARRIVAL (NON-JET) (RNAV)', rwy:['RW03','RW06','RW21','RW24'], trans:['A','V','X']},
+      {name:'SAPKO4', full:'SAPKO FOUR ALPHA, VICTOR, X-RAY ARRIVAL (NON-JET) (RNAV)', rwy:['RW03','RW06','RW21','RW24'], trans:['A','V','X']},
+      {name:'SOLUS3', full:'SOLUS THREE ALPHA, VICTOR, X-RAY ARRIVAL (RNAV)', rwy:null, trans:['A','V','X']},
+    ]
+  },
+  YBSU: {
+    runways: ['RW13','RW31'],
+    stars: [
+      {name:'ITIDE2', full:'ITIDE TWO WHISKEY, ZULU ARRIVAL (RNAV)', rwy:null, trans:['W','Z']},
+      {name:'REBEG2', full:'REBEG TWO X-RAY, ZULU ARRIVAL (RNAV)', rwy:null, trans:['X','Z']},
+      {name:'SEBVA2', full:'SEBVA TWO X-RAY, ZULU ARRIVAL (RNAV)', rwy:null, trans:['X','Z']},
+    ]
+  },
+  YBTL: {
+    runways: ['RW01','RW19'],
+    stars: [
+      {name:'IBUXI2', full:'IBUXI TWO ALPHA, ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','Z']},
+      {name:'IGIKI2', full:'IGIKI TWO ALPHA ARRIVAL (RNAV)', rwy:null, trans:['A']},
+      {name:'POROB3', full:'POROB THREE ALPHA, BRAVO, PAPA, ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','B','P','Z']},
+      {name:'VOMPA2', full:'VOMPA TWO ALPHA, BRAVO, PAPA, ZULU ARRIVAL (RNAV)', rwy:null, trans:['A','B','P','Z']},
+    ]
+  },
+  YWLM: {
+    runways: ['RW12','RW30'],
+    stars: [
+      {name:'ASUVA1', full:'ASUVA ONE ARRIVAL (RNAV)', rwy:['RW12','RW30'], trans:[]},
+      {name:'EKIPU2', full:'EKIPU TWO ARRIVAL (RNAV)', rwy:['RW12','RW30'], trans:[]},
+      {name:'IVTAG1', full:'IVTAG ONE ROMEO, VICTOR ARRIVAL (RNAV)', rwy:'RW30', trans:['R','V']},
+      {name:'LAXUM2', full:'LAXUM TWO ALPHA, BRAVO, ROMEO, VICTOR ARRIVAL (RNAV)', rwy:['RW12','RW30'], trans:['A','B','R','V']},
+      {name:'OVLUX2', full:'OVLUX TWO ARRIVAL (RNAV)', rwy:['RW12','RW30'], trans:[]},
+      {name:'PUDUT1', full:'PUDUT ONE ARRIVAL (RNAV)', rwy:['RW12','RW30'], trans:[]},
+    ]
   }
 };
 function arrFilteredStars(data){
@@ -4034,7 +4278,7 @@ function openArrivalsDialog(){
     </div>`;
   if(!data){
     const body = `
-      <div class="grey" style="font-size:11px; margin-bottom:12px;">No arrival data is loaded for ${origin || 'this airport'}. Only YSSY, YMML, YBBN, YBCS, YSCB and YPAD have been transcribed so far.</div>
+      <div class="grey" style="font-size:11px; margin-bottom:12px;">No arrival data is loaded for ${origin || 'this airport'}.</div>
       <div class="row" style="margin-bottom:10px;"><span class="lbl">OTHER AIRPORT</span>${field('----', {blank:true})}</div>
       <div class="row">
         <span class="btn" onclick="closeCornerPopup(); openDeparturesDialog();">DEPARTURES...</span>
@@ -4383,9 +4627,12 @@ function pageDbaseStatus(){
 }
 
 function pageDbaseSearch(){
-  const d = NAVDB[state.searchQuery];
+  const q = state.dbase.entry.ident || '';
+  const d = NAVDB[q];
   let details = '';
-  if(d.kind==='airport'){
+  if(!d){
+    details = `<div class="grey" style="margin-bottom:14px;">${q ? 'NOT FOUND IN DATABASE' : 'Enter an airport, navaid, or waypoint identifier.'}</div>`;
+  } else if(d.kind==='airport'){
     details = `
     <div class="lbl">ARP LOCATION</div>
     <div class="cyan val" style="margin-bottom:14px;">${d.loc}</div>
@@ -4397,11 +4644,11 @@ function pageDbaseSearch(){
       </div>
     </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
-      <span class="btn" onclick="infoDialog('RUNWAYS','<div class=&quot;grey&quot;>Runway data not modeled for ${state.searchQuery}.</div>')">RUNWAYS</span>
-      <span class="btn" onclick="infoDialog('LOC','<div class=&quot;grey&quot;>Localizer data not modeled for ${state.searchQuery}.</div>')">LOC</span>
-      <span class="btn" onclick="infoDialog('TERM WPTS','<div class=&quot;val&quot;>List of terminal waypoints for ${state.searchQuery}</div>')">TERM WPTS</span>
-      <span class="btn" onclick="infoDialog('TERM NDBS','<div class=&quot;val&quot;>List of terminal NDBs for ${state.searchQuery}</div>')">TERM NDBS</span>
-      <span class="btn" onclick="infoDialog('GATES','<div class=&quot;val&quot;>Gate information for ${state.searchQuery}</div>')">GATES</span>
+      <span class="btn" onclick="infoDialog('RUNWAYS','<div class=&quot;grey&quot;>Runway data not modeled for ${q}.</div>')">RUNWAYS</span>
+      <span class="btn" onclick="infoDialog('LOC','<div class=&quot;grey&quot;>Localizer data not modeled for ${q}.</div>')">LOC</span>
+      <span class="btn" onclick="infoDialog('TERM WPTS','<div class=&quot;val&quot;>List of terminal waypoints for ${q}</div>')">TERM WPTS</span>
+      <span class="btn" onclick="infoDialog('TERM NDBS','<div class=&quot;val&quot;>List of terminal NDBs for ${q}</div>')">TERM NDBS</span>
+      <span class="btn" onclick="infoDialog('GATES','<div class=&quot;val&quot;>Gate information for ${q}</div>')">GATES</span>
     </div>`;
   } else if(d.kind==='navaid'){
     details = `
@@ -4417,7 +4664,7 @@ function pageDbaseSearch(){
         <div class="lbl" style="margin-top:8px;">IDENT</div><div class="val">${d.ident}</div>
       </div>
     </div>
-    <span class="btn" onclick="infoDialog('AIRWAY WPTS','<div class=&quot;val&quot;>Airways associated with ${state.searchQuery}</div>')">AIRWAY WPTS</span>`;
+    <span class="btn" onclick="infoDialog('AIRWAY WPTS','<div class=&quot;val&quot;>Airways associated with ${q}</div>')">AIRWAY WPTS</span>`;
   } else {
     details = `
     <div class="grid g2" style="margin-bottom:14px;">
@@ -4426,18 +4673,18 @@ function pageDbaseSearch(){
         <div class="lbl" style="margin-top:8px;">VARIATION</div><div class="val">${d.variation}</div>
       </div>
     </div>
-    <span class="btn" onclick="infoDialog('AIRWAY WPTS','<div class=&quot;val&quot;>Airways associated with ${state.searchQuery}</div>')">AIRWAY WPTS</span>`;
+    <span class="btn" onclick="infoDialog('AIRWAY WPTS','<div class=&quot;val&quot;>Airways associated with ${q}</div>')">AIRWAY WPTS</span>`;
   }
   return `
   <div class="grid g3" style="margin-bottom:14px;">
     <div>
       <div class="lbl">ARPT/NAVAID/WPT</div>
-      <input id="searchBox" class="field-input" value="${state.searchInput}" onkeydown="if(event.key==='Enter')runSearch();" onblur="runSearch();">
-      <div class="grey" style="font-size:10px; margin-top:4px;">try SCCI, KJFK, LAS, BLD, DVC, COTON</div>
+      ${scratchFieldHtml('dbaseSearch','ident')}
+      <div class="grey" style="font-size:10px; margin-top:4px;">try YSSY, YMML, YBBN, YPPH, YPAD, YBCG...</div>
     </div>
     <div>
       <div class="lbl">LONG RWY</div>
-      <div class="val">${d.kind==='airport' ? d.longrwy : '&nbsp;'}</div>
+      <div class="val">${d && d.kind==='airport' ? d.longrwy : '&nbsp;'}</div>
     </div>
     <div>
       <div class="lbl">AIRWAY</div>
@@ -4547,15 +4794,13 @@ const AIRPORT_COORDS = {
   YBCS: 'S16°53.15  E145°45.32',
   YPAD: 'S34°56.70  E138°31.83'
 };
-/* Airport elevation, feet AMSL. Source: SkyVector, cross-checked against
-   published ARP data — same confirmed-only policy as AIRPORT_COORDS above. */
+/* Airport elevation, feet AMSL. Same sourcing as NAVDB (SkyVector/Wikipedia,
+   cross-checked; AIP chart where noted) — kept in sync with all 17 airports
+   now in NAVDB, not just the original 6. */
 const AIRPORT_ELEV = {
-  YSSY: 21,
-  YMML: 434,
-  YSCB: 1886,
-  YBBN: 15,
-  YBCS: 10,
-  YPAD: 20
+  YSSY: 21,  YMML: 434, YSCB: 1886, YBBN: 15,  YBCS: 10,  YPAD: 20,
+  YPPH: 67,  YBCG: 21,  YMHB: 13,   YPDN: 103, YBTL: 18,  YBSU: 15,
+  YMLT: 562, YWLM: 31,  YBMK: 19,   YCFS: 18,  NZWN: 41
 };
 function fmsPosCoord(){
   const o = (state.gnssOrigin || '').toUpperCase();
@@ -4864,19 +5109,28 @@ function pagePerfDep(){
   <div class="hr"></div>
   <div class="row" style="margin-bottom:8px;"><span class="lbl">DEP PROFILE</span>${ddSel('depProfile')}</div>
   ${state.fms.depProfile==='NADP' ? (function(){
-    if(!state.perf.entry.accelHt){
-      const elev = AIRPORT_ELEV[(state.fpln.entry.origin||'').toUpperCase()];
-      state.perf.entry.accelHt = (elev != null) ? String(elev + 1000) : '1000';
-    }
+    // Default ACCEL height is a flat 1000 FT AGL, same convention as the
+    // STANDARD table's hardcoded 1500 FT default — it is NOT elevation-
+    // adjusted itself (that was a bug: the old default baked the origin's
+    // elevation into the stored entry, which then double-counted elevation
+    // when computing the corresponding altitude below).
+    if(!state.perf.entry.accelHt) state.perf.entry.accelHt = '1000';
     const accelHt = parseInt(state.perf.entry.accelHt,10) || 0;
     const thrRedHt = parseInt(state.perf.entry.thrRedHt,10) || 0;
     const distant = state.perf.entry.thrRedTouched;
+    // PG 10-49: HT/ALT is "thrust reduction height and display of
+    // corresponding altitude" — the entered value is height AGL, the
+    // displayed altitude is that height plus the origin's field elevation.
+    const originElev = AIRPORT_ELEV[(state.fpln.entry.origin||'').toUpperCase()];
+    const hasElev = originElev != null;
+    const accelAlt   = hasElev ? (accelHt + originElev) : null;
+    const thrRedAlt  = hasElev ? (thrRedHt + originElev) : null;
     return `
     <div class="val" style="font-size:11px; margin:0 0 8px 2px;">${distant?'DISTANT':'CLOSE-IN'}</div>
     <table class="simple">
       <tr><th></th><th>HT/ALT</th><th>PITCH</th><th>SPD</th><th>THRUST</th></tr>
-      <tr><td class="grey">ACCEL</td><td>${pfField('accelHt')}</td><td class="val">${accelHt+434}</td><td class="val">VFLC</td><td class="val">FMS CLB ${distant?'TO':'CLB-2'}</td></tr>
-      <tr><td class="grey">THR RED</td><td>${thrRedFieldHtml()}</td><td class="val">${thrRedHt+434}</td><td class="val">VFLC</td><td class="val">FMS CLB CLB-2</td></tr>
+      <tr><td class="grey">ACCEL</td><td>${pfField('accelHt')} / <span class="val">${hasElev ? accelAlt : '-----'}</span></td><td class="val">VFLC</td><td class="val">FMS CLB / V2+10</td><td class="val">${distant?'TO':'CLB-2'}</td></tr>
+      <tr><td class="grey">THR RED</td><td>${thrRedFieldHtml()} / <span class="val">${hasElev ? thrRedAlt : '-----'}</span></td><td class="val">VFLC</td><td class="val">FMS CLB / V2+10</td><td class="val">CLB-2</td></tr>
     </table>`;
   })() : `
   <table class="simple">
@@ -4958,7 +5212,9 @@ function pagePerfArr(){
   const vac = hasVref ? (vrefNum + addNum + 1) : null;
   const vga = hasVref ? (vrefNum + addNum + 11) : null;
   return `
-  <div class="lbl" style="margin-bottom:6px;">TRANS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRANS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APPR</div>
+  <div class="row" style="margin-bottom:14px;">
+    <div><div class="lbl">RWY&nbsp;&nbsp;&nbsp;STAR&nbsp;&nbsp;&nbsp;TRANS</div><span class="val">${state.fpln.arr.rwy||'----'}&nbsp; ${state.fpln.arr.star||'-----'}&nbsp; ${state.fpln.arr.trans||'---'}</span></div>
+  </div>
   <div class="row" style="margin-bottom:14px;">
     <span class="btn" onclick="openArrivalsDialog()">ARRIVALS...</span>
     <span class="btn" onclick="openArrivalData()">ARRIVAL DATA...</span>
@@ -4970,7 +5226,7 @@ function pagePerfArr(){
   </div>
   <div class="grid g4" style="margin-bottom:14px;">
     <div><div class="lbl">OAT</div>${pfField('oatArr')}</div>
-    <div><div class="lbl">RWY WIND</div>${pfField('rwyWindArr')} <span class="grey" style="font-size:9.5px;">H11/R9</span></div>
+    <div><div class="lbl">RWY WIND</div>${pfField('rwyWindArr')}</div>
     <div><div class="lbl">QNH</div>${pfField('qnhArr')}</div>
     <div><div class="lbl">ALT</div>${pfField('altArr')}</div>
   </div>
@@ -5012,6 +5268,7 @@ function pagePerfArr(){
 /* ================= ROUTE ================= */
 function pageRouteLegs(){
   let rows = generateLegs();
+  const fromWpt = state.fpln.entry.origin || '';
   let html = `
   <div class="row" style="margin-bottom:6px; position:relative;">
     <span class="checkbox" style="cursor:pointer;" onclick="toggleSeqAuto()"><span class="box">${state.fms.seqAuto?'✓':''}</span></span>
@@ -5023,24 +5280,35 @@ function pageRouteLegs(){
   ${(state.fms.airborne && state.legsCol2==='SPD/ALT VPA+RNP')
       ? `<div class="row" style="margin-bottom:6px;"><span class="right" style="margin-left:auto;"><span class="lbl">RNP</span> ${ddSel('rnp')}</span></div>`
       : `<div class="grey" style="font-size:10px; margin-bottom:6px;">RNP AUTO menu is shown when the aircraft is en route and SPD/ALT VPA+RNP is selected (PG 10-74)</div>`}
+  <div class="row" style="margin-bottom:4px;"><span class="cyan val" style="cursor:pointer;" onclick="openLegsWaypointMenu('${fromWpt||'FROM'}')">○ ${fromWpt || '----'}</span></div>
   `;
   if(rows.length===0){
     html += `<div class="grey" style="font-size:11px; margin:10px 0;">No route legs yet — select a departure and/or enter waypoints on ROUTE VIA/TO.</div>`;
   } else {
     rows.forEach((r,i)=>{
+      const editableModes = (state.legsCol2==='SPD/ALT VPA' || state.legsCol2==='SPD/ALT VPA+RNP');
+      const constraint = state.route.legConstraints[r.name];
+      // PG 10-72: SPD/ALT may be edited to create a constraint, shown in white (.val)
+      // once entered; the FMS-predicted default stays green until then.
+      const spdAltDisplay = editableModes
+        ? (constraint
+            ? `<span class="field init-val" onclick="legConstraintClick('${r.name}')">${renderMask('nnn/nnnnn', constraint, '-', false)}</span>`
+            : `<span class="green val" style="cursor:pointer;" onclick="legConstraintClick('${r.name}')">${r.spdalt}</span>`)
+        : `<span class="green val">${r.spdalt}</span>`;
       let rightCol;
       if(state.legsCol2==='OAT/WIND TAS/GS'){
-        // PG 10-72 NOTE: predicted TAS/GS for cruise waypoints is displayed as 0/0
+        // PG 10-72 NOTE: predicted TAS/GS for cruise waypoints is displayed as 0/0.
+        // This overlay may not be edited on the LEGS tab.
         rightCol = `<span class="green val">${r.oat}&nbsp; ${r.wind}&nbsp; ${r.cruise?'0/0':r.tasgs}</span>`;
       } else if(state.legsCol2==='SPD/ALT VPA'){
-        rightCol = `<span class="green val">${r.spdalt}</span>&nbsp;<span class="grey">VPA ${r.vpa}</span>`;
+        rightCol = `${spdAltDisplay}&nbsp;<span class="grey">VPA ${r.vpa}</span>`;
       } else {
         // SPD/ALT VPA+RNP — adds RNP, XTK and EPU (PG 10-73)
-        rightCol = `<span class="green val">${r.spdalt}</span>&nbsp;<span class="grey">VPA ${r.vpa}&nbsp; XTK ${r.xtk||'0.00'}&nbsp; EPU ${r.epu||'0.02'}</span>`;
+        rightCol = `${spdAltDisplay}&nbsp;<span class="grey">VPA ${r.vpa}&nbsp; XTK ${r.xtk||'0.00'}&nbsp; EPU ${r.epu||'0.02'}</span>`;
       }
       const timeOrFuel = state.legsCol1==='FUEL' ? `<span class="val">${r.fuel}</span>` : `<span class="val">${r.eta}</span>`;
       html += `<div class="grey" style="font-size:11px; margin-top:4px;">${r.brg}&nbsp;&nbsp;${r.dist}<span class="right" style="float:right;">RNP ${r.rnp}</span></div>
-      <div class="row"><span class="${i===0?'magenta':'val'} val">${r.name}</span> ${timeOrFuel} ${rightCol}</div>`;
+      <div class="row"><span class="${i===0?'magenta':'val'} val" style="cursor:pointer;" onclick="openLegsWaypointMenu('${r.name}')">○ ${r.name}</span> ${timeOrFuel} ${rightCol}</div>`;
     });
   }
   html += `
@@ -5049,17 +5317,60 @@ function pageRouteLegs(){
     <div><div class="lbl">OFFSET</div>${field('---.-', {blank:true})}</div>
     <span class="btn" onclick="openHoldDialog()">HOLD...</span>
     <span class="btn" onclick="openFixDialog()">FIX...</span>
-    <span class="btn" onclick="openRtaDialog()">RTA...</span>
     <span class="btn" onclick="${state.fplnMode==='SEC' ? 'activateSec()' : 'copyToSec()'}">${state.fplnMode==='SEC' ? 'ACTIVATE SEC' : 'COPY TO SEC'}</span>
   </div>
   <div class="hr"></div>
   <table class="simple">
     <tr><th></th><th>DTG</th><th>ETE</th><th>ETA</th><th>FUEL (KG)</th></tr>
-    ${destAltnRow('DEST', state.fpln.entry.dest, '1332','3:05','18:26 -01','8459 +826')}
-    ${destAltnRow('ALTN', state.fpln.entry.altn, '1502','3:38','18:59 -02','7253 +925')}
+    ${destAltnRow('DEST', 'dest', false)}
+    ${destAltnRow('ALTN', 'altn', true)}
   </table>
   `;
   return html;
+}
+/* ROUTE.LEGS waypoint task menu (PG 10-72: "the waypoint symbol may be
+   selected to show a waypoint task menu with additional options"). Reuses
+   the dialog functions already modeled for the MAP page's AIRPORT/WAYPOINT
+   task menus (PG 10-152+) rather than inventing a separate set — D→, HOLD,
+   FIX, and INFO are the items common to those menus regardless of waypoint
+   type. REROUTE/DELETE/FLY OVER/etc. from the full MAP_TASK_MENUS set aren't
+   duplicated here since ROUTE.LEGS doesn't yet model the flight plan as a
+   directly-editable waypoint list (still a known gap). */
+function openLegsWaypointMenu(name){
+  const html = `<div class="tm">
+    <div class="tm-grp">
+      <div class="tm-item" onclick="openDirectTo()"><span>-D→...</span></div>
+      <div class="tm-item" onclick="openHoldDialog()"><span>HOLD...</span></div>
+      <div class="tm-item" onclick="openFixDialog()"><span>FIX...</span></div>
+    </div>
+    <div class="tm-grp">
+      <div class="tm-item" onclick="openInfoDialog('${name}')"><span>INFO...</span></div>
+    </div>
+  </div>
+  <div class="enum-src" style="border-top:1px solid var(--line);">PG 10-72 — waypoint symbol shows a waypoint task menu; items shown are the subset already modeled elsewhere (D→/HOLD/FIX/INFO from the MAP page's AIRPORT/WAYPOINT task menus, PG 10-152+)</div>
+  <div class="right" style="margin-top:12px;"><span class="btn" onclick="closeModal()">CLOSE</span></div>`;
+  openModal('○  ' + name, html);
+}
+/* ROUTE.LEGS SPD/ALT constraint entry (PG 10-72: "The SPD/ALT field may be
+   edited to create speed and altitude constraints (shown in white)"). Not
+   modeled: dash-for-omit syntax (e.g. "-/FL350"), Mach entries, and AT/
+   ABOVE/BELOW qualifiers — this accepts a plain SPD/ALT pair only, since the
+   guide doesn't spell out the full entry syntax and inventing it would be
+   a fabricated feature, not a sourced one. */
+function legConstraintClick(name){
+  if(!state.scratch.text) return;
+  const cap = maskCap('nnn/nnnnn');
+  if(state.scratch.text.length > cap){
+    state.scratch.error = true;
+    render();
+    clearTimeout(window.__scratchErrTimer);
+    window.__scratchErrTimer = setTimeout(()=>{ state.scratch.error = false; render(); }, 1600);
+    return;
+  }
+  state.route.legConstraints[name] = state.scratch.text;
+  state.scratch.text = '';
+  state.scratch.error = false;
+  render();
 }
 /* SEQ AUTO — PG 10-74: when deselected the FMS is prevented from sequencing
    waypoints; selecting it again forces an automatic sequence to the next point. */
@@ -5083,11 +5394,6 @@ function seededFrac(seed){
   let h = 0;
   for(let i=0;i<seed.length;i++) h = (h*31 + seed.charCodeAt(i)) | 0;
   return (Math.abs(h) % 10000) / 10000;
-}
-// Random-but-stable DTG (100-400 NM), seeded from the airport code so it
-// doesn't change on every re-render, only when the code itself changes.
-function randDtg(seed){
-  return Math.round(100 + seededFrac(seed) * 300);
 }
 function legsWaypoints(){
   const list = [];
@@ -5124,13 +5430,29 @@ function generateLegs(){
     };
   });
 }
-function destAltnRow(label, code, dtg, ete, eta, fuel, blankIfEmpty){
+// Shared, single source for the DEST/ALTN summary row so ROUTE.LEGS and
+// ROUTE.VIA/TO can never disagree for the same flight plan (PG 10-73 and
+// 10-78 both describe the same four fields — DTG, ETE, ETA+deviation, and
+// FUEL+deviation — for DEST/ALTN at the bottom of each tab). This is still
+// flavor placeholder data, not a real route/wind computation, but it's now
+// one shared table instead of two independently-hardcoded ones.
+const DEST_ALTN_SUMMARY = {
+  DEST: {dtg:'1332', ete:'3:05', eta:'18:26 -01', fuel:'8459 +826'},
+  ALTN: {dtg:'1502', ete:'3:38', eta:'18:59 -02', fuel:'7253 +925'}
+};
+// DEST/ALTN are editable data-entry fields on both tabs (PG 10-74/75 for LEGS,
+// PG 10-79/80 for VIA/TO), not read-only display — fieldKey maps to the same
+// fplnEntry scratchpad bucket field used on FPLN.INIT, so editing DEST/ALTN
+// from either ROUTE tab (or FPLN.INIT) updates the same underlying value.
+function destAltnRow(label, fieldKey, blankIfEmpty){
+  const code = state.fpln.entry[fieldKey];
   const has = !!code;
+  const d = DEST_ALTN_SUMMARY[label];
   const ph = blankIfEmpty ? '' : '-----';
   const phEte = blankIfEmpty ? '' : '----';
-  return `<tr><td class="val">${label}&nbsp;<span class="val">${code || '----'}</span> <span class="cyan">○</span></td>`+
-    `<td class="val">${has?dtg:ph}</td><td class="val">${has?ete:phEte}</td>`+
-    `<td class="val">${has?eta:ph}</td><td class="val">${has?fuel:ph}</td></tr>`;
+  return `<tr><td class="val">${label}&nbsp;${fpField(fieldKey)} <span class="cyan">○</span></td>`+
+    `<td class="val">${has?d.dtg:ph}</td><td class="val">${has?d.ete:phEte}</td>`+
+    `<td class="val">${has?d.eta:ph}</td><td class="val">${has?d.fuel:ph}</td></tr>`;
 }
 function viaToRowCount(){
   let n = 2;
@@ -5154,8 +5476,8 @@ function pageRouteViaTo(){
   }
   return `
   <div class="row" style="margin-bottom:14px;">
-    <div><div class="lbl">RTE</div></div>
-    <div><div class="lbl">ORIGIN</div><span class="val">${state.fpln.entry.origin || '----'}</span> <span class="cyan">○</span></div>
+    <div><div class="lbl">RTE</div><span class="val">${state.fpln.entry.rte || '----'}</span></div>
+    <div><div class="lbl">ORIGIN</div>${fpField('origin')} <span class="cyan">○</span></div>
     <div><div class="lbl">RWY</div><span class="val">${state.fpln.dep.rwy || '----'}</span></div>
   </div>
   <div class="hr"></div>
@@ -5171,8 +5493,8 @@ function pageRouteViaTo(){
   <div class="hr"></div>
   <table class="simple">
     <tr><th></th><th>DTG</th><th>ETE</th><th>ETA</th><th>FUEL (KG)</th></tr>
-    ${destAltnRow('DEST', state.fpln.entry.dest, randDtg((state.fpln.entry.dest||'')+'destdtg')+'', '0:45', '18:26 -01', '3150', false)}
-    ${destAltnRow('ALTN', state.fpln.entry.altn, randDtg((state.fpln.entry.altn||'')+'altndtg')+'', '0:45', '18:59 -02', '3150', true)}
+    ${destAltnRow('DEST', 'dest', false)}
+    ${destAltnRow('ALTN', 'altn', true)}
   </table>
   `;
 }
