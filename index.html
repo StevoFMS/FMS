@@ -1590,6 +1590,149 @@
   .cb-steep{display:flex;align-items:center;justify-content:flex-end;gap:2cqw;margin:-1cqw 0 7cqw;color:#fbfbf8;font-size:3.6cqw;letter-spacing:.3cqw;cursor:pointer}
   .cb-box{width:4.2cqw;height:4.2cqw;background:#141214;border:.35cqw solid #7c8287;display:inline-flex;align-items:center;justify-content:center;font-size:3.2cqw}
 
+
+  .dp-on .modal-body{aspect-ratio:1300/1184 !important}
+  .dp-on .hd-f{font-size:4cqw}
+  .dp-on .hd-g{font-size:3cqw}
+  .dp-on .hd-w{font-size:3.8cqw}
+  .dp-on .hd-b{font-size:4cqw}
+  .dp-on .hd-t.hd-g:first-of-type{font-size:4.6cqw}
+  .dt-on .modal-body{aspect-ratio:1093/1040 !important}
+  .dt-on .hd-b{font-size:3.2cqw;justify-content:flex-start;gap:1.6cqw;padding-left:2cqw}
+  .dt-id{background:#141214;flex:1;padding:1.2cqw 2.4cqw;font-size:3.4cqw;letter-spacing:.3cqw}
+  .dt-on .hd-g{font-size:2.3cqw}
+  .dt-on .hd-f{font-size:3.2cqw}
+  .dt-on .hd-b[onclick*="openNearestArpts"],.dt-on .hd-b[onclick*="closeModal"]{justify-content:center;padding-left:0}
+  .dt-on .hd-b.dis{justify-content:center;padding:0}
+  .tc-on .modal-body{aspect-ratio:950/930 !important}
+  .mc-on .modal-box{width:54% !important;}
+  .mc-on .modal-body{aspect-ratio:632/790 !important}
+  .mc-on .hd-b{font-size:4.4cqw}
+  .ai-on .modal-body{aspect-ratio:1157/846 !important}
+  .hd-b.dis{background:#3b3e42;color:#7c8287;cursor:default}
+  /* all dialogs anchor bottom-right of the screen */
+  .modal-overlay{align-items:flex-end !important; justify-content:flex-end !important; background:transparent !important; pointer-events:none;}
+  .modal-overlay .modal-box{pointer-events:auto}
+  .nap-on .modal-box,.hd-on .modal-box{width:88% !important;}
+
+
+  /* CHKL / ECL — FMS-family style per supplied capture */
+  .screen[data-app="CHKL"]{background:#000;}
+  .screen[data-app="CHKL"] .subrow{padding:.8% .8% 0 .8% !important; gap:.9% !important; border-bottom:none !important; background:#000; align-items:stretch !important;}
+  .screen[data-app="CHKL"] .subtab{flex:1 1 auto; text-align:center; background:#4a4d50 !important; border:none !important; border-radius:0 !important; top:0 !important; clip-path:none !important; padding:calc(var(--sw,584px)*.016) calc(var(--sw,584px)*.006) !important; min-width:0; font-family:'Arial Narrow','Roboto Condensed',Arial,Helvetica,sans-serif !important; font-size:calc(var(--sw,584px)*.037) !important; letter-spacing:0 !important; color:#fff; white-space:nowrap;}
+  .screen[data-app="CHKL"] .subtab.active{background:#163a77 !important; padding-bottom:calc(var(--sw,584px)*.016) !important;}
+  .screen[data-app="CHKL"] .subtab.fctn{padding-left:calc(var(--sw,584px)*.03) !important; padding-right:calc(var(--sw,584px)*.03) !important;}
+  .screen[data-app="CHKL"] .subtab::before,.screen[data-app="CHKL"] .subtab.active::before{display:none !important;}
+  .screen[data-app="CHKL"] .subtab:hover:not(.active){background:#5a5d60 !important;}
+  .screen[data-app="CHKL"] .subtab .arrow{font-size:.8em;}
+  .content:has(> .ecl-sum){padding:0 !important; overflow:hidden; display:flex; flex-direction:column;}
+  .ecl-sum{flex:1; display:flex; flex-direction:column; min-height:0; font-family:'Arial Narrow',Arial,Helvetica,sans-serif;}
+  .ecl-sum-list{flex:0 0 auto; min-height:48%; max-height:70%; overflow-y:auto !important; scrollbar-width:none; padding:calc(var(--sw,584px)*.01) 0 0 0; overflow:hidden;}
+  .ecl-sr{display:flex; align-items:baseline; margin:0 calc(var(--sw,584px)*.06) 0 calc(var(--sw,584px)*.024); padding:calc(var(--sw,584px)*.0085) calc(var(--sw,584px)*.036) calc(var(--sw,584px)*.0085) calc(var(--sw,584px)*.056); border:calc(var(--sw,584px)*.004) solid transparent; color:#fff; font-size:calc(var(--sw,584px)*.0375); line-height:1.15; cursor:pointer;}
+  .ecl-sr.cur{border-color:#4db8f0;}
+  .ecl-sr .ld{flex:1; border-bottom:calc(var(--sw,584px)*.004) dotted #fff; margin:0 .45em 0 .6em; transform:translateY(-.25em);}
+  .ecl-sr .st{white-space:nowrap;}
+  .ecl-sum-list.nn-list{flex:1 1 auto; max-height:none; min-height:0;}
+  .nn-list .ecl-sr{padding-top:calc(var(--sw,584px)*.0155); padding-bottom:calc(var(--sw,584px)*.0155); margin-right:calc(var(--sw,584px)*.05);}
+  .nn-list .ecl-sr:hover{border-color:#4db8f0;}
+  .ecl-sum-mid{flex:1; border-top:2px solid #8a8d90;}
+  .ecl-sum-foot{flex:0 0 calc(var(--sw,584px)*.056); border-top:2px solid #8a8d90;}
+  .screen[data-app="CHKL"] .ecl2-txt{font-family:'Arial Narrow',Arial,Helvetica,sans-serif; font-weight:400;}
+  .screen[data-app="CHKL"] .ecl2-title{font-family:'Arial Narrow',Arial,Helvetica,sans-serif;}
+
+
+  /* ECL checklist page — per supplied capture */
+  .screen[data-app="CHKL"] .ecl2-title{font-size:calc(var(--sw,584px)*.04); padding:calc(var(--sw,584px)*.012) 0 calc(var(--sw,584px)*.03);}
+  .screen[data-app="CHKL"] .ecl2-box{border-top:2px solid #8a8d90; border-bottom:2px solid #8a8d90;}
+  .screen[data-app="CHKL"] .ecl2-item{border:2px solid transparent;}
+  .screen[data-app="CHKL"] .ecl2-item.cur{border-color:#fff; background:transparent;}
+  .screen[data-app="CHKL"] .ecl2-cb{border:3px solid #fff; background:#000; color:#6fe05a; display:flex; align-items:center; justify-content:center; font-size:2.2em; font-weight:700;}
+  .screen[data-app="CHKL"] .ecl2-item.cur .ecl2-cb{background:#9a9a9a;}
+  .screen[data-app="CHKL"] .ecl2-item.cur.done .ecl2-cb{background:#9a9a9a;}
+  .screen[data-app="CHKL"] .ecl2-item.done .ecl2-cb{border-color:#fff;}
+  .screen[data-app="CHKL"] .ecl2-item.done .ecl2-txt,.screen[data-app="CHKL"] .ecl2-item.cur .ecl2-txt{color:#6fe05a;}
+  .screen[data-app="CHKL"] .ecl2-lead{border-bottom:3px dotted currentColor;}
+  .screen[data-app="CHKL"] .ecl2-arrow{flex:0 0 calc(var(--sw,584px)*.065);background:#4a4d50; border:2px solid #777; color:#fff;}
+  .screen[data-app="CHKL"] .ecl2-thumb{background:#808890; left:25%; right:25%;}
+  .screen[data-app="CHKL"] .nn-chkl-t{justify-content:center; font-family:'Arial Narrow',Arial,Helvetica,sans-serif; font-weight:400; font-size:calc(var(--sw,584px)*.044); padding:calc(var(--sw,584px)*.012) 0 calc(var(--sw,584px)*.02);}
+  .screen[data-app="CHKL"] .nn-chkl-t.w{color:#ff3b30;} .screen[data-app="CHKL"] .nn-chkl-t.c{color:#ffee33;}
+  .screen[data-app="CHKL"] .nn-chkl-t .nn-tag{display:none;}
+  .screen[data-app="CHKL"] .nn-cat.w{color:#ff3b30;} .screen[data-app="CHKL"] .nn-cat.c{color:#ffee33;}
+
+
+  .pr-box{flex:1; display:flex; min-height:0;}
+  .pr-list{flex:1; overflow-y:auto; scrollbar-width:none; padding-left:calc(var(--sw,584px)*.045);}
+  .pr-list::-webkit-scrollbar{display:none;}
+  .pr-h{color:#8a8d90; font-size:calc(var(--sw,584px)*.036); padding:calc(var(--sw,584px)*.012) 0 calc(var(--sw,584px)*.004); border-bottom:2px solid #8a8d90; margin:0 calc(var(--sw,584px)*.01) calc(var(--sw,584px)*.012) calc(var(--sw,584px)*.016);}
+  .pr-gap{height:calc(var(--sw,584px)*.09);}
+  .pr-list .ecl-sr{margin:0; padding:calc(var(--sw,584px)*.0085) calc(var(--sw,584px)*.016); width:70%;}
+  .pr-list .ecl-sr:hover{border-color:#4db8f0;}
+  .pr-bar{flex:0 0 calc(var(--sw,584px)*.065); padding:0;}
+
+
+  .enum-menu.fctn-menu{background:#222 !important; border:2px solid #7c7c7c !important; box-shadow:none !important; padding:calc(var(--fz,1px)*4) 0 !important; min-width:0 !important; box-sizing:border-box; max-width:none !important; font-family:'Arial Narrow','Roboto Condensed',Arial,Helvetica,sans-serif;}
+  .fctn-menu .enum-item{font-weight:400 !important;color:#fff; font-size:var(--ff,26px); padding:2px 9px; line-height:1.45; white-space:nowrap; letter-spacing:0; background:transparent !important;}
+  .fctn-menu .enum-item.dash{color:#8a8a8a; opacity:1 !important;}
+  .fctn-menu .enum-item:hover:not(.dash){background:#333 !important;}
+  .screen[data-app="CHKL"] .subtab.fctn.open{background:#163a77 !important; box-shadow:inset 0 0 0 2px #4db8f0;}
+
+
+  /* MAP menu bar — per supplied capture */
+  .map-full .map-bar{background:#1e1d1f !important; padding:calc(var(--sw,584px)*.011) calc(var(--sw,584px)*.007) !important; gap:calc(var(--sw,584px)*.012) !important; pointer-events:auto !important; align-items:stretch;}
+  .map-full .map-stage{top:calc(var(--sw,584px)*.108) !important;}
+  .map-full .map-bar .btn{background:#6e7072 !important; background-image:none !important; border:none !important; border-radius:0; box-shadow:inset 1px 1px 0 #8e9092, inset -1px -1px 0 #55585a; color:#fff; font-family:'Bahnschrift','DIN Alternate','Roboto Condensed','Arial Narrow',Arial,sans-serif; font-size:calc(var(--sw,584px)*.031); letter-spacing:.02em; padding:0 calc(var(--sw,584px)*.016); height:calc(var(--sw,584px)*.083); display:inline-flex; align-items:center; gap:.3em; text-shadow:0 0 1px #000;}
+  .map-full .map-bar .btn.on{background:#1b3f86 !important; box-shadow:none;}
+  .map-full .map-bar .btn .mb-ar{font-size:.8em;}
+  .map-full .map-bar .mb-act{gap:.5em;}
+  .map-full .map-bar .mb-f{background:#000; padding:0 .45em; line-height:1.5;}
+
+
+  #ovlyMenu,#symMenu{position:fixed; z-index:70; width:var(--ow,275px); background:#1e1d1f; border:2px solid #8a8d90; font-family:'Bahnschrift','DIN Alternate','Roboto Condensed','Arial Narrow',Arial,sans-serif; color:#fff; font-size:calc(var(--ow,275px)*.066); letter-spacing:.04em;}
+  #ovlyMenu,#symMenu .om-r{display:flex; align-items:center; gap:calc(var(--ow,275px)*.06); padding:calc(var(--ow,275px)*.022) calc(var(--ow,275px)*.04); cursor:pointer; line-height:1.2;}
+  #ovlyMenu,#symMenu .om-r:hover{background:#2a292b;}
+  #ovlyMenu,#symMenu .om-cb{width:1em; height:1em; border:2px solid #8a8d90; display:inline-flex; align-items:center; justify-content:center; font-size:.9em; color:#7fd4d9;}
+  #ovlyMenu,#symMenu .om-rd{width:1em; height:1em; border-radius:50%; border:2px solid #8a8d90; box-sizing:border-box;}
+  #ovlyMenu,#symMenu .om-rd.on{background:#7fd4d9; box-shadow:inset 0 0 0 .15em #1e1d1f; border-color:#c9cdd0;}
+  #ovlyMenu,#symMenu .om-sep{height:2px; background:#8a8d90;}
+  #ovlyMenu,#symMenu .om-done{text-align:right; padding:calc(var(--ow,275px)*.022) calc(var(--ow,275px)*.04); cursor:pointer;}
+  .map-full .map-bar .btn.sym-btn.open,.map-full .map-bar .btn.ovly-btn.open{background:#1b3f86 !important;}
+
+
+  /* map task menus */
+  .tm-on .modal-box{width:52% !important; background:#1e1d1f; border:2px solid #8a8d90; font-family:'Bahnschrift','DIN Alternate','Roboto Condensed','Arial Narrow',Arial,sans-serif; color:#fff; overflow:visible; max-height:none !important;}
+  .tm-on .modal-header{display:none}
+  .tm-on .modal-body{padding:0; --u:calc(var(--sw,584px)*.0052); font-size:calc(var(--u)*5.6); letter-spacing:.04em;}
+  .tm2-h{display:flex; align-items:center; gap:calc(var(--u)*4); padding:calc(var(--u)*1.8) calc(var(--u)*3.5); border-bottom:2px solid #8a8d90; cursor:pointer;}
+  .tm2-g{border-bottom:2px solid #8a8d90; padding:calc(var(--u)*.6) 0;}
+  .tm2-g:last-child{border-bottom:none;}
+  .tm2-i{display:flex; align-items:center; gap:calc(var(--u)*2); padding:calc(var(--u)*1.5) calc(var(--u)*3.5) calc(var(--u)*1.5) calc(var(--u)*7); cursor:pointer; white-space:nowrap;}
+  .tm2-i:hover:not(.dis){background:#2a292b;}
+  .tm2-i.dis{color:#8a8a8a; cursor:default;}
+
+
+  /* page-select menu — stacked bevelled keys per supplied capture */
+  .nav-panel{background:#000 !important; border-radius:0 !important; box-shadow:0 8px 24px rgba(0,0,0,.7) !important; width:150px; padding:0 0 3px; font-family:'Bahnschrift','DIN Alternate','Roboto Condensed','Arial Narrow',Arial,sans-serif !important;}
+  .nav-head{padding:2px 8px !important; background:#000 !important; min-height:0 !important; justify-content:flex-end !important; font-size:11px !important;}
+  .nav-item,.dukey{background:#5e6164 !important; background-image:none !important; color:#fff !important; font-weight:400 !important; font-size:22px !important; letter-spacing:.04em !important; padding:8px 14px !important; min-height:0 !important; margin:0 3px 3px 3px; border:3px solid !important; border-color:#8f9599 #3f4144 #3f4144 #8f9599 !important; border-radius:0 !important; text-shadow:0 0 1px #000;}
+  .nav-item:hover,.dukey:hover{background:#6c6f72 !important;}
+  .nav-item.active,.dukey.active{background:#5e6164 !important; color:#fff !important;}
+  .nav-item.active span:last-child,.dukey .arrow{font-size:16px !important;}
+  .dumenu{background:#000; padding:3px 0 0; gap:0 !important; box-shadow:0 8px 20px rgba(0,0,0,.6);}
+
+
+  /* scratchpad row — MENU / scratchpad / CNCL / EXEC */
+  .scratchwin{display:flex; align-items:flex-end; gap:10px; padding:8px 14px 8px !important;}
+  .scratchwin .scratchbar{flex:1; min-width:0;}
+  .sw-key{background:linear-gradient(#34373a,#232527); border:1px solid #0a0a0a; border-radius:6px; box-shadow:inset 0 1px 0 #55595d, 0 2px 3px rgba(0,0,0,.6); color:#fff; font-family:'Arial Narrow','Roboto Condensed',Arial,Helvetica,sans-serif; font-size:17px; height:36px; line-height:34px; padding:0 14px; text-align:center; cursor:pointer; user-select:none; box-sizing:border-box;}
+  .sw-key:active{filter:brightness(1.4);}
+  .sw-menu{width:84px; height:38px; background:linear-gradient(#3b3e41,#1d1f21); font-size:19px;}
+  .sw-cncl{width:68px;} .sw-execk{width:68px;}
+  .sw-exec{position:relative; padding-top:0;}
+  .sw-light{position:absolute; left:8px; right:8px; top:-9px; height:5px; background:#222426; border-radius:1px;}
+  .sw-light.on{background:#46e04a; box-shadow:0 0 8px #46e04a;}
+
+  @keyframes swAttn{0%,100%{box-shadow:0 0 0 0 rgba(127,212,217,0)}50%{box-shadow:0 0 14px 4px rgba(127,212,217,.9)}}
+  .scratchwin.sw-attn .scratchbar{border-color:#7fd4d9 !important; animation:swAttn 1s ease-in-out infinite;}
   /* PERF.DEP compact layout */
   .content:has(.pd){overflow-y:hidden; padding-top:8px; padding-bottom:4px;}
   /* box sizing follows the reference capture's box-to-screen proportions */
@@ -2153,7 +2296,12 @@
     <div class="init-box" id="initBox"></div>
   </div>
 </div>
-<div class="scratchwin" id="scratchwin"><div class="scratchbar" id="scratchbar" onclick="focusScratchInput()"></div></div>
+<div class="scratchwin" id="scratchwin">
+  <div class="sw-key sw-menu" id="swMenu" onclick="toggleDuMenu(event,true)">MENU</div>
+  <div class="scratchbar" id="scratchbar" onclick="focusScratchInput()"></div>
+  <div class="sw-key sw-cncl" onclick="swCncl()">CNCL</div>
+  <div class="sw-exec"><div class="sw-light" id="swLight"></div><div class="sw-key sw-execk" onclick="swExec()">EXEC</div></div>
+</div>
 </div>
 <div class="guide-panel" id="guidePanel" style="display:none;">
   <div class="guide-header">
@@ -2165,11 +2313,11 @@
   </div>
   <div class="guide-body" id="guideBody"></div>
 </div>
-<div class="nav-panel" id="navPanel" style="display:none;">
-  <div class="nav-head"><span>PAGES</span><span class="guide-close" onclick="closeNavPanel()">✕</span></div>
+<div class="nav-panel" id="navPanel" style="display:none !important;">
+  <div class="nav-head"><span></span><span class="guide-close" onclick="closeNavPanel()">✕</span></div>
   <div id="navList"></div>
 </div>
-<div class="nav-reopen" id="navReopen" onclick="openNavPanel()">MENU</div>
+<div class="nav-reopen" id="navReopen" onclick="openNavPanel()" style="display:none !important">MENU</div>
 <div class="guide-reopen" id="guideReopen" style="display:block;" onclick="openGuidePanel()">GUIDE</div>
 
 
@@ -2464,13 +2612,13 @@ let state = {
 function setMain(m){ state.main = m; state.sub = SUB_TABS[m][0]; render(); }
 function setSub(s){ state.sub = s; render(); }
 function setChklSub(s){
-  state.chklSub = s; state.eclPhase = null;
+  state.chklSub = s; state.eclPhase = null; if(state.proc) state.proc.sel=null;
   state.nn = {level:'SYS', sys:null, sub:null, msg:null};
   render();
 }
 
 /* ---------- Hard-key page selector (MAP / FMS / CNS / CHKL / SYN / DATA) ---------- */
-function toggleDuMenu(ev){
+function toggleDuMenu(ev,fromKey){
   ev.stopPropagation();
   const existing = document.getElementById('duMenu');
   if(existing){ existing.remove(); return; }
@@ -2488,7 +2636,8 @@ function toggleDuMenu(ev){
     };
     menu.appendChild(item);
   });
-  document.querySelector('.fmslabel').appendChild(menu);
+  if(fromKey){ menu.style.top='0'; menu.style.left='0'; document.querySelector('.screen').appendChild(menu); }
+  else document.querySelector('.fmslabel').appendChild(menu);
   document.addEventListener('click', function h(){ const m=document.getElementById('duMenu'); if(m) m.remove(); document.removeEventListener('click', h); });
 }
 /* Side MENU tab — alternative page selector (same targets as the hard-key menu).
@@ -2734,28 +2883,24 @@ function openMapTaskMenu(key){
   const m = MAP_TASK_MENUS[key];
   if(!m) return;
   const isSec = state.fplnMode === 'SEC';
-  let html = '<div class="tm">';
+  const dto = '<svg viewBox="0 0 36 16" style="width:1.5em;height:.7em;vertical-align:middle"><circle cx="14" cy="8" r="6" fill="none" stroke="#fff" stroke-width="2"/><line x1="2" y1="8" x2="30" y2="8" stroke="#fff" stroke-width="2"/><path d="M26 3l9 5-9 5z" fill="#fff"/></svg>';
+  const acIco = '<svg viewBox="0 0 36 20" style="width:1.4em;height:.8em;vertical-align:middle"><path d="M3 10h30M24 3l-8 7 8 7M12 6l-4 4 4 4" fill="none" stroke="#fff" stroke-width="2"/></svg>';
+  const sym = key==='AIRCRAFT' ? acIco : `<span>${m.sym}</span>`;
+  let html = `<div class="tm2-h" onclick="closeModal()">${sym}<span>${m.title}</span></div>`;
   m.groups.forEach(g=>{
-    html += '<div class="tm-grp">';
+    html += '<div class="tm2-g">';
     g.forEach(it=>{
-      let dis = false, why = '';
-      if(it.disabled)                      { dis = true; why = 'not available'; }
-      else if(it.sec && isSec)             { dis = true; why = 'disabled for SEC FPLN'; }
-      else if(it.needDisco && !state.map.discoActive) { dis = true; why = 'no DISCONTINUITY leg active'; }
-      else if(it.needTo && !state.map.toDefined)      { dis = true; why = 'TO waypoint undefined'; }
+      let dis = false;
+      if(it.disabled || (it.sec && isSec) || (it.needDisco && !state.map.discoActive) || (it.needTo && !state.map.toDefined)) dis = true;
       const act = dis ? '' : (it.act || '').replace('%T%', m.title);
-      const label = it.t + (it.dlg ? '...' : '');
+      const label = (it.t==='-D-&gt;' ? dto : it.t) + (it.dlg ? '...' : '');
       const box = it.chk ? `<span class="tm-box">${state.map.flyOver?'✓':''}</span>` : '';
-      html += `<div class="tm-item${dis?' dis':''}"${dis?'':` onclick="${act}"`}${dis?` title="${why}"`:''}>${box}<span>${label}</span></div>`;
+      html += `<div class="tm2-i${dis?' dis':''}"${dis?'':` onclick="${act}"`}>${box}<span>${label}</span></div>`;
     });
     html += '</div>';
   });
-  html += '</div>';
-  html += `<div class="tm-state">Showing selections for the <span class="${isSec?'cyan':'val'}">${state.fplnMode}</span> flight plan. Greyed items are unavailable — hover for the reason.</div>`;
-  if(m.notes) m.notes.forEach(n=>{ html += `<div class="tm-note">${n}</div>`; });
-  html += ``;
-  html += `<div class="right" style="margin-top:12px;"><span class="btn" onclick="closeModal()">CLOSE</span></div>`;
-  openModal(m.sym + '  ' + m.title, html);
+  openModal(m.title, html);
+  document.getElementById('modalOverlay').classList.add('tm-on');
 }
 
 /* ---------- Map menu bar controls (PG 10-148..151) ---------- */
@@ -2765,29 +2910,29 @@ function toggleFlyOver(){ state.map.flyOver = !state.map.flyOver; closeModal(); 
 
 /* OVLY — multi-state toggle for WX radar / DLK GWX, plus single-state
    toggles for TERRAIN, TFC, VSD and NEXRAD (PG 10-149). */
-function openOverlayMenu(){
-  const o = state.map.ovly;
-  const wxOpts = ['OFF','WX','DLK GWX'];
-  let wx = '<div class="row" style="margin-bottom:10px;"><span class="lbl">WX / DLK GWX</span><span class="stack" style="flex-direction:row; gap:6px;">';
-  wxOpts.forEach(w=>{
-    wx += `<span class="btn ${o.wx===w?'on':''}" onclick="state.map.ovly.wx='${w}'; openOverlayMenu(); render();">${w}</span>`;
-  });
-  wx += '</span></div>';
-  const single = [['terrain','TERRAIN'],['tfc','TFC'],['vsd','VSD'],['nexrad','NEXRAD']];
-  let sing = '';
-  single.forEach(([k,lbl])=>{
-    sing += `<div class="row" style="margin-bottom:8px;">
-      <span class="checkbox" style="cursor:pointer;" onclick="state.map.ovly.${k}=!state.map.ovly.${k}; openOverlayMenu(); render();"><span class="box">${o[k]?'✓':''}</span></span>
-      <span class="${o[k]?'green val':'val'}">${lbl}</span>
-      ${k==='nexrad' ? `<span class="right" style="margin-left:auto;">${nexradAge()}</span>` : ''}
-    </div>`;
-  });
-  const html = `
-    ${wx}
-    ${sing}
-    <div class="yellow" style="font-size:9.5px; margin-top:8px;">DLK GWX and NEXRAD are only available on aircraft equipped with Datalink Graphical Weather.</div>
-    <div class="right" style="margin-top:12px;"><span class="btn" onclick="closeModal()">DONE</span></div>`;
-  openModal('MAP OVERLAY', html);
+function closeOvlyMenu(){ const m=document.getElementById('ovlyMenu'); if(m) m.remove(); const b=document.querySelector('.map-bar .btn.ovly-btn'); if(b) b.classList.remove('open'); }
+function ovlyToggle(k){ state.map.ovly[k]=!state.map.ovly[k]; render(); drawOvlyMenu(); }
+function ovlyWx(v){ state.map.ovly.wx=v; render(); drawOvlyMenu(); }
+function drawOvlyMenu(){
+  const m=document.getElementById('ovlyMenu'); if(!m) return;
+  const o=state.map.ovly, wx=(o.wx==='WX')?'WX':'OFF';
+  const cb=(k,l)=>`<div class="om-r" onclick="ovlyToggle('${k}')"><span class="om-cb">${o[k]?'✓':''}</span><span>${l}</span></div>`;
+  const rd=(v)=>`<div class="om-r" onclick="ovlyWx('${v}')"><span class="om-rd ${wx===v?'on':''}"></span><span>${v}</span></div>`;
+  m.innerHTML = cb('vsd','VSD')+cb('terrain','TERRAIN')+cb('tfc','TRAFFIC')+'<div class="om-sep"></div>'+rd('WX')+rd('OFF')+'<div class="om-sep"></div><div class="om-done" onclick="closeOvlyMenu()">DONE</div>';
+}
+function openOverlayMenu(ev){
+  if(document.getElementById('ovlyMenu')){ closeOvlyMenu(); return; }
+  closeSymMenu();
+  const sr=document.querySelector('.screen').getBoundingClientRect();
+  const btn=(ev&&ev.currentTarget)||document.querySelector('.map-bar .ovly-btn'), r=btn.getBoundingClientRect();
+  if(ev) ev.stopPropagation();
+  const m=document.createElement('div'); m.id='ovlyMenu';
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>e.stopPropagation());
+  m.style.setProperty('--ow', sr.width*0.47+'px');
+  m.style.left=Math.min(r.left, sr.right-sr.width*0.47)+'px'; m.style.top=(r.bottom+sr.width*0.004)+'px';
+  btn.classList.add('open'); drawOvlyMenu();
+  setTimeout(()=>document.addEventListener('click', function h(e){ const mm=document.getElementById('ovlyMenu'); if(mm && mm.contains(e.target)) return; closeOvlyMenu(); document.removeEventListener('click',h); }),0);
 }
 function nexradAge(){
   if(!state.map.ovly.nexrad) return `<span class="grey">- -</span>`;
@@ -2796,28 +2941,54 @@ function nexradAge(){
 
 /* SYMBOL — a list of check boxes (PG 10-151). The individual symbol
    names appear only in Figure 10-79, so they are not invented here. */
-function openSymbolMenu(){
-  const html = `
-    <div class="yellow" style="font-size:10.5px; line-height:1.45; margin-bottom:12px;">The individual check box items are given only in Figure 10-79 "FMS Map Symbols", which is a scanned image in the Pilot Guide. They are not transcribed here rather than guessed.</div>
-    <div class="right" style="margin-top:12px;"><span class="btn" onclick="closeModal()">DONE</span></div>`;
-  openModal('SYMBOL', html);
+const SYM_ITEMS = [['nearest','NEAREST ARPTS'],['arpts','AIRPORTS'],['missed','MISSED APPR'],['rng','RNG: ALT SEL'],['hiNav','HI NAVAIDS'],['loNav','LO NAVAIDS'],['ndbs','NDBS'],['hiAwy','HI AIRWAYS'],['loAwy','LO AIRWAYS'],['term','TERM WAYPOINTS'],['ints','INTERSECTIONS'],['eta','ETA, SPEED, ALT'],null,['pol','POLITICAL'],['obst','OBSTACLES'],['cities','CITIES'],['ctrld','CTRLD AIRSPACE'],['sua','SUA']];
+state.map.sym = state.map.sym || {hiNav:true, sua:true};
+function closeSymMenu(){ const m=document.getElementById('symMenu'); if(m) m.remove(); const b=document.querySelector('.map-bar .btn.sym-btn'); if(b) b.classList.remove('open'); }
+function symToggle(k){ state.map.sym[k]=!state.map.sym[k]; drawSymMenu(); }
+function drawSymMenu(){
+  const m=document.getElementById('symMenu'); if(!m) return;
+  const o=state.map.sym;
+  m.innerHTML = SYM_ITEMS.map(it=> it ? `<div class="om-r" onclick="symToggle('${it[0]}')"><span class="om-cb">${o[it[0]]?'✓':''}</span><span style="${o[it[0]]?'color:#7fd4d9':''}">${it[1]}</span></div>` : '<div class="om-sep"></div>').join('')+'<div class="om-sep"></div><div class="om-done" onclick="closeSymMenu()">DONE</div>';
+}
+function openSymbolMenu(ev){
+  if(document.getElementById('symMenu')){ closeSymMenu(); return; }
+  closeOvlyMenu();
+  const sr=document.querySelector('.screen').getBoundingClientRect();
+  const btn=(ev&&ev.currentTarget)||document.querySelector('.map-bar .sym-btn'), r=btn.getBoundingClientRect();
+  if(ev) ev.stopPropagation();
+  const m=document.createElement('div'); m.id='symMenu';
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>e.stopPropagation());
+  const w=sr.width*0.4; m.style.setProperty('--ow', w+'px');
+  m.style.left=Math.min(r.right - w, sr.right - w)+'px'; m.style.top=(r.bottom+sr.width*0.004)+'px';
+  btn.classList.add('open'); drawSymMenu();
+  setTimeout(()=>document.addEventListener('click', function h(){ closeSymMenu(); document.removeEventListener('click',h); }),0);
 }
 
 /* CTR — Map Center dialog box, PLAN map only (PG 10-150) */
 function openMapCenter(){
-  const c = state.map.center;
-  const html = `
-    <div class="row" style="margin-bottom:8px;"><span class="btn" onclick="setMapCenter('PREV WPT','LAS')">PREV WPT</span><span class="val">LAS</span></div>
-    <div class="row" style="margin-bottom:8px;"><span class="btn" onclick="setMapCenter('NEXT WPT','BETHL')">NEXT WPT</span><span class="val">BETHL</span></div>
-    <div class="row" style="margin-bottom:8px;"><span class="btn" onclick="setMapCenter('TO WPT','NOOTN')">TO WPT</span><span class="magenta val">NOOTN</span></div>
-    <div class="row" style="margin-bottom:8px;"><span class="btn" onclick="setMapCenter('CTR WPT','entered waypoint')">CTR WPT</span>${field('-----', {blank:true})}
-      <span class="grey" style="font-size:9.5px;">CTR WPT shows when a waypoint is entered here</span></div>
-    <div class="row" style="margin-bottom:12px;"><span class="btn" onclick="setMapCenter('CTR A/C','aircraft position')">CTR A/C</span><span class="grey">centres on the current aircraft position</span></div>
-    <div class="row"><span class="lbl">CENTRED ON</span><span class="green val">${c}</span>
-      <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeModal()">DONE</span></span></div>`;
-  openModal('MAP CENTER', html);
+  state.dlgRedraw = openMapCenter;
+  DLG_HANDLERS.mcWpt = t=>{ if(!(legsWaypoints().includes(t) || wptInfo(t))) return 'ID NOT FOUND'; state.map.ctrWpt=true; setMapCenter('CTR WPT',t); return true; };
+  const E=state.fpln.entry;
+  const legs=generateLegs().filter(r=>!r.pseudo&&!r.disco&&!r.dest).map(r=>r.name);
+  const prev=(E.origin||'').toUpperCase(), to=legs[0]||'', next=legs[1]||'';
+  const X=x=>(x/6.32).toFixed(2)+'%', Y=y=>(y/7.9).toFixed(2)+'%', W=w=>(w/6.32).toFixed(2)+'cqw', H=h=>(h/6.32).toFixed(2)+'cqw';
+  const T=(x,y,t,cls,st)=>`<div class="hd-t ${cls}" style="left:${X(x)};top:${Y(y)};${st||''}">${t}</div>`;
+  const Bt=(x,y,w,h,inner,oc)=>`<div class="hd-b" style="left:${X(x)};top:${Y(y)};width:${W(w)};height:${H(h)}" ${oc?`onclick="${oc}"`:''}>${inner}</div>`;
+  const q=n=>n.replace(/'/g,"\\'");
+  const ctr = (state.map.center && state.map.center!=='aircraft position') ? state.map.center : '';
+  let b = T(25,55,'MAP CENTER','hd-g','font-size:5.4cqw')+'<div class="hd-hr" style="top:11.7%"></div>';
+  b += Bt(25,113,307,95,'PREV WPT',prev?`setMapCenter('PREV WPT','${q(prev)}')`:'')+(prev?T(352,163,prev,'hd-w','font-size:4.6cqw'):'');
+  b += Bt(25,227,307,94,'NEXT WPT',next?`setMapCenter('NEXT WPT','${q(next)}')`:'')+(next?T(352,275,next,'hd-w','font-size:4.6cqw'):'');
+  b += Bt(25,340,307,95,'TO WPT',to?`setMapCenter('TO WPT','${q(to)}')`:'');
+  b += T(332,493,'CTR WPT','hd-g','font-size:4.4cqw;transform:translate(-100%,-50%)')+`<div class="hd-f" style="left:${X(352)};top:${Y(460)};width:${W(256)};height:${H(67)};justify-content:center;font-size:4.2cqw;letter-spacing:.6cqw" onclick="dlgPaste('mcWpt')">${ctr&&state.map.ctrWpt?ctr:'<span style="color:#fbfbf8">-------</span>'}</div>`;
+  b += Bt(25,556,307,95,'CTR A/C',"setMapCenter('CTR A/C','aircraft position')");
+  b += Bt(413,668,190,95,'DONE','closeModal()');
+  openModal('MAP CENTER', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','mc-on');
 }
 function setMapCenter(kind, what){
+  state.map.ctrWpt = (kind==='CTR WPT');
   state.map.center = what;
   state.map.view = 'PLAN';
   openMapCenter(); render();
@@ -2888,7 +3059,24 @@ const INFO_VOR_FIELDS = ['Plain English name of the VOR/DME or VORTAC','VOR freq
   'VOR magnetic declination from the NAV database (except VORs aligned to True North)',
   'Annunciation that a VOR is aligned to True North','VOR location',
   'Annunciation when the DME is not co-located with the VOR','VOR Morse code identifier'];
+function openAircraftInfo(){
+  const X=x=>(x/11.57).toFixed(2)+'%', Y=y=>(y/8.46).toFixed(2)+'%';
+  const o=(state.gnssOrigin||'').toUpperCase(), mv=(NAVDB[o]&&NAVDB[o].magvar)||'';
+  const a=NAV.a[o], elev=(!state.fms.airborne && a && a[3]!=null)?a[3]:null;
+  const L=(x,y,t)=>`<div class="hd-t hd-g" style="left:${X(x)};top:${Y(y)};font-size:2.8cqw">${t}</div>`;
+  const V=(x,y,v,u)=>`<div class="hd-t hd-w" style="left:${X(x)};top:${Y(y)};font-size:4cqw">${v}${u?`<span class="hd-g" style="font-size:2.6cqw"> ${u}</span>`:''}</div>`;
+  const d=(n)=>'-'.repeat(n);
+  let b=`<div class="hd-t" style="left:${X(25)};top:${Y(45)}"><svg viewBox="0 0 36 20" style="width:5cqw;height:3cqw"><path d="M3 10h30M24 3l-8 7 8 7M12 6l-4 4 4 4" fill="none" stroke="#fff" stroke-width="2"/></svg></div><div class="hd-t hd-w" style="right:2.4%;top:${Y(45)};font-size:3.6cqw;letter-spacing:.3cqw">AIRCRAFT</div><div class="hd-hr" style="top:8.9%"></div>`;
+  b+=L(22,117,'TAS/GS')+V(22,172,'---/---','KT')+L(318,117,'TRK')+V(318,172,'---°')+L(573,117,'TRK ERR')+V(620,172,'-°')+L(932,117,'XTK DEV')+V(932,172,'-.--','NM');
+  b+=L(22,288,'TAILWIND')+V(48,343,'---','KT')+L(318,288,'CROSSWIND')+V(340,343,'---','KT')+L(573,288,'DRIFT')+V(573,343,'-°')+L(768,288,'HDG')+V(768,343,'---','T')+L(932,288,'EPU-G')+V(932,343,'-.--','NM');
+  b+=L(22,458,'PRESENT POSITION')+V(22,513,fmsPosCoord())+L(573,458,'WIND')+V(573,513,'---T/ ---','KT')+L(870,458,'RNP')+V(870,513,'-.--','NM');
+  b+=L(22,628,'MAG VAR')+V(22,683,mv||'---')+L(318,628,'P ALT')+V(318,683,'-----','FT')+L(573,628,'SAT')+L(715,628,'/ ISAΔ')+V(573,683,'---','°C')+L(932,628,'VERT DEV')+V(932,683,'---','FT');
+  b+=`<div class="hd-b" style="left:${X(981)};top:${Y(739)};width:${(145/11.57).toFixed(2)}cqw;height:${(81/11.57).toFixed(2)}cqw;font-size:3.6cqw" onclick="closeModal()">DONE</div>`;
+  openModal('AIRCRAFT', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','ai-on');
+}
 function openInfoDialog(obj){
+  if(obj==='PPOS') return openAircraftInfo();
   let html = `<div class="grey" style="font-size:11px; margin-bottom:10px;">Shows navigation database information for the selected map or FMS format object. When the object is also an active flight plan waypoint, the dialog offers a choice of flight plan information or database information.</div>`;
   html += `<div class="row" style="margin-bottom:10px;"><span class="lbl">OBJECT</span><span class="val">${obj}</span>
     <span class="right" style="margin-left:auto;"><span class="btn on">FPLN INFO</span><span class="btn">DB INFO</span></span></div>`;
@@ -3018,11 +3206,11 @@ function pageMapMain(){
     <div class="map-bar">
       <span class="btn ${!isPlan?'on':''}" onclick="setMapView('MAP')">MAP</span>
       <span class="btn ${isPlan?'on':''}" onclick="setMapView('PLAN')">PLAN</span>
-      <span class="btn" onclick="toggleActMenu(event)">${state.fplnMode} ▾</span>
-      <span class="btn" onclick="openOverlayMenu()">OVLY ▾</span>
+      <span class="btn mb-act" onclick="toggleActMenu(event)"><span class="mb-f">${state.fplnMode}</span><span class="mb-ar">▼</span></span>
+      <span class="btn ovly-btn" onclick="openOverlayMenu(event)">OVLY <span class="mb-ar">▼</span></span>
       ${isPlan ? `<span class="btn" onclick="openMapCenter()">CTR</span>
-                  <span class="btn ${state.map.pan?'on':''}" onclick="toggleMapPan()">✋</span>` : ''}
-      <span class="btn" style="margin-left:auto;" onclick="openSymbolMenu()">SYMBOL ▾</span>
+      <span class="btn ${state.map.pan?'on':''}" onclick="toggleMapPan()">✋</span>` : ''}
+      <span class="btn sym-btn" style="margin-left:auto;" onclick="openSymbolMenu(event)">SYMBOL <span class="mb-ar">▼</span></span>
     </div>
     <div class="map-stage ${isPlan?'planfmt':'mapfmt'}">
       <div class="map-img"></div>
@@ -4479,14 +4667,14 @@ function pageSynMain(){
 function openModal(title, bodyHtml){
   state.modalTitle = title;
   state.modalBody = bodyHtml;
-  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on');
+  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on','dp-on','dt-on','tc-on','mc-on','tm-on','ai-on');
   document.getElementById('modalOverlay').style.display = 'flex';
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').innerHTML = bodyHtml;
 }
 function closeModal(){
   document.getElementById('modalOverlay').style.display = 'none';
-  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on');
+  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on','dp-on','dt-on','tc-on','mc-on','tm-on','ai-on');
 }
 function openCornerPopup(headerHtml, bodyHtml){
   document.getElementById('cornerOverlay').style.display = 'block';
@@ -4983,6 +5171,9 @@ function modTouch(){
   if(!state.pendingMod) state.modSnap = modSnapshot();
   state.pendingMod = true; state.fplnMode = 'MOD';
 }
+function swExec(){ if(state.pendingMod) execFpln(); }
+function swCncl(){ if(state.pendingMod) cnclFpln(); }
+function updateExecLight(){ const l=document.getElementById('swLight'); if(l) l.classList.toggle('on', !!state.pendingMod); }
 function execFpln(){
   state.pendingMod=false; state.modSnap=null; state.fplnMode='ACT';
   if(state.fpln.entry.origin && state.fpln.entry.dest) state.fpln.executed=true;
@@ -5053,23 +5244,34 @@ function deleteLegWpt(idx){
 }
 /* ---- DIRECT-TO dialog ---- */
 function openDirectTo(){
-  const rows=generateLegs().filter(r=>!r.pseudo&&!r.disco&&!r.dest).slice(0,7);
-  const crz=state.fpln.entry.crzAlt;
-  let list = rows.map((r,i)=>`<div class="row" style="padding:4px 0; border-bottom:1px solid #1c1e20;">
-      <span class="btn" onclick="directToWpt('${r.name}')">-D-&gt;</span>
-      <span class="${i===0?'magenta':'val'} val">${r.name}</span>
-      <span class="right grey" style="margin-left:auto; font-size:10.5px;">${r.dist} NM</span></div>`).join('');
-  if(!list) list='<div class="grey">NO FLIGHT PLAN</div>';
-  state.dlg.dtoWpt='';
-  const draw=()=>openModal('DIRECT-TO', `
-    <div class="row" style="margin-bottom:10px;">
-      <span class="lbl">ALT SEL</span><span class="val">${crz||'-----'}</span>
-      <span class="right" style="margin-left:auto;"><span class="btn" onclick="openNearestArpts()">NEAREST ARPTS...</span></span>
-    </div>
-    <div class="hr"></div>
-    <div style="max-height:190px; overflow:auto; margin:8px 0;">${list}</div>
-    <div class="row" style="margin-bottom:14px;"><span class="lbl">-D-&gt;</span>${dlgField('dtoWpt','Enter any valid waypoint',true)}</div>
-    <div class="right"><span class="btn" onclick="closeModal()">CLOSE</span></div>`);
+  const rows=generateLegs().filter(r=>!r.pseudo&&!r.disco&&!r.dest);
+  const crz=state.fpln.entry.crzAlt, off=state.fpln.offset;
+  state.dlg.dtoWpt=''; state.dlg.dtoPage=state.dlg.dtoPage||0;
+  const PG=4, pages=Math.max(1,Math.ceil(rows.length/PG));
+  const draw=()=>{
+    state.dlg.dtoPage=Math.min(state.dlg.dtoPage,pages-1);
+    const pg=state.dlg.dtoPage;
+    const X=x=>(x/10.93).toFixed(2)+'%', Y=y=>(y/10.4).toFixed(2)+'%', W=w=>(w/10.93).toFixed(2)+'cqw', H=h=>(h/10.93).toFixed(2)+'cqw';
+    const T=(x,y,t,cls)=>`<div class="hd-t ${cls}" style="left:${X(x)};top:${Y(y)}">${t}</div>`;
+    const Bt=(x,y,w,h,inner,oc,cls)=>`<div class="hd-b ${cls||''}" style="left:${X(x)};top:${Y(y)};width:${W(w)};height:${H(h)}" ${oc?`onclick="${oc}"`:''}>${inner}</div>`;
+    const ico=`<svg viewBox="0 0 30 16" style="width:3.2cqw;height:2cqw;flex:none"><circle cx="11" cy="8" r="6" fill="none" stroke="#fbfbf8" stroke-width="2"/><line x1="2" y1="8" x2="26" y2="8" stroke="#fbfbf8" stroke-width="2"/><path d="M22 3l7 5-7 5z" fill="#fbfbf8"/></svg>`;
+    let b=`<div class="hd-t" style="left:${X(15)};top:${Y(18)}">${ico}</div><div class="hd-t" style="right:1.2%;top:${Y(50)}"><span class="hd-w" style="font-size:3.4cqw">${state.fplnMode}</span> <span class="hd-g">FPLN</span></div><div class="hd-hr" style="top:6.6%"></div>`;
+    b+=T(18,110,'OFFSET','hd-g')+`<div class="hd-f" style="left:${X(131)};top:${Y(84)};width:${W(135)};height:${H(52)};cursor:default">${off?off.dir+off.nm.toFixed(1):'<span style="color:#959b9f">---</span>'}</div>`+T(280,110,'NM','hd-g');
+    b+=`<div style="position:absolute;left:0;right:0;top:${Y(146)};height:.3cqw;background:#a9afb3"></div>`;
+    b+=T(530,190,'ALT SEL','hd-g')+`<div class="hd-f dim" style="left:${X(665)};top:${Y(160)};width:${W(155)};height:${H(60)};color:#7fd4d9;justify-content:center">${crz||'-----'}</div>`;
+    b+=`<div class="hd-t" style="left:${X(178)};top:${Y(262)}">${ico}</div><div class="hd-f" style="left:${X(245)};top:${Y(236)};width:${W(187)};height:${H(52)}" onclick="dlgPaste('dtoWpt')"><span style="color:#959b9f">-----</span></div>`;
+    rows.slice(pg*PG,pg*PG+PG).forEach((r,i)=>{
+      const y=355+i*130, first=(pg===0&&i===0);
+      b+=Bt(158,y,297,73,ico+`<span class="dt-id" style="color:${first?'#d060e0':'#fbfbf8'}">${r.name}</span>`,`directToWpt('${r.name}')`);
+      b+=T(500,y+36,`${/\d/.test(String(r.dist))?r.dist+' NM':''}`,'hd-g');
+    });
+    // scroll bar
+    b+=Bt(995,225,73,73,'▲',pg>0?`state.dlg.dtoPage--;state.dlgRedraw()`:'',pg>0?'':'dis')+Bt(995,745,73,73,'▼',pg<pages-1?`state.dlg.dtoPage++;state.dlgRedraw()`:'',pg<pages-1?'':'dis');
+    b+=`<div style="position:absolute;left:${X(995)};top:${Y(298)};width:${W(73)};height:${H(447)};"><div style="position:absolute;left:30%;width:12%;top:0;bottom:0;background:#7c8287;opacity:.35"></div><div style="position:absolute;left:18%;width:30%;background:#808890;top:${(pg/pages*100).toFixed(1)}%;height:${(100/pages).toFixed(1)}%"></div></div>`;
+    b+=Bt(18,948,387,74,'NEAREST ARPTS...','openNearestArpts()')+Bt(936,948,132,74,'DONE','closeModal()');
+    openModal('DIRECT-TO', b);
+    document.getElementById('modalOverlay').classList.add('hd-on','dt-on');
+  };
   state.dlgRedraw=draw; draw();
 }
 /* ---- OFFSET (lateral, nm, L/R) ---- */
@@ -5295,24 +5497,26 @@ function dpStore(over){
 function openDefPilotWpt(){
   state.dlgRedraw = openDefPilotWpt;
   const D=state.dlg, r=dpResult();
-  const html = `
-    <div class="row" style="margin-bottom:10px;"><span class="lbl">WPT NAME</span>${dlgField('dpName','-----')}</div>
-    <div class="row" style="margin-bottom:8px;"><span class="lbl">PLACE BRG/DIST</span>${dlgField('dpBd','-----/---/---',true)}</div>
-    <div class="row" style="margin-bottom:8px;"><span class="lbl">PLACE BRG/PLACE BRG</span>${dlgField('dpBb','-----/-----',true)}</div>
-    <div class="grid g2" style="margin-bottom:10px;">
-      <div><div class="lbl">LATITUDE</div>${dlgField('dpLat','-----')}</div>
-      <div><div class="lbl">LONGITUDE</div>${dlgField('dpLon','------')}</div>
-    </div>
-    <div class="hr"></div>
-    <div class="row" style="margin:10px 0;"><span class="lbl">POSITION</span>${r ? `<span class="cyan val">${fmtLL(r.ll)}</span>` : '<span class="grey">—</span>'}</div>
-    ${D.dpDup ? `<div class="yellow val" style="margin-bottom:8px;">DUPLICATE NAME</div>` : ''}
-    <div class="row">
-      <span class="btn" onclick="dpStore(false)">STORE WPT</span>
-      ${D.dpDup ? `<span class="btn" onclick="dpStore(true)">OVERWRITE WPT</span>` : ''}
-      <span class="btn" onclick="openPilotWpts()">PILOT WPTS...</span>
-      <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeModal()">CLOSE</span></span>
-    </div>`;
-  openModal('DEF PILOT WPT', html);
+  const X=x=>(x/13).toFixed(2)+'%', Y=y=>(y/11.84).toFixed(2)+'%', W=w=>(w/13).toFixed(2)+'cqw', H=h=>(h/13).toFixed(2)+'cqw';
+  const T=(x,y,t,cls)=>`<div class="hd-t ${cls}" style="left:${X(x)};top:${Y(y)}">${t}</div>`;
+  const Fd=(x,y,w,h,v,key,ph)=>`<div class="hd-f" style="left:${X(x)};top:${Y(y)};width:${W(w)};height:${H(h)}" onclick="dlgPaste('${key}')">${v||`<span style="color:#959b9f">${ph}</span>`}</div>`;
+  const Bt=(x,y,w,h,inner,oc,cls)=>`<div class="hd-b ${cls||''}" style="left:${X(x)};top:${Y(y)};width:${W(w)};height:${H(h)}" ${oc?`onclick="${oc}"`:''}>${inner}</div>`;
+  const canStore = !!(D.dpName && r);
+  let b = T(32,60,'DEF PILOT WPT','hd-g')+'<div class="hd-hr" style="top:8.4%"></div>';
+  b += T(38,142,'PLACE','hd-g')+T(350,142,'BRG','hd-g')+T(548,142,'/','hd-g')+T(617,142,'DIST','hd-g');
+  b += Fd(40,188,722,80,D.dpBd,'dpBd','-----&nbsp;&nbsp;&nbsp;---.-°/---.-')+T(780,230,'NM','hd-g');
+  b += T(38,312,'PLACE','hd-g')+T(350,312,'BRG','hd-g')+T(548,312,'/','hd-g')+T(615,312,'PLACE','hd-g')+T(866,312,'BRG','hd-g');
+  b += Fd(40,358,1078,82,D.dpBb,'dpBb','-----&nbsp;&nbsp;&nbsp;---.-&nbsp;/-----&nbsp;&nbsp;&nbsp;--');
+  b += T(38,493,'LATITUDE','hd-g')+T(400,493,'LONGITUDE','hd-g');
+  b += Fd(40,535,355,80,D.dpLat||(r?fmtLat(r.ll[0]):''),'dpLat','-----')+Fd(400,535,398,80,D.dpLon||(r?fmtLon(r.ll[1]):''),'dpLon','------');
+  b += T(38,662,'WPT NAME','hd-g')+Fd(40,708,222,82,D.dpName,'dpName','-----');
+  b += Bt(35,795,408,110,'STORE WPT',canStore?'dpStore(false)':'',canStore?'':'dis');
+  b += Bt(822,795,446,113,'PILOT WPTS','openPilotWpts()');
+  if(D.dpDup) b += Bt(35,915,552,112,'OVERWRITE WPT','dpStore(true)');
+  b += `<div class="hd-bar" style="left:${X(18)};top:${Y(1058)};width:${W(1027)};height:${H(90)}"></div>`+(D.dpDup?T(32,1103,'DUPLICATE NAME','hd-w'):'');
+  b += Bt(1062,1040,206,110,'DONE','closeModal()');
+  openModal('DEF PILOT WPT', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','dp-on');
 }
 
 /* ---- PILOT WPTS / DELETE ALL (PG 10-124, 10-104) ---- */
@@ -6295,27 +6499,25 @@ function openTempComp(){
   const isaDelta = (oat===null||oat===undefined) ? null : Math.round(oat - 15);
   const hot = isaDelta!==null && isaDelta > 0;
   const canArm = isaDelta!==null && isaDelta <= 0;
-  const html = `
-    <div class="row" style="margin-bottom:6px;">
-      <span class="lbl">OAT</span>
-      <span class="field ${hot?'':''}" style="${hot?'color:var(--yellow);':''}">${oat===null||oat===undefined ? '--- °C' : oat+' °C'}</span>
-      <span class="btn" onclick="setTempCompOat(-10)">-10°C</span>
-      <span class="btn" onclick="setTempCompOat(25)">+25°C</span>
-      <span class="btn" onclick="setTempCompOat(null)">CLR</span>
-    </div>
-    <div class="row" style="margin-bottom:10px;">
-      <span class="lbl">ISAΔ</span>
-      <span class="${hot?'yellow':'val'}">${isaDelta===null ? '—' : (isaDelta>0?'+':'')+isaDelta+' °C'}</span>
-    </div>
-    <div class="row" style="margin-bottom:10px;">
-      <span class="lbl">TEMP COMP</span>
-      ${canArm ? ddSel('tempComp') : ddDisabled(state.fms.tempComp)}
-      ${hot ? `<span class="yellow" style="font-size:10px;">ISAΔ greater than 0 °C — TEMP COMP not available</span>` : ``}
-      ${isaDelta===null ? `<span class="grey" style="font-size:10px;">enter OAT before compensation can be computed</span>` : ``}
-    </div>
-    <div class="right"><span class="btn" onclick="closeModal()">CLOSE</span></div>
-  `;
-  openModal('TEMP COMP', html);
+  state.dlgRedraw = openTempComp;
+  const X=x=>(x/9.5).toFixed(2)+'%', Y=y=>(y/9.3).toFixed(2)+'%', W=w=>(w/9.5).toFixed(2)+'cqw', H=h=>(h/9.5).toFixed(2)+'cqw';
+  const T=(x,y,t,cls,st)=>`<div class="hd-t ${cls}" style="left:${X(x)};top:${Y(y)};${st||''}">${t}</div>`;
+  const on = state.fms.tempComp==='ON';
+  const dest=(state.fpln.entry.dest||'').toUpperCase()||'----';
+  let b = T(22,45,'TEMP COMP - <span style="color:#fbfbf8">'+dest+'</span>','hd-g','font-size:4.8cqw')+`<div class="hd-t" style="right:2%;top:${Y(50)}"><span class="hd-w" style="font-size:4.4cqw">${state.fplnMode}</span> <span class="hd-g" style="font-size:3.4cqw">FPLN</span></div><div class="hd-hr" style="top:9.3%"></div>`;
+  b += T(58,200,'OAT','hd-g')+`<div class="hd-f" style="left:${X(152)};top:${Y(165)};width:${W(161)};height:${H(70)};justify-content:flex-end;${hot?'color:#f2d12f;':''}" onclick="dlgPaste('tcOat')">${oat===null||oat===undefined?'<span style="color:#959b9f">---</span>':oat}</div>`+T(325,200,'°C','hd-g');
+  b += T(630,200,'ISAΔ','hd-g')+T(770,200,isaDelta===null?'---':(isaDelta>0?'+':'')+isaDelta,'hd-w',hot?'color:#f2d12f':'')+T(835,200,'°C','hd-g');
+  b += `<div class="hd-f ${canArm?'':'dim'}" style="left:${X(68)};top:${Y(320)};width:${W(60)};height:${H(55)};justify-content:center;color:#7fd4d9;font-size:5cqw;${canArm?'':'opacity:.4;'}" ${canArm?`onclick="state.fms.tempComp='${on?'OFF':'ON'}';modTouch&&0;openTempComp();render()"`:''}>${on?'✓':''}</div>`;
+  b += T(152,348,'TEMP COMP ON','hd-g',`font-size:5cqw;color:${on?'#7fd4d9':'#959b9f'}`);
+  b += `<div class="hd-bar" style="left:${X(10)};top:${Y(818)};width:${W(710)};height:${H(78)}"></div>`+(hot?T(24,857,'UNABLE TEMP COMP','hd-w'):'');
+  b += `<div class="hd-b" style="left:${X(738)};top:${Y(797)};width:${W(177)};height:${H(98)}" onclick="closeModal()">DONE</div>`;
+  openModal('TEMP COMP', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','tc-on');
+}
+DLG_HANDLERS.tcOat = t=>{ if(!/^-?\d{1,2}$/.test(t)) return false; setTempCompOatSilent(+t); return true; };
+function setTempCompOatSilent(v){
+  if((v-15)>0 && state.fms.tempComp==='ON') pushMessage('UNABLE TEMP COMP');
+  state.tempCompOat=v; if((v-15)>0) state.fms.tempComp='OFF';
 }
 function setTempCompOat(v){
   if(v!==null && (v-15)>0 && state.fms.tempComp==='ON') pushMessage('UNABLE TEMP COMP');
@@ -6459,7 +6661,7 @@ function renderTabs(){
     st.style.display = 'none';
   }
 
-  document.querySelector('.toprow').style.display = (state.app==='CNS' || state.app==='SYN') ? 'none' : '';
+  document.querySelector('.toprow').style.display = (state.app==='CNS' || state.app==='SYN' || state.app==='CHKL' || state.app==='MAP') ? 'none' : '';
   if(state.app==='SYN'){ const c=document.getElementById('content'); if(c) c.style.setProperty('--tk', Math.min(1, c.clientWidth/632)); }
   // top-left page ID label
   document.getElementById('appLabel').textContent = state.app==='FMS' ? 'FMS1' : state.app;
@@ -6474,6 +6676,7 @@ function renderBottom(){
   b.innerHTML = '';
   if(state.app!=='FMS'){
     b.style.display = 'none';
+    updateExecLight();
     return;
   }
   b.style.display = 'flex';
@@ -6514,6 +6717,7 @@ function renderBottom(){
   msg.textContent='MSG...';
   msg.onclick = openMsgDialog;
   b.appendChild(msg);
+  updateExecLight();
 }
 
 function tgtBlock(){
@@ -7658,10 +7862,10 @@ function toggleFctnMenu(ev){
   const inPhase = !!state.eclPhase;
   const menu = document.createElement('div');
   menu.id = 'fctnMenu';
-  menu.className = 'enum-menu';
+  menu.className = 'enum-menu fctn-menu';
   const items = [
     {label:'RESET CHKL', act:'fctnResetChkl()', enabled:inPhase},
-    {label:'RESET ALL', act:'', enabled:false},
+    {label:state.fms.airborne?'RESET NORMALS':'RESET ALL', act:'', enabled:false},
     {label:'OVERRIDE ITEM', act:'fctnOverrideItem()', enabled:inPhase},
     {label:'OVERRIDE CHKL', act:'fctnOverrideChkl()', enabled:inPhase}
   ];
@@ -7669,13 +7873,18 @@ function toggleFctnMenu(ev){
   items.forEach(it=>{
     html += `<div class="enum-item ${it.enabled?'':'dash'}" ${it.enabled?`onclick="${it.act}"`:''} style="${it.enabled?'':'opacity:.4; cursor:default;'}">${it.label}</div>`;
   });
-  if(!inPhase) html += `<div class="enum-note">Select a checklist item first — these functions act on the open checklist.</div>`;
   menu.innerHTML = html;
   document.body.appendChild(menu);
+  { const w=document.querySelector('.screen').getBoundingClientRect().width; menu.style.setProperty('--ff',(w*0.0325)+'px'); menu.style.setProperty('--fz',(w*0.004)+'px'); }
   const r = ev.currentTarget.getBoundingClientRect();
-  menu.style.left = Math.min(r.left, window.innerWidth - menu.offsetWidth - 8) + 'px';
-  menu.style.top  = (r.bottom + 4) + 'px';
-  document.addEventListener('click', function h(){ const m=document.getElementById('fctnMenu'); if(m) m.remove(); document.removeEventListener('click', h); });
+  const sr = document.querySelector('.screen').getBoundingClientRect();
+  const prev = ev.currentTarget.previousElementSibling, pr = prev ? prev.getBoundingClientRect() : r;
+  const left = pr.left + pr.width*0.06;
+  menu.style.width = (r.right - left) + 'px';
+  menu.style.left = left + 'px';
+  menu.style.top  = (r.bottom + sr.width*0.012) + 'px';
+  ev.currentTarget.classList.add('open');
+  document.addEventListener('click', function h(){ const m=document.getElementById('fctnMenu'); if(m) m.remove(); const f=document.querySelector('.subtab.fctn'); if(f) f.classList.remove('open'); document.removeEventListener('click', h); });
 }
 function fctnResetChkl(){ resetEclPhase(); document.getElementById('fctnMenu')?.remove(); }
 function fctnOverrideItem(){
@@ -7692,20 +7901,19 @@ function fctnOverrideChkl(){
 }
 
 function pageEclPhaseList(order, heading){
-  let html = `<div class="lbl" style="margin-bottom:8px;">${heading}</div>`;
-  order.forEach(phase=>{
+  let cur=-1; order.forEach((ph,i)=>{ const p=eclProgress(ph); if(cur<0 && !(p.total>0&&p.done===p.total)) cur=i; });
+  let html='<div class="ecl-sum"><div class="ecl-sum-list">';
+  order.forEach((phase,i)=>{
     const p = eclProgress(phase);
     const isDone = p.total>0 && p.done===p.total;
-    html += `<div class="ecl-phase-row" onclick="openEclPhase('${phase.replace(/'/g,"\\'")}')">
-      <span class="name">${ECL_DATA[phase] ? ECL_DATA[phase].title : phase}</span>
-      <span class="status ${isDone?'done':''}">${isDone ? '✓ COMPLETE' : (p.done>0 ? p.done+' / '+p.total : p.total+' items')}</span>
+    html += `<div class="ecl-sr${i===cur?' cur':''}" onclick="openEclPhase('${phase.replace(/'/g,"\\'")}')">
+      <span class="n">${ECL_DATA[phase] ? ECL_DATA[phase].title : phase}</span>${isDone?'<span class="ld"></span><span class="st">COMPLETED</span>':''}
     </div>`;
   });
-  return html;
+  return html+'</div><div class="ecl-sum-mid"></div><div class="ecl-sum-foot"></div></div>';
 }
 function pageEclSummary(){
-  return pageEclPhaseList(ECL_SUMMARY_ORDER, 'SUMMARY') +
-    `<div class="grey" style="margin-top:16px; font-size:10.5px;">Ver 1.00 &nbsp;·&nbsp; select NORMAL for the full checklist sequence</div>`;
+  return pageEclPhaseList(ECL_SUMMARY_ORDER, 'SUMMARY');
 }
 function pageEclNormal(){
   return pageEclPhaseList(ECL_NORMAL_ORDER, 'NORMAL');
@@ -7750,18 +7958,12 @@ function pageEclNonNormal(){
   /* ---- level 1: system list (alphabetical, per FCOM 1 21-01-12) ---- */
   if(n.level==='SYS'){
     const keys=Object.keys(NN_TREE).sort((a,b)=>NN_TREE[a].t.localeCompare(NN_TREE[b].t));
-    let h=`<div class="nn-hd">NON-NORMAL &mdash; SYSTEMS<span class="nn-ct">${cnt.t} checklists</span></div>`;
-    h+=`<div class="nn-scroll">`;
+    let h=`<div class="ecl-sum nn-sum"><div class="ecl-sum-list nn-list">`;
     keys.forEach(k=>{
       const sys=NN_TREE[k];
-      let w=0,c=0;
-      for(const s in sys.subs){ w+=sys.subs[s].W.length; c+=sys.subs[s].C.length; }
-      h+=`<div class="nn-item" onclick="nnGo('SUB','${k}')">
-        <span class="nn-sys">${sys.t}</span>
-        <span class="nn-cnt">${w?`<b class="w">${w}W</b> `:''}<b class="c">${c}C</b></span>
-        <span class="ar r">&#9655;</span></div>`;
+      h+=`<div class="ecl-sr" onclick="nnGo('SUB','${k}')"><span class="n">${sys.t}</span></div>`;
     });
-    h+=`</div>`+foot;
+    h+=`</div><div class="ecl-sum-foot"></div></div>`;
     return h;
   }
 
@@ -7770,16 +7972,12 @@ function pageEclNonNormal(){
     const sys=NN_TREE[n.sys];
     const subs=Object.keys(sys.subs);
     if(subs.length===1) return nnListPage(n.sys, subs[0], cnt, foot);
-    let h=`<div class="ecl-back" onclick="nnGo('SYS')">&#9664; SYSTEMS</div>`;
-    h+=`<div class="nn-hd">${sys.t}</div><div class="nn-scroll">`;
+    let h=`<div class="ecl-sum nn-sum"><div class="ecl-sum-list nn-list"><div class="ecl-back" onclick="nnGo('SYS')" style="padding:0 0 0 calc(var(--sw,584px)*.056)">&#9664; SYSTEMS</div>`;
+    h+=`<div class="ecl-sr" style="cursor:default"><span class="n" style="color:#959b9f">${sys.t}</span></div>`;
     subs.forEach(s=>{
-      const d=sys.subs[s];
-      h+=`<div class="nn-item" onclick="nnGo('LIST','${n.sys}','${escAttr(s)}')">
-        <span class="nn-sys">${s}</span>
-        <span class="nn-cnt">${d.W.length?`<b class="w">${d.W.length}W</b> `:''}<b class="c">${d.C.length}C</b></span>
-        <span class="ar r">&#9655;</span></div>`;
+      h+=`<div class="ecl-sr" onclick="nnGo('LIST','${n.sys}','${escAttr(s)}')"><span class="n">${s}</span></div>`;
     });
-    h+=`</div>`+foot;
+    h+=`</div><div class="ecl-sum-foot"></div></div>`;
     return h;
   }
 
@@ -7829,12 +8027,36 @@ function nnListPage(sysKey, subName, cnt, foot){
 /* PROC page - FCOM 1 21-01-16: two lists separated by a gray line, priority
    procedures first, then the other non-normal procedures. The actual procedure
    titles are published in FCOM Vol. 2 and are not loaded.                     */
+const PROC_PRIORITY = ['Ditching','Emergency evacuation','Forced landing','Pilot incapacitation','Rejected takeoff','Smoke/fire/fumes procedure','Smoke or fumes removal','Unreliable airspeed'];
+const PROC_NONNORMAL = ['Aural warnings failed on','Display unit failure','Emergency descent','Fuel quantity indication failure','Gear up or unsafe landing'];
+state.proc = state.proc || {sel:null, started:{}};
+function procOpen(n){ state.proc.sel=n; state.proc.started[n]=true; render(); }
+function procBack(){ state.proc.sel=null; render(); }
+function procScroll(d){ const l=document.getElementById('prList'); if(l){ l.scrollBy({top:d*l.clientHeight*.8,behavior:'smooth'}); } }
+function procSync(){
+  const l=document.getElementById('prList'), t=document.getElementById('prThumb'); if(!l||!t) return;
+  const max=l.scrollHeight-l.clientHeight;
+  t.style.height = max>0 ? (l.clientHeight/l.scrollHeight*100)+'%' : '100%';
+  t.style.top = max>0 ? (l.scrollTop/l.scrollHeight*100)+'%' : '0';
+}
 function pageEclProc(){
-  return `<div class="nn-hd">PROC &mdash; PROCEDURES</div>
-  <div class="nn-cat w">PRIORITY PROCEDURES</div>
-  <div class="nn-sep"></div>
-  <div class="nn-cat c">OTHER NON-NORMAL PROCEDURES</div>
-  <div class="nn-nobody">PROCEDURE LIST NOT LOADED</div>`;
+  const P=state.proc;
+  if(P.sel){
+    return `<div style="display:flex;flex-direction:column;height:100%"><div class="ecl2-title" onclick="procBack()" style="cursor:pointer">${eclEsc(P.sel)}</div>
+      <div class="ecl2-box"><div class="ecl2-list"></div>
+        <div class="ecl2-bar"><div class="ecl2-arrow">▲</div><div class="ecl2-track"></div><div class="ecl2-arrow">▼</div></div></div>
+      <div class="ecl2-foot">STARTED</div></div>`;
+  }
+  const row=n=>`<div class="ecl-sr" onclick="procOpen('${n.replace(/'/g,"\\'")}')"><span class="n">${n}</span>${P.started[n]?'<span class="ld"></span><span class="st">STARTED</span>':''}</div>`;
+  setTimeout(procSync,0);
+  return `<div class="ecl-sum pr-sum"><div class="pr-box">
+    <div class="pr-list" id="prList" onscroll="procSync()">
+      <div class="pr-h">Priority Procedures</div>${PROC_PRIORITY.map(row).join('')}
+      <div class="pr-gap"></div>
+      <div class="pr-h">Non-Normal Procedures</div>${PROC_NONNORMAL.map(row).join('')}
+    </div>
+    <div class="ecl2-bar pr-bar"><div class="ecl2-arrow" onclick="procScroll(-1)">▲</div><div class="ecl2-track"><div class="ecl2-thumb" id="prThumb"></div></div><div class="ecl2-arrow" onclick="procScroll(1)">▼</div></div>
+  </div><div class="ecl-sum-foot"></div></div>`;
 }
 
 function eclEsc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -8057,16 +8279,16 @@ function renderInitDialog(){
     '<div class="init-title">FMS INITIALIZATION</div>'+
     '<div class="init-sub">Complete both entries to continue</div>'+
     step(1,'Tap your <b>ORIGIN</b> airport.')+
-    step(2,'Tap the <b>SCRATCHPAD</b> box below and type the fuel on board (kg).')+
+    step(2,'Tap the <b>SCRATCHPAD</b> (bottom) and type the fuel on board (kg).')+
     step(3,'Tap the <b>BLOCK FUEL</b> field to paste the scratchpad into it.')+
     step(4,'Tap <b>INIT</b>.')+
     '<div class="init-lbl">ORIGIN</div>'+
     '<div class="init-origin-grid">'+originHtml+'</div>'+
     '<div class="init-lbl">BLOCK FUEL (KG)</div>'+
     '<div class="init-fuel-row"><span class="'+fuelCls.trim()+'">'+scratchFieldHtml('initDlg','fuel')+'</span>'+fuelHint+'</div>'+
-    '<div class="init-lbl">SCRATCHPAD</div><div class="init-echo'+(cur===2?' init-pulse':'')+'" onclick="focusScratchInput()">'+(state.scratch.error?'INVALID ENTRY':(state.scratch.text||'')+'<span class="scratch-caret">_</span>')+(state.scratch.text?'':'<span class="scratch-hint">TAP HERE TO TYPE</span>')+'</div>'+
     '<div class="init-btn-row"><span class="btn'+(ready?'':' disabled')+'"'+(ready?' onclick="confirmInit()"':'')+'>INIT</span></div>'+
     down;
+  const sb=document.getElementById('scratchwin'); if(sb) sb.classList.toggle('sw-attn', cur===2);
 }
 function initDefaults(){
   state.initDlg.origin = 'YMML';
@@ -8078,6 +8300,7 @@ function confirmInit(){
   state.gnssOrigin = state.initDlg.origin;
   state.fpln.entry.fob = state.initDlg.entry.fuel;
   state.initDlg.done = true;
+  document.getElementById('scratchwin').classList.remove('sw-attn');
   document.getElementById('initOverlay').style.display = 'none';
   render();
 }
