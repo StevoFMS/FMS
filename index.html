@@ -1610,6 +1610,18 @@
   .fc-on .modal-body{aspect-ratio:595/350 !important}
   .fx-on .modal-body{aspect-ratio:1366/918 !important}
   .gi-on .modal-body{aspect-ratio:614/408 !important}
+  .vh-on .modal-body{aspect-ratio:797/745 !important}
+  .modal-overlay.hd-on.vh-on .modal-box{width:96% !important;background:#303030;border:3px solid #8d9296}
+  .vh3-on .modal-body{aspect-ratio:901/602 !important}
+  .hf-on .modal-body{aspect-ratio:926/672 !important}
+  .xp-on .modal-body{aspect-ratio:1303/1042 !important}
+  .nv-on .modal-body{aspect-ratio:918/860 !important}
+  .modal-overlay.hd-on.nv-on .modal-box{width:96% !important;background:#303030;border:3px solid #8d9296}
+  .modal-overlay.hd-on.xp-on .modal-box{width:96% !important;background:#303030;border:3px solid #8d9296}
+  .modal-overlay.hd-on.hf-on .modal-box{width:96% !important;background:#474747;border:3px solid #8d9296}
+  .ve-on .modal-body{aspect-ratio:879/684 !important}
+  .modal-overlay.hd-on.ve-on .modal-box{width:96% !important;background:#474747;border:3px solid #8d9296}
+  .modal-overlay.hd-on.vh3-on .modal-box{width:96% !important;background:#484848}
   .ad-on .modal-body{aspect-ratio:775/782 !important}
   .modal-overlay.hd-on.ad-on .modal-box{width:78% !important;background:#363636;border:3px solid #8d9296}
   .gs-on .modal-body{aspect-ratio:516/174 !important}
@@ -1702,14 +1714,15 @@
   .map-full .map-bar .mb-f{background:#000; padding:0 .45em; line-height:1.5;}
 
 
+  .map-info{display:none !important}
   #ovlyMenu,#symMenu{position:fixed; z-index:70; width:var(--ow,275px); background:#1e1d1f; border:2px solid #8a8d90; font-family:'Bahnschrift','DIN Alternate','Roboto Condensed','Arial Narrow',Arial,sans-serif; color:#fff; font-size:calc(var(--ow,275px)*.066); letter-spacing:.04em;}
-  #ovlyMenu,#symMenu .om-r{display:flex; align-items:center; gap:calc(var(--ow,275px)*.06); padding:calc(var(--ow,275px)*.022) calc(var(--ow,275px)*.04); cursor:pointer; line-height:1.2;}
-  #ovlyMenu,#symMenu .om-r:hover{background:#2a292b;}
-  #ovlyMenu,#symMenu .om-cb{width:1em; height:1em; border:2px solid #8a8d90; display:inline-flex; align-items:center; justify-content:center; font-size:.9em; color:#7fd4d9;}
-  #ovlyMenu,#symMenu .om-rd{width:1em; height:1em; border-radius:50%; border:2px solid #8a8d90; box-sizing:border-box;}
-  #ovlyMenu,#symMenu .om-rd.on{background:#7fd4d9; box-shadow:inset 0 0 0 .15em #1e1d1f; border-color:#c9cdd0;}
-  #ovlyMenu,#symMenu .om-sep{height:2px; background:#8a8d90;}
-  #ovlyMenu,#symMenu .om-done{text-align:right; padding:calc(var(--ow,275px)*.022) calc(var(--ow,275px)*.04); cursor:pointer;}
+  #ovlyMenu .om-r,#symMenu .om-r{display:flex; align-items:center; gap:calc(var(--ow,275px)*.06); padding:calc(var(--ow,275px)*.016) calc(var(--ow,275px)*.04); cursor:pointer; line-height:1.2;}
+  #ovlyMenu .om-r:hover,#symMenu .om-r:hover{background:#2a292b;}
+  #ovlyMenu .om-cb,#symMenu .om-cb{width:1em; height:1em; border:2px solid #8a8d90; display:inline-flex; align-items:center; justify-content:center; font-size:.9em; color:#7fd4d9;}
+  #ovlyMenu .om-rd,#symMenu .om-rd{width:1em; height:1em; border-radius:50%; border:2px solid #8a8d90; box-sizing:border-box;}
+  #ovlyMenu .om-rd.on,#symMenu .om-rd.on{background:#7fd4d9; box-shadow:inset 0 0 0 .15em #1e1d1f; border-color:#c9cdd0;}
+  #ovlyMenu .om-sep,#symMenu .om-sep{height:2px; background:#8a8d90;}
+  #ovlyMenu .om-done,#symMenu .om-done{text-align:right; padding:calc(var(--ow,275px)*.022) calc(var(--ow,275px)*.04); cursor:pointer;}
   .map-full .map-bar .btn.sym-btn.open,.map-full .map-bar .btn.ovly-btn.open{background:#1b3f86 !important;}
 
 
@@ -2683,6 +2696,7 @@ let state = {
     navPre:[null,null,null,null,null,null,null,null,null,null], navPreSel:null, navPrePage:0, navEditPage:0,
     hf:{act:'not specified', sq:'-'},
     hfBoxes:{hf1:'5.6800', hf2:'8.8640'},
+    hfc:{hf1:{power:'LO',mode:'SIMPLEX',sq:2,em:'LV'}, hf2:{power:'LO',mode:'SIMPLEX',sq:2,em:'LV'}}, hfScr:0,
     nav:{
       nav1:{act:'116.300', ident:'', sby:'116.80', recall:false, sbySel:false, auto:true,  dme:false, hold:false, holdFreq:'', mkr:'LO'},
       nav2:{act:'109.30',  ident:'IUL', sby:'112.30', recall:false, sbySel:false, auto:false, dme:true, hold:true, holdFreq:'114.10', mkr:'LO'},
@@ -3007,8 +3021,8 @@ function ovlyWx(v){ state.map.ovly.wx=v; render(); drawOvlyMenu(); }
 function drawOvlyMenu(){
   const m=document.getElementById('ovlyMenu'); if(!m) return;
   const o=state.map.ovly, wx=(o.wx==='WX')?'WX':'OFF';
-  const cb=(k,l)=>`<div class="om-r" onclick="ovlyToggle('${k}')"><span class="om-cb">${o[k]?'✓':''}</span><span>${l}</span></div>`;
-  const rd=(v)=>`<div class="om-r" onclick="ovlyWx('${v}')"><span class="om-rd ${wx===v?'on':''}"></span><span>${v}</span></div>`;
+  const cb=(k,l)=>`<div class="om-r" onclick="ovlyToggle('${k}')"><span class="om-cb">${o[k]?'✓':''}</span><span style="${o[k]?'color:#7fd4d9':''}">${l}</span></div>`;
+  const rd=(v)=>`<div class="om-r" onclick="ovlyWx('${v}')"><span class="om-rd ${wx===v?'on':''}"></span><span style="${wx===v?'color:#7fd4d9':''}">${v}</span></div>`;
   m.innerHTML = cb('vsd','VSD')+cb('terrain','TERRAIN')+cb('tfc','TRAFFIC')+'<div class="om-sep"></div>'+rd('WX')+rd('OFF')+'<div class="om-sep"></div><div class="om-done" onclick="closeOvlyMenu()">DONE</div>';
 }
 function openOverlayMenu(ev){
@@ -3367,7 +3381,7 @@ function setCnsTab(t){ state.cns.tab = t; state.cns.ctrl = null; render(); }
 function cnsCtrlRefresh(r){
   const t = document.getElementById('modalTitle');
   if(t && t.textContent === r.toUpperCase()+' CONTROL'){
-    openModal(r.toUpperCase()+' CONTROL', /^nav\d$/.test(r) ? navControlWindow(r) : cnsControlWindow(r));
+    if(/^nav\d$/.test(r)) openNavModal(r); else openVhfModal(r);
   }
   if(t && t.textContent === 'EDIT NAV PRESET FREQUENCIES') openModal('EDIT NAV PRESET FREQUENCIES', navEditWindow(r));
 }
@@ -3381,12 +3395,12 @@ function cnsSwap(r){
 }
 function cnsSelectSby(r){ cnsSbyClick('vhf', r); cnsCtrlRefresh(r); }
 function cnsOpenCtrl(r){
-  if(/^nav\d$/.test(r)){ state.cns.navPrePage=0; openModal(r.toUpperCase()+' CONTROL', navControlWindow(r)); return; }
+  if(/^nav\d$/.test(r)){ state.cns.navPrePage=0; openNavModal(r); return; }
   if(!state.cns.vhf[r]){
     infoDialogSrc(r.toUpperCase()+' CONTROL', '<div class="grey" style="font-size:11px;">A documented CONTROL window (FREQ SEL, SQUELCH, PRESET list) exists for VHF1/2/3 only. NAV, ADF and XPDR/TCAS control-window contents are not in the extracted FCOM text.</div>', 'User-supplied screen capture — not in extracted FCOM text');
     return;
   }
-  openModal(r.toUpperCase()+' CONTROL', cnsControlWindow(r));
+  openVhfModal(r);
 }
 function cnsSet(r, key, val){ state.cns.vhf[r][key] = val; render(); cnsCtrlRefresh(r); }
 function cnsCycleSat(){
@@ -3476,79 +3490,46 @@ function cnsXpdrSet(key, val){
 }
 function cnsXpdrCtrlRefresh(){
   const t = document.getElementById('modalTitle');
-  if(t && t.textContent==='XPDR/TCAS CONTROL') openModal('XPDR/TCAS CONTROL', cnsXpdrCtrl());
+  if(t && t.textContent==='XPDR/TCAS CONTROL') openXpdrModal();
 }
 function cnsXpdrPress(what){
   infoDialogSrc(what, `<div class="grey" style="font-size:11px;">The ${what} soft switch is available on the XPDR/TCAS CONTROL page.</div>`, 'User-supplied screen capture — not in extracted FCOM text');
 }
-function cnsOpenXpdrCtrl(){
+function cnsOpenXpdrCtrl(){ openXpdrModal(); }
+function openXpdrModal(){
   openModal('XPDR/TCAS CONTROL', cnsXpdrCtrl());
+  document.getElementById('modalOverlay').classList.add('hd-on','xp-on');
 }
 function cnsXpdrCtrl(){
   const x = state.cns.xpdr, t = state.cns.tcas;
-  const radio = (key,val,label,color)=>{
-    const on = t[key]===val;
-    return `<div class="xpdr-radio" onclick="cnsXpdrSet('${key}','${val}')"><span class="dot ${on?color:''}"></span><span class="${on?color:''}">${label}</span></div>`;
+  const X=p=>(p/13.03).toFixed(2)+'%', Y=p=>(p/10.42).toFixed(2)+'%', C=p=>(p/13.03).toFixed(2)+'cqw';
+  const CY='#3fb4f0', W='#fbfbf8', G='#c3c7ca', GR='#6fe05a';
+  const T=(px,py,tx,col,fs,st)=>`<div class="hd-t" style="left:${X(px)};top:${Y(py)};color:${col};font-size:${C(fs)};letter-spacing:0;${st||''}">${tx}</div>`;
+  const rad=(cx,y,key,val,label,dim)=>{
+    const on=t[key]===val;
+    const dot = on ? (dim ? 'radial-gradient(circle,#c3c7ca 0 55%,#303030 60% 100%)' : `radial-gradient(circle,${CY} 0 52%,#303030 58% 100%)`) : '#000';
+    return `<div style="position:absolute;left:${X(cx-28)};top:${Y(y-30)};height:${C(60)};display:flex;align-items:center;gap:${C(11)};cursor:pointer" onclick="cnsXpdrSet('${key}','${val}')"><div style="width:${C(50)};height:${C(50)};border-radius:50%;border:${C(7)} solid #d0d3d5;background:${dot};box-sizing:border-box;flex:none"></div><span style="font-size:${C(52)};color:${dim?'#a6aaad':(on?CY:W)};white-space:nowrap;line-height:1">${label}</span></div>`;
   };
-  return `
-  <div class="row" style="gap:28px; align-items:flex-start;">
-    <div>
-      <div class="cyan" style="font-size:11px; margin-bottom:4px;">REPLY</div>
-      <div class="row" style="gap:8px; align-items:center; margin-bottom:8px;">
-        <span class="grey" style="font-size:11px; width:44px; display:inline-block;">XPDR</span>
-        <span class="green val xpdr-field">${x.code}</span>
-      </div>
-      <div class="row" style="gap:8px; align-items:center;">
-        <span class="grey" style="font-size:11px; width:44px; display:inline-block;">FLT ID</span>
-        <span class="green val xpdr-field" style="min-width:90px; text-align:left;">${x.id}</span>
-      </div>
-    </div>
-    <div>
-      <div class="grey" style="font-size:11px; margin-bottom:4px;">ALT TAG</div>
-      ${radio('altTag','REL','REL','cyan')}
-      ${radio('altTag','ABS','ABS','')}
-    </div>
-    <div>
-      <div class="grey" style="font-size:11px; margin-bottom:4px;">XPDR SEL</div>
-      ${radio('xpdrSel','XPDR1','XPDR1','cyan')}
-      ${radio('xpdrSel','XPDR2','XPDR2','')}
-    </div>
-    <div>
-      <div class="cyan" style="font-size:11px; margin-bottom:4px;">◇TRAFFIC</div>
-      ${radio('traffic','ON','ON','cyan')}
-      ${radio('traffic','OFF','OFF','')}
-    </div>
-  </div>
-  <div class="hr" style="margin:12px 0;"></div>
-  <div class="row" style="gap:36px; align-items:flex-start;">
-    <div>
-      <div class="grey" style="font-size:11px; margin-bottom:4px;">MODE</div>
-      ${radio('mode','AUTO','AUTO','cyan')}
-      ${radio('mode','STBY','STBY','')}
-      ${radio('mode','TA/RA','TA/RA','')}
-      ${radio('mode','TA ONLY','TA ONLY','')}
-      ${radio('mode','ALT ON','ALT ON','')}
-      ${radio('mode','ALT OFF','ALT OFF','')}
-    </div>
-    <div>
-      <div class="grey" style="font-size:11px; margin-bottom:4px;">ALT LIMIT</div>
-      ${radio('altLimit','NORM','NORM','')}
-      ${radio('altLimit','ABOVE','ABOVE','')}
-      ${radio('altLimit','BELOW','BELOW','')}
-      ${radio('altLimit','ABOVE/BELOW','ABOVE/BELOW','')}
-    </div>
-    <div style="margin-left:auto;">
-      <span class="btn" onclick="cnsXpdrPress('IDENT')">IDENT</span>
-      <span class="btn" style="margin-left:8px;" onclick="cnsXpdrPress('TEST')">TEST</span>
-    </div>
-  </div>
-  <div class="row" style="margin-top:16px;">
-    <span class="cyan" style="font-weight:bold;">ADC1</span>
-    <span class="val" style="margin-left:8px;">ALT</span>
-    <span class="green val" style="margin-left:6px;">${t.adc1Alt}</span>
-    <span class="grey" style="margin-left:4px; font-size:10px;">FT</span>
-    <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeModal()">DONE</span></span>
-  </div>`;
+  let b=T(8,30,'XPDR/TCAS CONTROL',G,55);
+  b+=`<div style="position:absolute;left:0;right:0;top:${Y(67)};height:${C(8)};background:#111"></div>`;
+  b+=T(200,103,'REPLY',CY,40);
+  b+=T(32,208,'XPDR','#a6aaad',40)+T(32,346,'FLT ID','#a6aaad',40);
+  b+=`<div style="position:absolute;left:${X(201)};top:${Y(176)};width:${C(154)};height:${C(67)};background:#000;border:${C(5)} solid #7d8184;box-sizing:border-box;display:flex;align-items:center;padding-left:${C(18)};color:${GR};font-size:${C(52)};line-height:1">${x.code}</div>`;
+  b+=`<div style="position:absolute;left:${X(201)};top:${Y(313)};width:${C(271)};height:${C(67)};background:#000;border:${C(5)} solid #7d8184;box-sizing:border-box;display:flex;align-items:center;padding-left:${C(18)};color:${GR};font-size:${C(52)};line-height:1">${x.id}</div>`;
+  b+=T(513,136,'ALT TAG','#a6aaad',40)+T(773,136,'XPDR SEL','#a6aaad',40);
+  b+=`<div style="position:absolute;left:${X(1040)};top:${Y(116)};width:${C(36)};height:${C(36)};background:${CY};transform:rotate(45deg) scale(.9);clip-path:polygon(0 0,100% 0,100% 100%,0 100%);-webkit-mask:radial-gradient(circle,transparent 0 28%,#000 30%);mask:radial-gradient(circle,transparent 0 28%,#000 30%)"></div>`;
+  b+=T(1085,136,'TRAFFIC','#a6aaad',40);
+  b+=rad(537,207,'altTag','REL','REL')+rad(537,275,'altTag','ABS','ABS');
+  b+=rad(797,207,'xpdrSel','XPDR1','XPDR1')+rad(797,275,'xpdrSel','XPDR2','XPDR2');
+  b+=rad(1072,207,'traffic','ON','ON')+rad(1072,275,'traffic','OFF','OFF');
+  b+=T(121,491,'MODE','#a6aaad',40)+T(534,491,'ALT LIMIT','#a6aaad',40);
+  ['AUTO','STBY','TA/RA','TA ONLY','ALT ON','ALT OFF'].forEach((m,i)=>b+=rad(79,567+i*67.8,'mode',m,m));
+  ['NORM','ABOVE','BELOW','ABOVE/BELOW'].forEach((m,i)=>b+=rad(537,567+i*68.3,'altLimit',m,m,true));
+  b+=`<div class="hd-b" style="left:${X(874)};top:${Y(481)};width:${C(207)};height:${C(91)};font-size:${C(52)}" onclick="cnsXpdrPress('IDENT')">IDENT</div>`;
+  b+=`<div class="hd-b" style="left:${X(1097)};top:${Y(481)};width:${C(182)};height:${C(91)};font-size:${C(52)}" onclick="cnsXpdrPress('TEST')">TEST</div>`;
+  b+=T(752,874,`<span style="color:${CY}">ADC1</span> <span style="color:${W}">ALT</span> <span style="color:${GR}">${t.adc1Alt}</span> <span style="color:${W};font-size:${C(40)}">FT</span>`,W,52);
+  b+=`<div class="hd-b" style="left:${X(1119)};top:${Y(940)};width:${C(168)};height:${C(88)};font-size:${C(52)}" onclick="closeModal()">DONE</div>`;
+  return b;
 }
 
 const TN_ARROW='<svg width="14" height="40" viewBox="0 0 14 40"><g stroke="#fff" stroke-width="1.6" fill="none"><line x1="7" y1="3" x2="7" y2="37"/><polyline points="2,9 7,3 12,9"/><polyline points="2,31 7,37 12,31"/></g></svg>';
@@ -3581,7 +3562,7 @@ function tnHfCell(r){
   const h = state.cns.hfBoxes[r];
   return `
   <div class="tn-cell">
-    <span class="tn-soft" onclick="infoDialogSrc('${r.toUpperCase()} CONTROL','<div class=&quot;grey&quot; style=&quot;font-size:11px;&quot;>HF direct tuning: active frequency, HF1/HF2 soft switches, Simplex, Duplex, EMER, MAR and EM (LV/UV/AM) modes, TX annunciator, and SQ level.</div>','FCOM 05-03 Fig 05-03-59 — TUNE page HF direct tuning')">${r.toUpperCase()}...</span>
+    <span class="tn-soft" onclick="openHfModal('${r}')">${r.toUpperCase()}...</span>
     <div class="tn-box green">${h}</div>
   </div>`.replace('', ``);
 }
@@ -3650,44 +3631,48 @@ function navPreRows(r, list, page, PER, onclickFn, selIdx){
   }
   return rows.join('');
 }
+function openNavModal(r){
+  openModal(r.toUpperCase()+' CONTROL', navControlWindow(r));
+  document.getElementById('modalOverlay').classList.add('hd-on','nv-on');
+}
 function navControlWindow(r){
-  const v=state.cns.nav[r];
-  const list=state.cns.navPre.map((e,i)=>e?{i,...e}:null);
-  const filled=list.filter(Boolean);
-  const PER=5, pages=Math.max(1,Math.ceil(filled.length/PER));
-  state.cns.navPrePage=Math.min(state.cns.navPrePage||0,pages-1);
+  const v=state.cns.nav[r], L=state.cns.navPre, PER=5;
+  state.cns.navPrePage=Math.max(0,Math.min(1,state.cns.navPrePage||0));
   const pg=state.cns.navPrePage;
-  const rows=[];
+  const X=p=>(p/9.18).toFixed(2)+'%', Y=p=>(p/8.60).toFixed(2)+'%', C=p=>(p/9.18).toFixed(2)+'cqw';
+  const CY='#3fb4f0', W='#fbfbf8', G='#c3c7ca', GR='#6fe05a';
+  const T=(px,py,tx,col,fs,st)=>`<div class="hd-t" style="left:${X(px)};top:${Y(py)};color:${col};font-size:${C(fs)};letter-spacing:0;${st||''}">${tx}</div>`;
+  const rad=(cx,y,on,label,oc)=>`<div style="position:absolute;left:${X(cx-16)};top:${Y(y-22)};height:${C(44)};display:flex;align-items:center;gap:${C(10)};cursor:pointer" onclick="${oc}"><div style="width:${C(30)};height:${C(30)};border-radius:50%;border:${C(4)} solid #d0d3d5;background:${on?`radial-gradient(circle,${CY} 0 52%,#303030 58% 100%)`:'#000'};box-sizing:border-box;flex:none"></div><span style="font-size:${C(37)};color:${on?CY:W};line-height:1">${label}</span></div>`;
+  let b=T(8,25,r.toUpperCase()+' CONTROL',G,33);
+  b+=`<div style="position:absolute;left:0;right:0;top:${Y(50)};height:${C(6)};background:#111"></div>`;
+  b+=T(38,121,v.act+(v.ident?'/'+v.ident:''),GR,42);
+  b+=T(47,196,v.recall?'RECALL':'PRESET',G,26);
+  b+=`<div class="hd-f" style="left:${X(24)};top:${Y(221)};width:${C(144)};height:${C(45)};border-radius:0;border-color:${v.sbySel?CY:'#9a9fa3'};font-size:${C(33)}" onclick="navSby('${r}')">${v.sby}</div>`;
+  b+=`<div class="hd-b" style="left:${X(217)};top:${Y(198)};width:${C(44)};height:${C(92)};font-size:${C(36)}" onclick="navSwap('${r}')">↕</div>`;
+  b+=T(416,113,'MKR',G,26)+rad(428,164,(v.mkr||'LO')==='LO','LO',`navSet('${r}','mkr','LO')`)+rad(428,212,(v.mkr||'LO')==='HI','HI',`navSet('${r}','mkr','HI')`);
+  if(r!=='nav3') b+=T(583,113,'NAV TUNING',G,26)+rad(597,164,!!v.auto,'AUTO',`navSet('${r}','auto',true)`)+rad(597,212,!v.auto,'MAN',`navSet('${r}','auto',false)`);
+  b+=T(179,340,'DME',G,28);
+  b+=`<div style="position:absolute;left:${X(244)};top:${Y(326)};width:${C(32)};height:${C(31)};background:#000;border:${C(3)} solid #d0d3d5;box-sizing:border-box;color:${CY};font-size:${C(28)};display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1" onclick="cnsToggleHold('${r}')">${v.hold?'✓':''}</div>`;
+  b+=T(298,339,'HOLD',v.hold?CY:W,37,'cursor:pointer')+`<div style="position:absolute;left:${X(290)};top:${Y(318)};width:${C(110)};height:${C(44)};cursor:pointer" onclick="cnsToggleHold('${r}')"></div>`;
+  if(v.hold) b+=`<div class="hd-t" style="left:${X(430)};top:${Y(340)};color:${GR};font-size:${C(33)};cursor:pointer" onclick="navHoldFreq('${r}')">${v.holdFreq||'-----'}</div>`;
+  b+=T(23,428,'NAV PRESET FREQUENCIES',G,28);
+  b+=`<div class="hd-b" style="left:${X(630)};top:${Y(377)};width:${C(127)};height:${C(63)};font-size:${C(37)}" onclick="navOpenEdit('${r}')">EDIT</div>`;
+  const dis=state.fms.airborne;
+  b+=`<div class="hd-b ${dis?'dis':''}" style="left:${X(768)};top:${Y(377)};width:${C(128)};height:${C(63)};font-size:${C(v.testing?26:37)}" ${dis?'':`onclick="navTest('${r}')"`}>${v.testing?'TESTING':'TEST'}</div>`;
+  b+=`<div style="position:absolute;left:${X(22)};top:${Y(457)};width:${C(870)};height:${C(315)};background:#000;border:${C(2)} solid #b4b8bb;box-sizing:border-box"></div>`;
   for(let k=0;k<PER;k++){
-    const e=filled[pg*PER+k];
-    rows.push(`<div class="cns-opt" style="height:22px; padding:0; justify-content:flex-start; gap:12px;" onclick="${e?`navPrePick('${r}',${e.i})`:''}"><span style="width:18px;">${e?e.i+1:''}</span><span style="width:60px;">${e?e.f:(k===0&&!filled.length?'- - - - -':'')}</span><span>${e?e.n:''}</span></div>`);
+    const i=pg*PER+k, e=L[i], yy=492+k*56.5;
+    b+=`<div style="position:absolute;left:${X(24)};top:${Y(yy-27)};width:${C(790)};height:${C(54)};cursor:${e?'pointer':'default'}" onclick="${e?`navPrePick('${r}',${i})`:''}"></div>`;
+    b+=T(i>8?37:45,yy,String(i+1),W,37,'pointer-events:none');
+    if(e) b+=T(116,yy,`${e.f} ${e.n||''}`.trim(),W,37,'pointer-events:none');
   }
-  const radio=(key,val,cur,label)=>`<div class="cns-opt ${cur===val?'on':''}" onclick="navSet('${r}','${key}',${typeof val==='boolean'?val:`'${val}'`})"><span class="dot"></span>${label}</div>`;
-  const hasTun = r!=='nav3';
-  return `
-    <div class="row" style="margin-bottom:8px; align-items:center;">
-      <span class="cns-act green" style="font-size:15px;">${v.act}${v.ident?'/'+v.ident:''}</span>
-      <span class="cns-pre" style="margin-left:10px;">${v.recall?'RECALL':'PRESET'}</span>
-      <span class="cns-sby ${v.sbySel?'sel':''}" style="margin-left:6px;" onclick="navSby('${r}')">${v.sby}</span>
-      <span class="cns-swap ${v.armed?'armed':''}" onclick="navSwap('${r}')">⇅</span>
-      ${v.testing?'<span class="cyan" style="margin-left:12px; font-weight:bold;">TEST</span>':''}
-    </div>
-    <div class="row" style="gap:10px; justify-content:flex-start; align-items:center; margin-bottom:8px; min-height:24px;">
-      ${v.hold?`<span class="cns-sby" style="color:#0f0; min-width:60px;" onclick="navHoldFreq('${r}')">${v.holdFreq||'-----'}</span>`:''}
-      <span class="lbl">DME</span><span class="cns-chk" onclick="cnsToggleHold('${r}')"><span class="box ${v.hold?'on':''}">${v.hold?'✓':''}</span></span>
-      <span class="${v.hold?'cyan':''}" style="font-weight:bold;" onclick="cnsToggleHold('${r}')">HOLD</span>
-    </div>
-    <div class="grid g${hasTun?'2':'1'}" style="margin-bottom:8px;">
-      <div><div class="lbl">MKR</div>${radio('mkr','LO',v.mkr||'LO','LO')}${radio('mkr','HI',v.mkr||'LO','HI')}</div>
-      ${hasTun?`<div><div class="lbl">NAV TUNING</div>${radio('auto',true,!!v.auto,'AUTO')}${radio('auto',false,!!v.auto,'MAN')}</div>`:''}
-    </div>
-    <div class="lbl" style="margin-bottom:2px;">NAV PRESET FREQUENCIES</div>
-    <div style="display:flex; gap:6px; margin-bottom:8px;"><div style="flex:1; height:110px; overflow:hidden; border:1px solid var(--field-border); padding:0 6px;">${rows.join('')}</div>${pages>1?`<div style="display:flex; flex-direction:column; justify-content:space-between;"><span class="btn" onclick="navPrePage('${r}',-1)">▲</span><span class="grey" style="text-align:center; font-size:10px;">${pg+1}/${pages}</span><span class="btn" onclick="navPrePage('${r}',1)">▼</span></div>`:''}</div>
-    <div class="row">
-      <span class="btn" onclick="navOpenEdit('${r}')">EDIT</span>
-      <span class="btn ${state.fms.airborne?'dis':''}" style="${state.fms.airborne?'opacity:.45;':''}" onclick="navTest('${r}')">TEST</span>
-      <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeModal()">DONE</span></span>
-    </div>`;
+  b+=`<div class="hd-b ${pg===0?'dis':''}" style="left:${X(827)};top:${Y(463)};width:${C(61)};height:${C(60)};font-size:${C(32)}" ${pg===0?'':`onclick="navPrePage('${r}',-1)"`}>▲</div>`;
+  b+=`<div class="hd-b ${pg===1?'dis':''}" style="left:${X(827)};top:${Y(705)};width:${C(61)};height:${C(61)};font-size:${C(32)}" ${pg===1?'':`onclick="navPrePage('${r}',1)"`}>▼</div>`;
+  const th=112, tp=pg*(180-th);
+  b+=`<div style="position:absolute;left:${X(828)};top:${Y(525)};width:${C(60)};height:${C(180)};background:#000"></div>`;
+  b+=`<div style="position:absolute;left:${X(828)};top:${Y(526+tp)};width:${C(22)};height:${C(th)};background:#8f9599;border:${C(2)} solid;border-color:#b4babe #53575a #53575a #b4babe;box-sizing:border-box"></div>`;
+  b+=`<div class="hd-b" style="left:${X(789)};top:${Y(791)};width:${C(117)};height:${C(64)};font-size:${C(37)}" onclick="closeModal()">DONE</div>`;
+  return b;
 }
 function navOpenEdit(r){ state.cns.navEditPage=0; openModal('EDIT NAV PRESET FREQUENCIES', navEditWindow(r)); }
 function navEditPick(r,i){ state.cns.navPreSel=i; cnsCtrlRefresh(r); }
@@ -3705,7 +3690,7 @@ function navEditName(r){
   e.n=state.scratch.text.toUpperCase(); state.scratch.text=''; state.scratch.error=false; cnsCtrlRefresh(r);
 }
 function navEditClear(r){ const i=state.cns.navPreSel; if(i==null) return; state.cns.navPre[i]=null; cnsCtrlRefresh(r); }
-function navEditBack(r){ openModal(r.toUpperCase()+' CONTROL', navControlWindow(r)); }
+function navEditBack(r){ openNavModal(r); }
 function navEditWindow(r){
   const L=state.cns.navPre, PER=5, pages=Math.ceil(L.length/PER);
   const pg=Math.min(state.cns.navEditPage||0,pages-1), sel=state.cns.navPreSel;
@@ -3731,7 +3716,7 @@ function cnsPresetSources(){
   return [['USER','USER'],['ORIG',E.origin||''],['DEST',E.dest||''],['ALTN',E.altn||'']];
 }
 function cnsPresetList(src){
-  if(src==='USER') return (state.cns.userPre||[]).map(f=>['',f]);
+  if(src==='USER') return cnsSlots().filter(Boolean).map(x=>[x.n||'',x.f]);
   const id=(cnsPresetSources().find(x=>x[0]===src)||[])[1];
   const L=(NAV.fq||{})[id]||[];
   return L.map(e=>[e[0],e[1].toFixed(3)]);
@@ -3743,7 +3728,40 @@ function cnsPrePick(r,f){
   if(state.cns.preEdit) return;
   v.sby=f; v.sbySel=false; v.armed=true; v.recall=false; render(); cnsCtrlRefresh(r);
 }
-function cnsPreEdit(r){ state.cns.preSrc='USER'; state.cns.preEdit=!state.cns.preEdit; render(); cnsCtrlRefresh(r); }
+function cnsSlots(){ return state.cns.slots || (state.cns.slots=Array(10).fill(null)); }
+function cnsPreEdit(r){ state.cns.preSrc='USER'; state.cns.preEdit=false; state.cns.vsel=state.cns.vsel||0; openVhfEdit(r); }
+function vhfEditSel(r,i){ state.cns.vsel=i; openVhfEdit(r); }
+function vhfEditScroll(r,d){ state.cns.vscr=Math.max(0,Math.min(1,(state.cns.vscr||0)+d)); openVhfEdit(r); }
+function openVhfEdit(r){
+  state.dlgRedraw=()=>openVhfEdit(r);
+  DLG_HANDLERS.vhfFreq = t=>{ const f=cnsParseFreq('vhf',t,state.cns.vhf[r].spacing); if(!f) return false;
+    const S=cnsSlots(), i=state.cns.vsel||0; S[i]={f, n:(S[i]&&S[i].n)||''}; return true; };
+  DLG_HANDLERS.vhfName = t=>{ const S=cnsSlots(), i=state.cns.vsel||0; if(!S[i]) return false; S[i].n=t.slice(0,16); return true; };
+  const S=cnsSlots(), sel=state.cns.vsel||0, off=state.cns.vscr||0, cur=S[sel];
+  const X=x=>(x/8.79).toFixed(2)+'%', Y=y=>(y/6.84).toFixed(2)+'%', C=p=>(p/8.79).toFixed(2)+'cqw';
+  const W='#fbfbf8', G='#9a9fa3', CY='#3fb4f0';
+  const T=(x,y,t,col,fs,st)=>`<div class="hd-t" style="left:${X(x)};top:${Y(y)};color:${col};font-size:${C(fs)};letter-spacing:0;${st||''}">${t}</div>`;
+  let b=`<div style="position:absolute;left:0;right:0;top:0;height:${Y(60)};background:#262626"></div>`;
+  b+=T(17,31,'EDIT VHF PRESET FREQUENCIES',W,33)+T(31,79,'SELECT USER FREQUENCY',G,25);
+  b+=`<div style="position:absolute;left:${X(30)};top:${Y(101)};width:${C(818)};height:${C(482)};background:#000;border:${C(2)} solid #b4b8bb;box-sizing:border-box"></div>`;
+  for(let k=0;k<9;k++){
+    const i=off+k, e=S[i], yy=133+k*53.2;
+    b+=`<div style="position:absolute;left:${X(34)};top:${Y(yy-23)};width:${C(748)};height:${C(47)};cursor:pointer;${i===sel?`border:${C(3)} solid ${CY};box-sizing:border-box`:''}" onclick="vhfEditSel('${r}',${i})"></div>`;
+    b+=T(54,yy,String(i+1),W,36,'pointer-events:none')+(e?T(106,yy,e.f,W,36,'pointer-events:none')+T(268,yy,e.n||'',W,36,'pointer-events:none'):'');
+  }
+  b+=`<div class="hd-b ${off===0?'dis':''}" style="left:${X(788)};top:${Y(108)};width:${C(58)};height:${C(56)};font-size:${C(30)}" ${off===0?'':`onclick="vhfEditScroll('${r}',-1)"`}>△</div>`;
+  b+=`<div class="hd-b ${off===1?'dis':''}" style="left:${X(788)};top:${Y(522)};width:${C(58)};height:${C(58)};font-size:${C(30)}" ${off===1?'':`onclick="vhfEditScroll('${r}',1)"`}>▼</div>`;
+  const th=260, tp=off*(353-th);
+  b+=`<div style="position:absolute;left:${X(790)};top:${Y(167)};width:${C(55)};height:${C(353)};background:#000"></div>`;
+  b+=`<div style="position:absolute;left:${X(790)};top:${Y(167+tp)};width:${C(19)};height:${C(th)};background:#8f9599;border:${C(2)} solid;border-color:#b4babe #53575a #53575a #b4babe;box-sizing:border-box"></div>`;
+  b+=T(31,609,'SET FREQUENCY',G,25)+T(268,609,'DEFINE NAME',G,25);
+  b+=`<div class="hd-f" style="left:${X(30)};top:${Y(632)};width:${C(142)};height:${C(40)};border-radius:0;font-size:${C(33)}" onclick="dlgPaste('vhfFreq')">${cur?cur.f:'-------'}</div>`;
+  b+=`<div class="hd-f" style="left:${X(266)};top:${Y(632)};width:${C(248)};height:${C(40)};border-radius:0;border-color:transparent;font-size:${C(33)}" onclick="dlgPaste('vhfName')">${cur?(cur.n||''):''}</div>`;
+  b+=`<div class="hd-b" style="left:${X(553)};top:${Y(594)};width:${C(192)};height:${C(81)};font-size:${C(31)};text-align:center;line-height:1.05" onclick="state.dlgRedraw=null; openVhfModal('${r}')">RETURN TO<br>${r.toUpperCase()} CTRL</div>`;
+  b+=`<div class="hd-b" style="left:${X(752)};top:${Y(614)};width:${C(110)};height:${C(58)};font-size:${C(33)}" onclick="state.dlgRedraw=null; closeModal()">DONE</div>`;
+  openModal('EDIT VHF PRESET FREQUENCIES', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','ve-on');
+}
 function cnsPreAdd(r){
   if(!state.scratch.text) return;
   const f=cnsParseFreq('vhf', state.scratch.text, state.cns.vhf[r].spacing);
@@ -3759,58 +3777,112 @@ function cnsVhfTest(r){
   v.testing=true; render(); cnsCtrlRefresh(r);
   setTimeout(()=>{ v.testing=false; render(); cnsCtrlRefresh(r); }, 10000);
 }
-function cnsControlWindow(r){
+function hfSet(r,k,v){ state.cns.hfc[r][k]=v; render(); openHfModal(r); }
+function hfScroll(r,d){ state.cns.hfScr=Math.max(0,Math.min(5,(state.cns.hfScr||0)+d)); openHfModal(r); }
+function hfTest(r){ const c=state.cns.hfc[r]; if(c.testing) return; c.testing=true; openHfModal(r); setTimeout(()=>{ c.testing=false; const t=document.getElementById('modalTitle'); if(t&&t.textContent===r.toUpperCase()+' CONTROL') openHfModal(r); },10000); }
+function openHfModal(r){
+  state.dlgRedraw=()=>openHfModal(r);
+  DLG_HANDLERS.hfFreq = t=>{ if(!/^[0-9.]+$/.test(t)) return false; const n=parseFloat(t); if(!(n>=2&&n<30)) return false; state.cns.hfBoxes[r]=n.toFixed(4); return true; };
+  const c=state.cns.hfc[r], off=state.cns.hfScr||0, pre=state.cns.hfPre||(state.cns.hfPre=Array(10).fill(null));
+  const X=x=>(x/9.26).toFixed(2)+'%', Y=y=>(y/6.72).toFixed(2)+'%', C=p=>(p/9.26).toFixed(2)+'cqw';
+  const CY='#5fe3ee', W='#fbfbf8', G='#9a9fa3';
+  const T=(x,y,t,col,fs,st)=>`<div class="hd-t" style="left:${X(x)};top:${Y(y)};color:${col};font-size:${C(fs)};letter-spacing:0;${st||''}">${t}</div>`;
+  const rad=(cx,y,on,label,k,v)=>`<div style="position:absolute;left:${X(cx-15)};top:${Y(y-18)};height:${C(36)};display:flex;align-items:center;gap:${C(9)};cursor:pointer" onclick="hfSet('${r}','${k}',${typeof v==='number'?v:`'${v}'`})"><div style="width:${C(25)};height:${C(25)};border-radius:50%;border:${C(3)} solid #e8eaeb;background:${on?`radial-gradient(circle,${CY} 0 55%,#141214 60% 100%)`:'#000'};box-sizing:border-box"></div><span style="font-size:${C(26)};color:${on?CY:W};line-height:1">${label}</span></div>`;
+  let b=T(10,15,r.toUpperCase()+' CONTROL','#a2a6a9',26);
+  b+=`<div style="position:absolute;left:0;right:0;top:${Y(37)};height:${C(5)};background:#2b2b2b"></div>`;
+  b+=`<div class="hd-f" style="left:${X(24)};top:${Y(78)};width:${C(146)};height:${C(37)};border-radius:0;border-color:#9a9fa3;background:#000;color:#6fe05a;font-size:${C(32)}" onclick="dlgPaste('hfFreq')">${state.cns.hfBoxes[r]}</div>`;
+  b+=T(328,82,'POWER',G,22)+T(502,83,'MODE',G,22)+T(669,82,'SQ',G,22)+T(773,82,'EMISSIONS',G,22);
+  ['LO','MED','HI'].forEach((p,i)=>b+=rad(321,119+i*35.5,c.power===p,p,'power',p));
+  ['SIMPLEX','DUPLEX','EMER','MAR'].forEach((p,i)=>b+=rad(478,120+i*35.3,c.mode===p,p,'mode',p));
+  [0,1,2,3].forEach((p,i)=>b+=rad(672,119+i*35.3,c.sq===p,String(p),'sq',p));
+  ['LV','UV','AM'].forEach((p,i)=>b+=rad(810,119+i*35.5,c.em===p,p,'em',p));
+  b+=T(17,366,'HF PRESET FREQUENCIES',G,22);
+  b+=`<div class="hd-b" style="left:${X(656)};top:${Y(334)};width:${C(112)};height:${C(43)};font-size:${C(28)}">EDIT</div>`;
+  b+=`<div class="hd-b" style="left:${X(787)};top:${Y(334)};width:${C(111)};height:${C(43)};font-size:${C(c.testing?20:28)}" onclick="hfTest('${r}')">${c.testing?'TESTING':'TEST'}</div>`;
+  b+=`<div style="position:absolute;left:${X(14)};top:${Y(386)};width:${C(887)};height:${C(221)};background:#000;border:${C(2)} solid #b4b8bb;box-sizing:border-box"></div>`;
+  for(let k=0;k<5;k++){
+    const i=off+k, e=pre[i], yy=412+k*43;
+    b+=T(70,yy,String(i+1),W,26,'pointer-events:none');
+    if(e){ b+=T(120,yy,e.f,W,26)+T(474,yy,e.em||'',W,26)+T(609,yy,e.n||'',W,26); }
+  }
+  b+=`<div class="hd-b ${off===0?'dis':''}" style="left:${X(847)};top:${Y(398)};width:${C(50)};height:${C(49)};font-size:${C(26)}" ${off===0?'':`onclick="hfScroll('${r}',-1)"`}>▲</div>`;
+  b+=`<div class="hd-b ${off===5?'dis':''}" style="left:${X(847)};top:${Y(551)};width:${C(50)};height:${C(47)};font-size:${C(26)}" ${off===5?'':`onclick="hfScroll('${r}',1)"`}>▼</div>`;
+  const th=66, tp=off*(104-th)/5;
+  b+=`<div style="position:absolute;left:${X(849)};top:${Y(448)};width:${C(46)};height:${C(104)};background:#000"></div>`;
+  b+=`<div style="position:absolute;left:${X(852)};top:${Y(450+tp)};width:${C(14)};height:${C(th)};background:#8f9599;border:${C(2)} solid;border-color:#b4babe #53575a #53575a #b4babe;box-sizing:border-box"></div>`;
+  b+=`<div class="hd-b" style="left:${X(790)};top:${Y(619)};width:${C(111)};height:${C(43)};font-size:${C(28)}" onclick="state.dlgRedraw=null; closeModal()">DONE</div>`;
+  openModal(r.toUpperCase()+' CONTROL', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','hf-on');
+}
+function cnsControlWindowV3(r){
   const v = state.cns.vhf[r];
-  const isV3 = (r==='vhf3');
+  const X=x=>(x/9.01).toFixed(2)+'%', Y=y=>(y/6.02).toFixed(2)+'%', C=p=>(p/9.01).toFixed(2)+'cqw';
+  const CY='#62e8f4', W='#fbfbf8';
+  const T=(x,y,t,col,fs)=>`<div class="hd-t" style="left:${X(x)};top:${Y(y)};color:${col};font-size:${C(fs)};letter-spacing:0">${t}</div>`;
+  const rad=(y,on,label,m)=>`<div style="position:absolute;left:${X(640)};top:${Y(y-19)};height:${C(38)};display:flex;align-items:center;gap:${C(10)};cursor:pointer" onclick="cnsSet('vhf3','mode','${m}')"><div style="width:${C(26)};height:${C(26)};border-radius:50%;border:${C(3)} solid #fbfbf8;background:#000;box-sizing:border-box"></div><span style="font-size:${C(28)};color:${on?CY:W};line-height:1">${label}</span></div>`;
+  let b=T(11,21,'VHF3 CONTROL','#a2a6a9',26);
+  b+=`<div style="position:absolute;left:0;right:0;top:${Y(40)};height:${C(7)};background:#2b2b2b"></div>`;
+  b+=T(40,116,v.mode,'#6fe05a',40)+T(660,112,'MODE','#9a9fa3',25);
+  b+=rad(149,v.mode==='VOICE','VOICE','VOICE')+rad(183,v.mode==='DATA','DATA','DATA');
+  b+=`<div class="hd-b" style="left:${X(768)};top:${Y(555)};width:${C(109)};height:${C(43)};font-size:${C(28)}" onclick="closeModal()">DONE</div>`;
+  return b;
+}
+function cnsControlWindow(r){
+  if(r==='vhf3') return cnsControlWindowV3(r);
+  const v = state.cns.vhf[r], isV3 = false;
   const src = state.cns.preSrc||'USER';
-  const radio = (grp,val,cur,label)=>`<div class="cns-opt ${cur===val?'on':''}" onclick="cnsSet('${r}','${grp}','${val}')"><span class="dot"></span>${label}</div>`;
-  const srcs = cnsPresetSources();
-  const list = cnsPresetList(src);
-  const edit = state.cns.preEdit && src==='USER';
+  const srcs = cnsPresetSources(), list = cnsPresetList(src);
+  const edit = false;
   const PER=5, pages=Math.max(1,Math.ceil(list.length/PER));
   state.cns.prePage=Math.min(state.cns.prePage||0,pages-1);
-  const p0=state.cns.prePage*PER;
-  const rows=[];
-  for(let k=0;k<PER;k++){
-    const i=p0+k, e=list[i];
-    rows.push(e ? `<div class="cns-opt" style="height:22px; padding:0; justify-content:space-between;" onclick="${edit?'':`cnsPrePick('${r}','${e[1]}')`}"><span>${e[0]}</span><span>${e[1]}</span>${edit?`<span class="cyan" onclick="event.stopPropagation();cnsPreDel('${r}',${i})">✕</span>`:''}</div>`
-      : `<div class="grey" style="height:22px; font-size:11px; display:flex; align-items:center;">${(k===0&&!list.length)?'- - - - - -':''}</div>`);
+  const pg=state.cns.prePage, p0=pg*PER;
+  const X=x=>(x/7.97).toFixed(2)+'%', Y=y=>(y/7.45).toFixed(2)+'%', C=p=>(p/7.97).toFixed(2)+'cqw';
+  const CY='#3fb4f0', GR='#6fe05a', G='#c3c7ca', W='#fbfbf8';
+  const T=(x,y,t,col,fs,st)=>`<div class="hd-t" style="left:${X(x)};top:${Y(y)};color:${col};font-size:${C(fs)};letter-spacing:0;${st||''}">${t}</div>`;
+  const rad=(cx,y,on,label,oc)=>`<div style="position:absolute;left:${X(cx-16)};top:${Y(y-19)};height:${C(38)};display:flex;align-items:center;gap:${C(9)};cursor:pointer" onclick="${oc}"><div style="width:${C(26)};height:${C(26)};border-radius:50%;border:${C(3)} solid #c9cdd0;background:${on?`radial-gradient(circle,${CY} 0 48%,#141214 52% 100%)`:'#141214'};box-sizing:border-box"></div><span style="font-size:${C(30)};color:${on?CY:W};white-space:nowrap;line-height:1">${label}</span></div>`;
+  const btn=(x,y,w,h,t,oc,fs)=>`<div class="hd-b" style="left:${X(x)};top:${Y(y)};width:${C(w)};height:${C(h)};font-size:${C(fs||30)}" onclick="${oc}">${t}</div>`;
+  let b = T(17,21,r.toUpperCase()+' CONTROL','#c9cdd0',30);
+  b += `<div style="position:absolute;left:0;right:0;top:${Y(44)};height:${C(3)};background:#1b1b1b"></div>`;
+  if(v.tx) b += T(94,66,'TX',CY,22);
+  b += T(44,103,v.act,GR,40);
+  b += T(50,166,v.recall?'RECALL':'PRESET',G,24);
+  b += `<div class="hd-f" style="left:${X(31)};top:${Y(185)};width:${C(129)};height:${C(40)};border-radius:0;font-size:${C(30)};${v.sbySel?'border-color:'+CY+';':''}" onclick="cnsSelectSby('${r}')">${v.sby}</div>`;
+  b += `<div class="hd-b" style="left:${X(194)};top:${Y(167)};width:${C(39)};height:${C(78)};font-size:${C(30)}" onclick="cnsSwap('${r}')">↕</div>`;
+  b += T(263,96,'FREQ SEL',G,24)+T(395,96,'SQUELCH',G,24);
+  b += rad(278,140,v.spacing==='8.33','8.33',`cnsSet('${r}','spacing','8.33')`)+rad(278,182,v.spacing==='25','25',`cnsSet('${r}','spacing','25')`);
+  b += rad(405,140,v.squelch===true,'ON',`cnsSet('${r}','squelch',true)`)+rad(405,182,v.squelch===false,'OFF',`cnsSet('${r}','squelch',false)`);
+  if(isV3){
+    b += T(520,96,'MODE',G,24);
+    b += rad(530,140,v.mode==='VOICE','VOICE',`cnsSet('${r}','mode','VOICE')`)+rad(530,182,v.mode==='DATA','DATA',`cnsSet('${r}','mode','DATA')`);
   }
-  const items=rows.join(''), empty='';
-  return `
-    <div class="row" style="margin-bottom:8px;">
-      <span class="cns-act green" style="font-size:15px;">${v.act}</span>
-      <span class="cns-swap ${v.armed?'armed':''}" onclick="cnsSwap('${r}')">⇄</span>
-      <span class="cns-sby ${v.sbySel?'sel':''}" onclick="cnsSelectSby('${r}')">${v.sby}</span>
-      <span class="cns-pre">${v.recall?'RECALL':'PRESET'}</span>
-      ${v.tx?'<span class="cns-ann tx">TX</span>':''}
-    </div>
-    <div class="grid g${isV3?'4':'3'}" style="margin-bottom:10px;">
-      <div><div class="lbl">FREQ SEL</div>
-        ${radio('spacing','25',v.spacing,'25 kHz')}
-        ${radio('spacing','8.33',v.spacing,'8.33 kHz')}
-      </div>
-      <div><div class="lbl">SQUELCH</div>
-        ${radio('squelch',true,v.squelch,'ON')}
-        ${radio('squelch',false,v.squelch,'OFF')}
-      </div>
-      ${isV3 ? `<div><div class="lbl">MODE</div>
-        ${radio('mode','VOICE',v.mode,'VOICE')}
-        ${radio('mode','DATA',v.mode,'DATA')}
-      </div>` : ''}
-      <div><div class="lbl">FREQ</div>
-        ${srcs.map(([k,id])=>`<div class="cns-opt ${src===k?'on':''} ${id?'':'dash'}" onclick="cnsPreSel('${r}','${k}')"><span class="dot"></span>${k==='USER'?'USER':(id||'- - - -')}</div>`).join('')}
-      </div>
-    </div>
-    <div class="lbl" style="margin-bottom:2px;">PRESET FREQUENCIES${edit?' — EDIT':''}</div>
-    <div style="display:flex; gap:6px; margin-bottom:8px;"><div style="flex:1; height:110px; overflow:hidden; border:1px solid var(--field-border); padding:0 6px;">${items}</div>${pages>1?`<div style="display:flex; flex-direction:column; justify-content:space-between;"><span class="btn" onclick="cnsPrePage('${r}',-1)">▲</span><span class="grey" style="text-align:center; font-size:10px;">${state.cns.prePage+1}/${pages}</span><span class="btn" onclick="cnsPrePage('${r}',1)">▼</span></div>`:''}</div>
-    <div class="row">
-      <span class="btn" onclick="cnsPreEdit('${r}')">EDIT</span>
-      ${edit?`<span class="btn" onclick="cnsPreAdd('${r}')">ADD</span>`:''}
-      <span class="btn" onclick="cnsVhfTest('${r}')">${v.testing?'TESTING...':'TEST'}</span>
-      <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeModal()">CLOSE</span></span>
-    </div>
-  `;
+  b += T(699,96,'FREQ',G,24,'transform:translate(-8%,-50%)');
+  srcs.forEach(([k,id],i)=>{ b += rad(673,140+i*40.7,src===k,k==='USER'?'USER':(id||'- - - -'),`cnsPreSel('${r}','${k}')`); });
+  const srcName = src==='USER' ? 'USER' : ((srcs.find(x=>x[0]===src)||[])[1]||'');
+  b += T(30,364,(srcName?srcName+' ':'')+'FREQUENCIES',G,24);
+  if(edit) b += btn(430,320,108,53,'ADD',`cnsPreAdd('${r}')`,28);
+  b += btn(547,320,108,53,'EDIT',`cnsPreEdit('${r}')`,28);
+  b += btn(665,320,108,53,v.testing?'TESTING':'TEST',`cnsVhfTest('${r}')`,v.testing?22:28);
+  b += `<div style="position:absolute;left:${X(30)};top:${Y(388)};width:${C(684)};height:${C(267)};background:#000;border:${C(2)} solid #b4b8bb;box-sizing:border-box"></div>`;
+  for(let k=0;k<PER;k++){
+    const i=p0+k, e=list[i], yy=417+k*48;
+    if(e){
+      const on = e[1]===v.sby;
+      b += `<div style="position:absolute;left:${X(32)};top:${Y(yy-22)};width:${C(660)};height:${C(44)};cursor:${edit?'default':'pointer'}" onclick="${edit?'':`cnsPrePick('${r}','${e[1]}')`}"></div>`;
+      b += T(42,yy,`${e[1]} ${e[0]||''}`.trim(),on?CY:W,29,'pointer-events:none');
+      if(edit) b += `<div class="hd-t" style="left:${X(670)};top:${Y(yy)};color:${CY};font-size:${C(28)};cursor:pointer" onclick="cnsPreDel('${r}',${i})">✕</div>`;
+    } else if(k===0 && !list.length) b += T(42,yy,'- - - - - -',G,29);
+  }
+  b += `<div class="hd-b ${pg===0?'dis':''}" style="left:${X(714)};top:${Y(395)};width:${C(52)};height:${C(50)};font-size:${C(28)}" ${pg===0?'':`onclick="cnsPrePage('${r}',-1)"`}>▲</div>`;
+  b += `<div class="hd-b ${pg>=pages-1?'dis':''}" style="left:${X(714)};top:${Y(600)};width:${C(52)};height:${C(52)};font-size:${C(28)}" ${pg>=pages-1?'':`onclick="cnsPrePage('${r}',1)"`}>▼</div>`;
+  const trk=155, th=Math.max(30,trk*Math.min(1,PER/Math.max(list.length,1))), tp=pages>1?(trk-th)*pg/(pages-1):0;
+  b += `<div style="position:absolute;left:${X(714)};top:${Y(445)};width:${C(52)};height:${C(155)};background:#000"></div>`;
+  b += `<div style="position:absolute;left:${X(717)};top:${Y(446+tp)};width:${C(18)};height:${C(th)};background:#8f9599;border:${C(2)} solid;border-color:#b4babe #53575a #53575a #b4babe;box-sizing:border-box"></div>`;
+  b += btn(683,673,98,54,'DONE','closeModal()',28);
+  return b;
+}
+function openVhfModal(r){
+  openModal(r.toUpperCase()+' CONTROL', cnsControlWindow(r));
+  document.getElementById('modalOverlay').classList.add('hd-on','vh-on'); if(r==='vhf3') document.getElementById('modalOverlay').classList.add('vh3-on');
 }
 
 /* ---------- DLK ----------
@@ -4772,7 +4844,7 @@ function openModal(title, bodyHtml){
   closeCornerPopup();
   state.modalTitle = title;
   state.modalBody = bodyHtml;
-  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on','dp-on','dt-on','tc-on','mc-on','tm-on','ai-on','csc-on','fc-on','fx-on','mg-on','th-on','gi-on','ad-on');
+  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on','dp-on','dt-on','tc-on','mc-on','tm-on','ai-on','csc-on','fc-on','fx-on','mg-on','th-on','gi-on','ad-on','vh-on','vh3-on','ve-on','hf-on','xp-on','nv-on');
   document.getElementById('modalOverlay').style.display = 'flex';
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').innerHTML = bodyHtml;
@@ -4780,7 +4852,7 @@ function openModal(title, bodyHtml){
 function closeModal(){
   closeModal2();
   document.getElementById('modalOverlay').style.display = 'none';
-  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on','dp-on','dt-on','tc-on','mc-on','tm-on','ai-on','csc-on','fc-on','fx-on','mg-on','th-on','gi-on','ad-on');
+  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on','dp-on','dt-on','tc-on','mc-on','tm-on','ai-on','csc-on','fc-on','fx-on','mg-on','th-on','gi-on','ad-on','vh-on','vh3-on','ve-on','hf-on','xp-on','nv-on');
 }
 function openCornerPopup(headerHtml, bodyHtml){
   document.getElementById('cornerOverlay').style.display = 'block';
