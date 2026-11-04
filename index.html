@@ -1732,7 +1732,19 @@
   .sw-light.on{background:#46e04a; box-shadow:0 0 8px #46e04a;}
 
   @keyframes swAttn{0%,100%{box-shadow:0 0 0 0 rgba(127,212,217,0)}50%{box-shadow:0 0 14px 4px rgba(127,212,217,.9)}}
+  .scratchwin.sw-attn-x .sw-execk{border-color:#7fd4d9; animation:swAttn 1s ease-in-out infinite;}
   .scratchwin.sw-attn .scratchbar{border-color:#7fd4d9 !important; animation:swAttn 1s ease-in-out infinite;}
+
+  html.wk, html.wk body{overflow:hidden;}
+  html.wk #appWrap{transform-origin:center center;}
+
+  /* ---- dual FMS ---- */
+  html.frame, html.frame body{padding:0; margin:0; background:transparent; display:block; height:auto; overflow:hidden;}
+  html.frame .scratchwin, html.frame .guide-panel, html.frame .guide-reopen, html.frame .nav-reopen, html.frame .nav-panel{display:none !important;}
+  #appWrap.dual{display:grid; grid-template-columns:auto auto; column-gap:28px; justify-content:center;}
+  #appWrap.dual .scratchwin{grid-column:1 / -1; justify-self:center;}
+  #appWrap.dual .bezel, #appWrap.dual #fms2Box{outline:2px solid transparent; outline-offset:3px; border-radius:14px; transition:outline-color .15s;}
+  #appWrap.dual.act1 .bezel, #appWrap.dual.act2 #fms2Box{outline-color:rgba(127,212,217,.6);}
   /* PERF.DEP compact layout */
   .content:has(.pd){overflow-y:hidden; padding-top:8px; padding-bottom:4px;}
   /* box sizing follows the reference capture's box-to-screen proportions */
@@ -2297,7 +2309,7 @@
   </div>
 </div>
 <div class="scratchwin" id="scratchwin">
-  <div class="sw-key sw-menu" id="swMenu" onclick="toggleDuMenu(event,true)">MENU</div>
+  <div class="sw-key sw-menu" id="swMenu" onclick="menuKey(event)">MENU</div>
   <div class="scratchbar" id="scratchbar" onclick="focusScratchInput()"></div>
   <div class="sw-key sw-cncl" onclick="swCncl()">CNCL</div>
   <div class="sw-exec"><div class="sw-light" id="swLight"></div><div class="sw-key sw-execk" onclick="swExec()">EXEC</div></div>
@@ -2317,11 +2329,18 @@
   <div class="nav-head"><span></span><span class="guide-close" onclick="closeNavPanel()">✕</span></div>
   <div id="navList"></div>
 </div>
-<div class="nav-reopen" id="navReopen" onclick="openNavPanel()" style="display:none !important">MENU</div>
+<div class="nav-reopen" id="navReopen" onclick="toggleDual()">DUAL FMS</div>
 <div class="guide-reopen" id="guideReopen" style="display:block;" onclick="openGuidePanel()">GUIDE</div>
 
 
 <script>
+var __FRAME_SRC='<!doctype html>'+document.documentElement.outerHTML;
+var IS_FRAME=(window.name==='fms2');
+/* iPad Safari (WebKit) resolves container units against the zoomed width and then zooms again,
+   inflating boxes. On iPad, scale with transforms instead of CSS zoom. */
+var WK=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)||/[?&]wk=1/.test(location.search);
+if(WK) document.documentElement.classList.add('wk');
+if(IS_FRAME) document.documentElement.classList.add('frame');
 const FMS_TABS = ['DBASE','POS','FPLN','PERF','ROUTE'];
 const APP_LIST = ['MAP','FMS','CNS','CHKL','SYN','DATA'];
 const SUB_TABS = {
@@ -4162,7 +4181,10 @@ function scratchMobileInputHandler(e){
   render();
 }
 
-function fitApp(){ const w=document.getElementById('appWrap'); if(!w) return; w.style.zoom=1; const h=w.offsetHeight, ww=w.offsetWidth;
+function fitApp(){ const w=document.getElementById('appWrap'); if(!w) return;
+  if(WK){ w.style.zoom=''; w.style.transform='none'; if(IS_FRAME){ setSw(); return; } const h=w.offsetHeight, ww=w.offsetWidth;
+    const k=Math.min(1.25,(innerWidth-32)/ww,(innerHeight-32)/h); w.style.transform='scale('+Math.max(.3,k)+')'; setSw(); return; }
+  w.style.zoom=1; if(IS_FRAME){ setSw(); return; } const h=w.offsetHeight, ww=w.offsetWidth;
   const k=Math.min(1.25,(innerWidth-32)/ww,(innerHeight-32)/h); w.style.zoom=Math.max(.3,k); setSw(); }
 window.addEventListener('resize', fitApp);
 function setSw(){ const sc=document.querySelector('.screen'); if(sc) document.documentElement.style.setProperty('--sw', sc.clientWidth+'px'); }
@@ -4176,6 +4198,7 @@ function renderScratchBar(){
     : `${state.scratch.text}<span class="scratch-caret">_</span>`+
       ((!state.scratch.text && window.matchMedia && matchMedia('(pointer:coarse)').matches) ? `<span class="scratch-hint">TAP HERE TO TYPE</span>` : '');
   updateScratchEcho();
+  if(window.__syncReady) syncOut();
 }
 function updateScratchEcho(){
   let e = document.getElementById('scratchEcho');
@@ -5171,9 +5194,9 @@ function modTouch(){
   if(!state.pendingMod) state.modSnap = modSnapshot();
   state.pendingMod = true; state.fplnMode = 'MOD';
 }
-function swExec(){ if(state.pendingMod) execFpln(); }
-function swCncl(){ if(state.pendingMod) cnclFpln(); }
-function updateExecLight(){ const l=document.getElementById('swLight'); if(l) l.classList.toggle('on', !!state.pendingMod); }
+function swExec(){ if(!state.initDlg.done){ confirmInit(); return; } if(state.pendingMod) execFpln(); }
+function swCncl(){ if(!state.initDlg.done) return; if(state.pendingMod) cnclFpln(); }
+function updateExecLight(){ const l=document.getElementById('swLight'); if(l) l.classList.toggle('on', state.initDlg.done ? !!state.pendingMod : !!(state.initDlg.origin&&state.initDlg.entry.fuel)); }
 function execFpln(){
   state.pendingMod=false; state.modSnap=null; state.fplnMode='ACT';
   if(state.fpln.entry.origin && state.fpln.entry.dest) state.fpln.executed=true;
@@ -6664,7 +6687,7 @@ function renderTabs(){
   document.querySelector('.toprow').style.display = (state.app==='CNS' || state.app==='SYN' || state.app==='CHKL' || state.app==='MAP') ? 'none' : '';
   if(state.app==='SYN'){ const c=document.getElementById('content'); if(c) c.style.setProperty('--tk', Math.min(1, c.clientWidth/632)); }
   // top-left page ID label
-  document.getElementById('appLabel').textContent = state.app==='FMS' ? 'FMS1' : state.app;
+  document.getElementById('appLabel').textContent = state.app==='FMS' ? (IS_FRAME?'FMS2':'FMS1') : state.app;
 
   // fpln tile label
   document.getElementById('fplnTileLabel').textContent = state.fplnMode;
@@ -7277,12 +7300,12 @@ function pagePerfDep(){
 function fitPerfDep(){
   const w = document.getElementById('pdFit'), c = document.getElementById('content');
   if(!w || !c) return;
-  w.style.zoom = ''; w.style.minHeight = ''; w.classList.remove('spread');
+  w.style.zoom = ''; w.style.transform=''; w.style.width=''; w.style.marginBottom=''; w.style.minHeight = ''; w.classList.remove('spread');
   const cs = getComputedStyle(c);
   const avail = c.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
   const need = w.offsetHeight;
   if(need > avail && avail > 0){
-    w.style.zoom = Math.max(0.55, avail / need * 0.985);
+    { const zk=Math.max(0.55, avail / need * 0.985); if(WK){ w.style.transformOrigin='0 0'; w.style.transform='scale('+zk+')'; w.style.width=(100/zk)+'%'; w.style.marginBottom=(w.offsetHeight*(zk-1))+'px'; } else w.style.zoom=zk; }
   } else if(avail > 0){
     // spare height: spread the rows over the whole display so the negative space
     // between sections follows the reference captures
@@ -7306,8 +7329,9 @@ function fitGeneric(key){
   const nh=w.offsetHeight, nw=Math.max(w.scrollWidth,availW);
   if(!nh||availH<=0) return;
   const k=Math.min(availH*t/nh, availW/nw, 1.3);
-  if(k>1.02) w.style.zoom=k;
+  if(k>1.02){ if(WK){ w.style.transformOrigin='0 0'; w.style.transform='scale('+k+')'; w.style.width=(100/k)+'%'; } else w.style.zoom=k; }
   if(t>=.8){ w.style.minHeight=(availH/(k>1.02?k:1))+'px'; w.style.display='flex'; w.style.flexDirection='column'; if(key.startsWith('POS.')){ const l=w.lastElementChild; if(l) l.style.marginTop='auto'; } else w.style.justifyContent='space-between'; }
+  if(WK && k>1.02) w.style.marginBottom=(w.offsetHeight*(k-1))+'px';
 }
 
 function pagePerfClb(){
@@ -8197,6 +8221,14 @@ const CHKL_PAGES = {
   'PROC': pageEclProc,
 };
 
+function setContentScale(c,k){
+  if(!WK){ c.style.zoom = k||''; return; }
+  ['transform','width','height','flex','marginBottom','transformOrigin'].forEach(p=>c.style[p]='');
+  if(!k) return;
+  const cw=c.offsetWidth, ch=c.offsetHeight;
+  c.style.flex='none'; c.style.width=(cw/k)+'px'; c.style.height=(ch/k)+'px'; c.style.marginBottom=(ch-ch/k)+'px';
+  c.style.transformOrigin='0 0'; c.style.transform='scale('+k+')';
+}
 function render(){
   syncMessages();
   fitApp();
@@ -8208,12 +8240,12 @@ function render(){
   markGuidePageVisited();
   renderGuidePanel();
   const sb = document.getElementById('scratchwin');
-  if(sb) sb.style.visibility = (state.app==='SYN') ? 'hidden' : '';
+  if(sb) sb.style.visibility = '';
   const actBox = document.querySelector('.act');
   if(actBox) actBox.style.display = (state.app==='FMS' || state.app==='MAP') ? 'flex' : 'none';
   const content = document.getElementById('content');
   content.classList.remove('ecl-detail');
-  content.style.zoom = (state.app==='FMS') ? FMS_ZOOM : '';
+  setContentScale(content, (state.app==='FMS') ? FMS_ZOOM : 0);
   document.querySelector('.screen').dataset.app = state.app;
   if(state.app==='FMS'){
     const key = state.main + '.' + state.sub;
@@ -8281,14 +8313,13 @@ function renderInitDialog(){
     step(1,'Tap your <b>ORIGIN</b> airport.')+
     step(2,'Tap the <b>SCRATCHPAD</b> (bottom) and type the fuel on board (kg).')+
     step(3,'Tap the <b>BLOCK FUEL</b> field to paste the scratchpad into it.')+
-    step(4,'Tap <b>INIT</b>.')+
+    step(4,'Press <b>EXEC</b>.')+
     '<div class="init-lbl">ORIGIN</div>'+
     '<div class="init-origin-grid">'+originHtml+'</div>'+
     '<div class="init-lbl">BLOCK FUEL (KG)</div>'+
     '<div class="init-fuel-row"><span class="'+fuelCls.trim()+'">'+scratchFieldHtml('initDlg','fuel')+'</span>'+fuelHint+'</div>'+
-    '<div class="init-btn-row"><span class="btn'+(ready?'':' disabled')+'"'+(ready?' onclick="confirmInit()"':'')+'>INIT</span></div>'+
     down;
-  const sb=document.getElementById('scratchwin'); if(sb) sb.classList.toggle('sw-attn', cur===2);
+  const sb=document.getElementById('scratchwin'); if(sb) sb.classList.toggle('sw-attn', cur===2); sb.classList.toggle('sw-attn-x', cur===4); updateExecLight();
 }
 function initDefaults(){
   state.initDlg.origin = 'YMML';
@@ -8300,7 +8331,7 @@ function confirmInit(){
   state.gnssOrigin = state.initDlg.origin;
   state.fpln.entry.fob = state.initDlg.entry.fuel;
   state.initDlg.done = true;
-  document.getElementById('scratchwin').classList.remove('sw-attn');
+  document.getElementById('scratchwin').classList.remove('sw-attn','sw-attn-x');
   document.getElementById('initOverlay').style.display = 'none';
   render();
 }
@@ -8584,6 +8615,95 @@ setInterval(function(){
     }
   });
 }, 1000);
+
+/* ================= Dual FMS =================
+   Host document = FMS1. FMS2 = same page in an iframe (name "fms2").
+   Shared data syncs both ways via postMessage; page/dialog/map UI stays local. */
+const LOCAL_KEYS = new Set(['app','main','sub','chklSub','defaultsSelect','fplnMode','modalTitle','modalBody','eclPhase','eclScroll','eclAutoPage','nn','holdExitArmed','map','nap','dlg','dlgRedraw','fixPage','legsPage','posRepPage','fltLogPage','synPage','dataSelect','dataDsplL','dataDsplR','proc','guide','modIdle']);
+var __lastSync='';
+function sharedObj(){ const o={}; for(const k in state){ if(LOCAL_KEYS.has(k)||typeof state[k]==='function') continue; o[k]=state[k]; } return o; }
+function sharedSnap(){ return JSON.stringify(sharedObj()); }
+function dualPeer(){ return IS_FRAME ? parent : (window.__dual ? document.getElementById('fms2Frame').contentWindow : null); }
+function syncOut(force){
+  if(!window.__dual && !IS_FRAME) return;
+  const j=sharedSnap(); if(!force && j===__lastSync) return;
+  __lastSync=j; const p=dualPeer(); if(p) p.postMessage({fmsSync:j},'*');
+}
+function mirrorInit(){
+  const io=document.getElementById('initOverlay'); if(!io) return;
+  if(state.initDlg.done){ io.style.display='none'; const sw=document.getElementById('scratchwin'); if(sw) sw.classList.remove('sw-attn','sw-attn-x'); }
+  else { io.style.display='flex'; renderInitDialog(); }
+}
+function applySync(j){
+  const o=JSON.parse(j); const changed=[];
+  for(const k in o){ if(JSON.stringify(state[k])!==JSON.stringify(o[k])) changed.push(k); }
+  if(!changed.length){ __lastSync=sharedSnap(); return; }
+  changed.forEach(k=>{ state[k]=o[k]; });
+  __lastSync=sharedSnap();
+  if(changed.length===1 && changed[0]==='scratch'){
+    renderScratchBar();
+    if(state.scratch.error){ clearTimeout(window.__scratchErrTimer); window.__scratchErrTimer=setTimeout(()=>{ state.scratch.error=false; state.scratch.msg=''; render(); },1600); }
+    return;
+  }
+  mirrorInit(); render();
+}
+(function(){
+  const _render=render;
+  render=function(){ _render.apply(this,arguments); syncOut(); };
+})();
+window.addEventListener('message',function(e){
+  const d=e.data; if(!d||typeof d!=='object') return;
+  if(IS_FRAME){ if(e.source!==parent) return; }
+  else { const f=document.getElementById('fms2Frame'); if(!f||e.source!==f.contentWindow) return; }
+  if(d.fmsSync){ applySync(d.fmsSync); }
+  else if(d.fms==='ready' && !IS_FRAME){ syncOut(true); }
+  else if(d.fmsActive && !IS_FRAME){ setActiveSide(2); const m=document.getElementById('duMenu'); if(m) m.remove(); }
+  else if(d.fmsCmd==='menu' && IS_FRAME){ toggleDuMenu({stopPropagation(){}},true); }
+  else if(d.fmsCmd==='closemenu' && IS_FRAME){ const m=document.getElementById('duMenu'); if(m) m.remove(); }
+});
+function setActiveSide(n){
+  window.__activeSide=n; const w=document.getElementById('appWrap');
+  if(w){ w.classList.toggle('act1',n===1); w.classList.toggle('act2',n===2); }
+}
+function menuKey(ev){
+  if(window.__dual && window.__activeSide===2){ ev.stopPropagation(); dualPeer().postMessage({fmsCmd:'menu'},'*'); return; }
+  toggleDuMenu(ev,true);
+}
+function toggleDual(){
+  if(IS_FRAME) return;
+  const w=document.getElementById('appWrap'), tab=document.getElementById('navReopen');
+  if(!window.__dual){
+    const bz=document.querySelector('.bezel');
+    const box=document.createElement('div'); box.id='fms2Box';
+    const f=document.createElement('iframe'); f.id='fms2Frame'; f.name='fms2'; f.setAttribute('scrolling','no');
+    f.style.cssText='width:'+bz.offsetWidth+'px;height:'+bz.offsetHeight+'px;border:0;display:block;background:transparent;border-radius:14px';
+    box.appendChild(f); bz.after(box);
+    window.__dual=true; w.classList.add('dual'); setActiveSide(1);
+    f.srcdoc=__FRAME_SRC;
+    tab.textContent='SINGLE FMS';
+  } else {
+    const b=document.getElementById('fms2Box'); if(b) b.remove();
+    window.__dual=false; w.classList.remove('dual','act1','act2');
+    tab.textContent='DUAL FMS';
+  }
+  setTimeout(fitApp,0); fitApp();
+}
+document.addEventListener('pointerdown',function(e){
+  if(IS_FRAME){ if(!e.target.closest) return; parent.postMessage({fmsActive:2},'*'); return; }
+  if(window.__dual && e.target.closest && e.target.closest('.bezel')){ setActiveSide(1); const p=dualPeer(); if(p) p.postMessage({fmsCmd:'closemenu'},'*'); }
+},true);
+var __lastLand=null;
+function dualUiFit(){
+  if(IS_FRAME||!WK) return;
+  const land=innerWidth>innerHeight;
+  if(land===__lastLand) return; __lastLand=land;
+  if(land && !window.__dual) toggleDual();
+  else if(!land && window.__dual) toggleDual();
+}
+window.addEventListener('resize',dualUiFit); window.addEventListener('orientationchange',dualUiFit);
+dualUiFit();
+window.__syncReady=true;
+if(IS_FRAME){ window.addEventListener('load',function(){ parent.postMessage({fms:'ready'},'*'); }); }
 </script>
 </body>
 </html>
