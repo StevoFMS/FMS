@@ -1605,13 +1605,28 @@
   .dt-on .hd-b[onclick*="openNearestArpts"],.dt-on .hd-b[onclick*="closeModal"]{justify-content:center;padding-left:0}
   .dt-on .hd-b.dis{justify-content:center;padding:0}
   .tc-on .modal-body{aspect-ratio:950/930 !important}
+  .modal-overlay.hd-on.tc-on .modal-box{width:62% !important}
+  .csc-on .modal-body{aspect-ratio:558/758 !important}
+  .fc-on .modal-body{aspect-ratio:595/350 !important}
+  .fx-on .modal-body{aspect-ratio:1366/918 !important}
+  .gi-on .modal-body{aspect-ratio:614/408 !important}
+  .ad-on .modal-body{aspect-ratio:775/782 !important}
+  .modal-overlay.hd-on.ad-on .modal-box{width:78% !important;background:#363636;border:3px solid #8d9296}
+  .gs-on .modal-body{aspect-ratio:516/174 !important}
+  .modal-overlay.hd-on.gi-on .modal-box{width:96% !important;background:#262626;border:3px solid #8d9296}
+  .modal-overlay.hd-on.gs-on .modal-box{width:81% !important;background:#262626;border:3px solid #8d9296}
+  .mg-on .modal-body{aspect-ratio:385/512 !important}
+  .th-on .modal-body{aspect-ratio:645/422 !important}
+  .modal-overlay.hd-on.mg-on .modal-box{width:55% !important;background:#323232;border:3px solid #8d9296}
+  .modal-overlay.hd-on.th-on .modal-box{width:91.5% !important;background:#323232;border:3px solid #8d9296}
+  .modal-overlay.hd-on.csc-on .modal-box{width:58% !important;}
   .mc-on .modal-box{width:54% !important;}
   .mc-on .modal-body{aspect-ratio:632/790 !important}
   .mc-on .hd-b{font-size:4.4cqw}
   .ai-on .modal-body{aspect-ratio:1157/846 !important}
   .hd-b.dis{background:#3b3e42;color:#7c8287;cursor:default}
   /* all dialogs anchor bottom-right of the screen */
-  .modal-overlay{align-items:flex-end !important; justify-content:flex-end !important; background:transparent !important; pointer-events:none;}
+  .modal-overlay{align-items:flex-end !important; justify-content:flex-end !important; background:transparent !important; pointer-events:auto;}
   .modal-overlay .modal-box{pointer-events:auto}
   .nap-on .modal-box,.hd-on .modal-box{width:88% !important;}
 
@@ -1738,6 +1753,67 @@
   html.wk, html.wk body{overflow:hidden;}
   html.wk #appWrap{transform-origin:center center;}
 
+
+  /* ---- SYN CB page (photo layout; --u = 1 photo px) ---- */
+  .screen[data-app="SYN"] .syn-content.syn-content:has(.cbp){padding:0 !important; overflow:hidden;}
+  .cbp{--u:calc(var(--sw,641px)/636); position:relative; flex:1; min-height:0; display:flex; flex-direction:column; font-family:Arial,Helvetica,sans-serif; color:#fff; padding-top:calc(var(--u)*4);}
+  .cbp-lbls{position:relative; height:calc(var(--u)*22); font-size:calc(var(--u)*15); color:#b9b9b9; flex:none;}
+  .cbp-lbls .l1{position:absolute; left:calc(var(--u)*7); top:0;} .cbp-lbls .l2{position:absolute; left:calc(var(--u)*184); top:0;}
+  .cbp-sim{position:absolute; right:calc(var(--u)*96); top:calc(var(--u)*-1); height:calc(var(--u)*22); line-height:calc(var(--u)*20); padding:0 calc(var(--u)*10); font-size:calc(var(--u)*13); color:#fff; background:#7c7c7c; border:calc(var(--u)*2) solid; border-color:#b4b4b4 #555 #555 #b4b4b4; cursor:pointer; user-select:none;}
+  .cbp-sim.on{background:#6b5a14; border-color:#c9b04a #3d3308 #3d3308 #c9b04a;}
+  .cbp-ctl{position:relative; height:calc(var(--u)*42); margin-top:calc(var(--u)*4); flex:none;}
+  .cbp-dd{position:absolute; top:0; height:100%; background:#858585; border:calc(var(--u)*3) solid; border-color:#bdbdbd #565656 #565656 #bdbdbd; cursor:pointer; user-select:none;}
+  .cbp-dd .in{position:absolute; left:calc(var(--u)*10); top:calc(var(--u)*3); bottom:calc(var(--u)*3); right:calc(var(--u)*36); background:#000; border:calc(var(--u)*2) solid; border-color:#3a3a3a #aaa #aaa #3a3a3a; color:#fff; font-size:calc(var(--u)*24); line-height:calc(var(--u)*28); padding-left:calc(var(--u)*6); overflow:hidden; white-space:nowrap;}
+  .cbp-dd .ar{position:absolute; right:calc(var(--u)*6); top:50%; transform:translateY(-50%); color:#f2f2f2; font-size:calc(var(--u)*17);}
+  .cbp-dd.d1{left:calc(var(--u)*7); width:calc(var(--u)*155);} .cbp-dd.d2{left:calc(var(--u)*184); width:calc(var(--u)*356);}
+  .cbp-ref{position:absolute; left:calc(var(--u)*558); width:calc(var(--u)*65); top:0; height:100%; background:#858585; border:calc(var(--u)*3) solid; border-color:#bdbdbd #565656 #565656 #bdbdbd; padding:calc(var(--u)*6) calc(var(--u)*10); cursor:pointer;}
+  .cbp-hdr{position:relative; height:calc(var(--u)*34); margin-top:calc(var(--u)*30); width:calc(var(--u)*588); border-bottom:calc(var(--u)*2) solid #b5b5b5; font-size:calc(var(--u)*17); color:#a9a9a9; flex:none;}
+  .cbp-hdr span{position:absolute; bottom:calc(var(--u)*5); white-space:nowrap;}
+  .cbp-hdr .nm{left:calc(var(--u)*7);} .cbp-hdr .lc{left:calc(var(--u)*210);} .cbp-hdr .rt{left:calc(var(--u)*329);} .cbp-hdr .st{left:calc(var(--u)*411);}
+  .cbp-body{position:relative; flex:1; min-height:0; display:flex; margin-bottom:calc(var(--u)*14);}
+  .cbp-list{width:calc(var(--u)*588); overflow-y:auto; scrollbar-width:none; flex:none;}
+  .cbp-list::-webkit-scrollbar{display:none;}
+  .cbp-row{position:relative; height:calc(var(--u)*54); font-size:calc(var(--u)*17); flex:none;}
+  .cbp-row > span{position:absolute; top:50%; transform:translateY(-50%); white-space:nowrap;}
+  .cbp-nm{left:calc(var(--u)*7);} .cbp-lc{left:calc(var(--u)*210);}
+  .cbp-rt{left:calc(var(--u)*361); transform:translate(-50%,-50%) !important; text-align:center;}
+  .cbp-rt.ring{width:calc(var(--u)*42); height:calc(var(--u)*42); line-height:calc(var(--u)*38); border:calc(var(--u)*2) solid #e4e4e4; border-radius:50%; box-shadow:inset 0 0 0 calc(var(--u)*2) #000, inset 0 0 0 calc(var(--u)*3.5) #cfcfcf;}
+  .cbp-st{left:calc(var(--u)*439); transform:translate(-50%,-50%) !important;}
+  .cbp-st.in{color:var(--green);} .cbp-st.out{color:#fff;}
+  .cbp-pull{left:calc(var(--u)*484); width:calc(var(--u)*94); height:calc(var(--u)*42); line-height:calc(var(--u)*38); text-align:center; background:#858585; border:calc(var(--u)*3) solid; border-color:#bdbdbd #565656 #565656 #bdbdbd; color:#f2f2f2; font-size:calc(var(--u)*18); cursor:pointer;}
+  .cbp-sb{position:absolute; left:calc(var(--u)*590); top:calc(var(--u)*10); bottom:0; width:calc(var(--u)*43); display:flex; flex-direction:column;}
+  .cbp-sbb{flex:none; height:calc(var(--u)*43); text-align:center; line-height:calc(var(--u)*40); background:#858585; border:calc(var(--u)*3) solid; border-color:#bdbdbd #565656 #565656 #bdbdbd; color:#f2f2f2; font-size:calc(var(--u)*20); cursor:pointer; user-select:none;}
+  .cbp-sbb.dis{color:#5f5f5f;}
+  .cbp-track{flex:1; position:relative; border-left:calc(var(--u)*2) solid #cfcfcf; border-right:calc(var(--u)*2) solid #cfcfcf; background:#000;}
+  .cbp-thumb{position:absolute; left:0; width:calc(var(--u)*22); background:#858585; border:calc(var(--u)*2) solid; border-color:#bdbdbd #565656 #565656 #bdbdbd;}
+
+  /* ---- DATA page (photo layout; --u = 1 photo px) ---- */
+  .screen[data-app="DATA"]{background:#000;}
+  .screen[data-app="DATA"] .content:has(> .dtp){padding:0 !important; overflow:hidden; position:relative; background:#000;}
+  .dtp{--u:calc(var(--sw,641px)/672); position:absolute; inset:0; font-family:'Arial Narrow','Roboto Condensed',Arial,Helvetica,sans-serif; font-weight:bold; font-stretch:condensed; color:#fff;}
+  .dtp-dd{position:absolute; top:calc(var(--u)*5); height:calc(var(--u)*57); background:#858585; border:calc(var(--u)*3) solid; border-color:#bdbdbd #4f4f4f #4f4f4f #bdbdbd; cursor:pointer; user-select:none; z-index:3;}
+  .dtp-dd .t{position:absolute; left:calc(var(--u)*5); top:50%; transform:translateY(-50%); font-size:calc(var(--u)*26); letter-spacing:-.02em; white-space:nowrap;}
+  .dtp-dd .ar{position:absolute; right:calc(var(--u)*14); top:50%; transform:translateY(-50%); font-size:calc(var(--u)*26);}
+  .dtp-dd.d1{left:calc(var(--u)*5); width:calc(var(--u)*214);} .dtp-dd.d2{left:calc(var(--u)*227); width:calc(var(--u)*215);} .dtp-dd.d3{left:calc(var(--u)*450); width:calc(var(--u)*215);}
+  .dtp-title{position:absolute; left:0; right:0; top:calc(var(--u)*65); height:calc(var(--u)*60); line-height:calc(var(--u)*60); text-align:center; font-size:calc(var(--u)*26); letter-spacing:-.02em; text-transform:uppercase;}
+  .dtp-img{position:absolute; left:0; right:0; top:calc(var(--u)*125); height:calc(var(--u)*490); background:#c0c0c0; color:#000; display:flex; justify-content:center; padding-top:calc(var(--u)*184); box-sizing:border-box; font-size:calc(var(--u)*27);}
+  .dtp-menu{position:absolute; left:calc(var(--u)*5); top:calc(var(--u)*66); width:calc(var(--u)*215); z-index:4; background:#858585; border:calc(var(--u)*2) solid; border-color:#bdbdbd #4f4f4f #4f4f4f #bdbdbd; box-shadow:0 0 0 calc(var(--u)*1) #000;}
+  .dtp-menu div{height:calc(var(--u)*58); line-height:calc(var(--u)*58); padding-left:calc(var(--u)*8); font-size:calc(var(--u)*26); letter-spacing:-.02em; border-top:calc(var(--u)*2) solid #3c3c3c; cursor:pointer;}
+  .dtp-menu div:first-child{border-top:none;}
+  .dtp-menu div.sel{background:#9a9a9a;}
+  .dtp-bri{position:absolute; left:calc(var(--u)*27); top:calc(var(--u)*928); width:calc(var(--u)*102); height:calc(var(--u)*57); padding:calc(var(--u)*9) calc(var(--u)*10); background:#858585; border:calc(var(--u)*3) solid; border-color:#bdbdbd #4f4f4f #4f4f4f #bdbdbd; box-sizing:border-box;}
+
+  /* ---- SYN INFO page (photo layout; --u = 1 photo px) ---- */
+  .screen[data-app="SYN"] .syn-content.syn-content:has(.ifp){padding:0 !important; overflow:hidden;}
+  .ifp{--u:calc(var(--sw,641px)/668); position:relative; flex:1; min-height:0; font-family:'Arial Narrow','Roboto Condensed',Arial,Helvetica,sans-serif; color:#e8e8e8; font-size:calc(var(--u)*19); letter-spacing:.02em;}
+  .ifp-un{height:calc(var(--u)*311); padding-top:calc(var(--u)*8); overflow:hidden;}
+  .ifp-row{display:flex; height:calc(var(--u)*51); align-items:center; padding-left:calc(var(--u)*18);}
+  .ifp-row .ata{flex:0 0 calc(var(--u)*48);} .ifp-row .tx{white-space:nowrap;}
+  .ifp-row.acked{color:#dcdcdc;}
+  .ifp-hr{height:calc(var(--u)*2); margin-left:calc(var(--u)*32); width:calc(var(--u)*607); background:#c4c4c4;}
+  .ifp-hd{height:calc(var(--u)*52); line-height:calc(var(--u)*52); padding-left:calc(var(--u)*18); color:#d8d8d8;}
+  .ifp-ack{position:absolute; right:calc(var(--u)*7); bottom:calc(var(--u)*11); width:calc(var(--u)*181); height:calc(var(--u)*49); line-height:calc(var(--u)*43); text-align:center; background:#858585; border:calc(var(--u)*3) solid; border-color:#bdbdbd #4f4f4f #4f4f4f #bdbdbd; color:#fff; font-size:calc(var(--u)*18); letter-spacing:0; cursor:pointer; user-select:none;}
+  .ifp-ack.dis{color:#bdbdbd; cursor:default;}
   /* ---- dual FMS ---- */
   html.frame, html.frame body{padding:0; margin:0; background:transparent; display:block; height:auto; overflow:hidden;}
   html.frame .scratchwin, html.frame .guide-panel, html.frame .guide-reopen, html.frame .nav-reopen, html.frame .nav-panel{display:none !important;}
@@ -2197,9 +2273,9 @@
 
   /* SYN — chrome from reference photo */
   .screen[data-app="SYN"] .content{padding:0 !important; background:#000;}
-  .screen[data-app="SYN"] .syn-tile-grid{gap:calc(var(--sw,632px)*.009) !important; padding:calc(var(--sw,632px)*.003) calc(var(--sw,632px)*.012) 0; margin-bottom:calc(var(--sw,632px)*.007) !important;}
-  .screen[data-app="SYN"] .syn-tile{height:calc(var(--sw,632px)*.084); display:flex; align-items:center; justify-content:center; padding:0 !important; box-sizing:border-box; border:none !important; background:#808080 !important; color:#fbfbf8 !important; font-family:'Bahnschrift','DIN Alternate','Roboto Condensed',Arial,Helvetica,sans-serif !important; font-size:calc(var(--sw,632px)*.034) !important; letter-spacing:0 !important; white-space:nowrap;}
-  .screen[data-app="SYN"] .syn-tile.active{background:#243b73 !important;}
+  .screen[data-app="SYN"] .syn-tile-grid{gap:calc(var(--sw,632px)*.0055) calc(var(--sw,632px)*.0028) !important; padding:0; margin-bottom:calc(var(--sw,632px)*.007) !important;}
+  .screen[data-app="SYN"] .syn-tile{height:calc(var(--sw,632px)*.086); display:flex; align-items:center; justify-content:center; padding:0 !important; box-sizing:border-box; border:none !important; background:#808080 !important; color:#fbfbf8 !important; font-family:'Bahnschrift','DIN Alternate','Roboto Condensed',Arial,Helvetica,sans-serif !important; font-size:calc(var(--sw,632px)*.034) !important; letter-spacing:0 !important; white-space:nowrap;}
+  .screen[data-app="SYN"] .syn-tile.active{background:#14397a !important;}
   .airp-diagram-wrap{align-items:flex-start;}
   .airp-diagram-img{width:100% !important; max-width:none !important; height:auto !important; aspect-ratio:1282/1693 !important;}
   .screen[data-app="SYN"] .syn-content:not(:has([class*="diagram-wrap"])){padding:0 calc(var(--sw,632px)*.012) !important;}
@@ -2303,6 +2379,9 @@
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
+<div class="modal-overlay" id="modalOverlay2" style="display:none">
+  <div class="modal-box"><div class="modal-header"></div><div class="modal-body" id="modalBody2"></div></div>
+</div>
   </div>
   <div class="init-overlay" id="initOverlay">
     <div class="init-box" id="initBox"></div>
@@ -2315,7 +2394,7 @@
   <div class="sw-exec"><div class="sw-light" id="swLight"></div><div class="sw-key sw-execk" onclick="swExec()">EXEC</div></div>
 </div>
 </div>
-<div class="guide-panel" id="guidePanel" style="display:none;">
+<div class="guide-panel" id="guidePanel" style="display:none !important;">
   <div class="guide-header">
     <div>
       <div class="guide-title">FMS GUIDE</div>
@@ -2330,7 +2409,7 @@
   <div id="navList"></div>
 </div>
 <div class="nav-reopen" id="navReopen" onclick="toggleDual()">DUAL FMS</div>
-<div class="guide-reopen" id="guideReopen" style="display:block;" onclick="openGuidePanel()">GUIDE</div>
+<div class="guide-reopen" id="guideReopen" style="display:none !important;" onclick="openGuidePanel()">GUIDE</div>
 
 
 <script>
@@ -2535,6 +2614,8 @@ let state = {
 
   // CB / SSPC monitoring page (SYN)
   cb: { sort:'BUS', filter:'ALL' },
+  csc: {spd:'', entry:'', exit:''},
+  fc: {from:'',to:'',dist:'',ff:'',gs:'',fromPpos:false},
 
   // INFO page (SYN) — non-acknowledged / previously acknowledged messages
   info: {
@@ -2710,38 +2791,29 @@ function toggleDataDspl(side){
   state.dataDsplR = side==='R' ? !state.dataDsplR : state.dataDsplR;
   render();
 }
+const DATA_INPUTS = ['CKPT DOOR','INPT 2','INPT 3'];
+const DATA_CAMS = ['ENTRANCE','AREA 2','AREA 3'];
+function dataPick(n){
+  if(n===1){ state.dataMenu = !state.dataMenu; state.dataIn = 1; }
+  else { state.dataIn = n; state.dataMenu = false; }
+  render();
+}
+function dataCamPick(c){ state.dataIn = 1; state.dataCam = c; state.dataMenu = false; render(); }
+function dataCloseMenu(){ if(state.dataMenu){ state.dataMenu=false; render(); } }
 function pageDataVideo(){
+  const inp = state.dataIn || 1, cam = state.dataCam || 1;
+  const title = inp===1 ? `INPUT 1 - CAMERA ${cam}` : `INPUT ${inp}`;
+  const img = inp===1 ? `image [input 1 - Camera ${cam}]` : `image [input ${inp}]`;
+  const dd = DATA_INPUTS.map((n,i)=>`<span class="dtp-dd d${i+1}" onclick="event.stopPropagation();dataPick(${i+1})"><span class="t">${n}</span><span class="ar">▼</span></span>`).join('');
+  const menu = state.dataMenu ? `<div class="dtp-menu" onclick="event.stopPropagation()">${DATA_CAMS.map((c,i)=>`<div class="${(cam===i+1)?'sel':''}" onclick="dataCamPick(${i+1})">${c}</div>`).join('')}</div>` : '';
   return `
-  <div class="row" style="margin-bottom:14px;">
-    <div><div class="lbl">SELECT</div><span class="dropdown">VIDEO <span class="arrow">▼</span></span></div>
-  </div>
-
-  <div class="video-frame">
-    <div class="video-scene">
-      <div class="video-doorway"></div>
-      <div class="video-figure"></div>
-      <div class="video-floorline"></div>
-    </div>
-    <div class="video-overlay-top">
-      <span class="video-cam-id">CAM — FWD DOOR</span>
-      <span class="video-live">● LIVE</span>
-    </div>
-    <div class="video-overlay-bottom">
-      <span>DU3</span><span>${state.dataDsplL ? 'DISPLAYED' : 'STANDBY'}</span>
-    </div>
-  </div>
-
-  <div class="grid g2" style="margin-top:16px;">
-    <div class="row" onclick="toggleDataDspl('L')" style="cursor:pointer;">
-      <span class="lbl">VIDEO DSPL L <span class="grey" style="font-weight:normal;">(→ DU3)</span></span>
-      ${cb(state.dataDsplL)}
-    </div>
-    <div class="row" onclick="toggleDataDspl('R')" style="cursor:pointer;">
-      <span class="lbl">VIDEO DSPL R <span class="grey" style="font-weight:normal;">(→ DU5)</span></span>
-      ${cb(state.dataDsplR)}
-    </div>
-  </div>
-  `;
+  <div class="dtp" onclick="dataCloseMenu()">
+    ${dd}
+    <div class="dtp-title">${title}</div>
+    <div class="dtp-img"><span>${img}</span></div>
+    ${menu}
+    <span class="dtp-bri"><svg viewBox="0 0 80 36" width="100%" height="100%"><g fill="#fff"><circle cx="20" cy="18" r="8"/><path d="M20 2l2.6 5h-5.2zM20 34l-2.6-5h5.2zM2 18l5-2.6v5.2zM38 18l-5 2.6v-5.2zM7.3 5.3l5.6 1.3-3.9 3.9zM32.7 30.7l-5.6-1.3 3.9-3.9zM7.3 30.7l1.7-5.6 3.9 3.9zM32.7 5.3l-1.7 5.6-3.9-3.9z"/></g><circle cx="58" cy="18" r="12.5" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M58 5.5a12.5 12.5 0 0 1 0 25z" fill="#fff"/></svg></span>
+  </div>`;
 }
 
 /* ================================================================
@@ -4563,22 +4635,16 @@ function infoAcknowledge(){
   }
 }
 function pageSynInfo(){
-  let html = '';
-  state.info.unacked.forEach(m=>{
-    html += `<div class="info-row"><span class="info-ata">${m.ata}</span><span class="info-text">${m.text}</span></div>`;
-  });
-  if(state.info.unacked.length===0){
-    html += `<div class="grey" style="padding:4px 2px;">— no new messages —</div>`;
-  }
-  html += `<div class="hr" style="margin:18px 0 10px;"></div>`;
-  html += `<div class="grey" style="font-size:11px; letter-spacing:.3px; margin-bottom:6px;">PREVIOUSLY ACKNOWLEDGED</div>`;
-  state.info.acked.forEach(m=>{
-    html += `<div class="info-row acked"><span class="info-ata">${m.ata}</span><span class="info-text">${m.text}</span></div>`;
-  });
-  html += `<div class="right" style="margin-top:10px;">
-    <span class="btn" ${state.info.unacked.length?'':'style="opacity:.45; cursor:default;"'} onclick="infoAcknowledge()">ACKNOWLEDGE</span>
+  const row=(m,c)=>`<div class="ifp-row${c?' acked':''}"><span class="ata">${m.ata}</span><span class="tx">${m.text}</span></div>`;
+  const un = state.info.unacked.map(m=>row(m,false)).join('');
+  const ak = state.info.acked.map(m=>row(m,true)).join('');
+  return `<div class="ifp">
+    <div class="ifp-un">${un}</div>
+    <div class="ifp-hr"></div>
+    <div class="ifp-hd">PREVIOUSLY ACKNOWLEDGED</div>
+    <div class="ifp-ak">${ak}</div>
+    <span class="ifp-ack${state.info.unacked.length?'':' dis'}" onclick="infoAcknowledge()">ACKNOWLEDGE</span>
   </div>`;
-  return html;
 }
 
 /* CB / SSPC monitoring page.
@@ -4626,11 +4692,15 @@ const CB_DATA = [
   {name:'WIPER R', loc:'CDC2-15-6', rating:'5', status:'IN', pullable:true},
   {name:'STALL WARN', loc:'CDC3-6-11', rating:'3', status:'IN', pullable:true}
 ];
+function cbKeepScroll(fn){
+  const l=document.getElementById('cbpList'); const t=l?l.scrollTop:0;
+  fn(); const n=document.getElementById('cbpList'); if(n){ n.scrollTop=t; cbSyncThumb(); }
+}
 function cbToggle(i){
   const c = CB_DATA[i];
   if(!c.pullable) return;
   c.status = c.status==='IN' ? 'OUT' : 'IN';
-  render();
+  cbKeepScroll(render);
 }
 function cbCycleSort(){
   const opts = ['BUS','NAME','LOCATION','STATUS'];
@@ -4644,36 +4714,47 @@ function cbCycleFilter(){
   state.cb.filter = opts[(i+1)%opts.length];
   render();
 }
-function cbRefresh(){ render(); }
+function cbRefresh(){ cbKeepScroll(render); }
+function cbSim(){ state.cb.sim = !state.cb.sim; render(); }
+function cbScrollBy(d){ const l=document.getElementById('cbpList'); if(!l) return; l.scrollTop += d*l.clientHeight*0.8; cbSyncThumb(); }
+function cbSyncThumb(){
+  const l=document.getElementById('cbpList'), th=document.getElementById('cbpThumb'), tr=document.getElementById('cbpTrack'); if(!l||!th||!tr) return;
+  const max=l.scrollHeight-l.clientHeight;
+  const up=document.getElementById('cbpUp'), dn=document.getElementById('cbpDn');
+  if(max<=1){ th.style.display='none'; if(up) up.classList.add('dis'); if(dn) dn.classList.add('dis'); return; }
+  th.style.display='block';
+  const h=Math.max(24, tr.clientHeight*l.clientHeight/l.scrollHeight);
+  th.style.height=h+'px'; th.style.top=((tr.clientHeight-h)*l.scrollTop/max)+'px';
+  if(up) up.classList.toggle('dis', l.scrollTop<=1); if(dn) dn.classList.toggle('dis', l.scrollTop>=max-1);
+}
 function pageSynCb(){
-  let rows = CB_DATA.map((c,i)=>({...c,i}));
+  let rows = state.cb.sim ? CB_DATA.map((c,i)=>({...c,i})) : [];
   if(state.cb.filter!=='ALL') rows = rows.filter(r=>r.status===state.cb.filter);
   if(state.cb.sort==='NAME') rows.sort((a,b)=>a.name.localeCompare(b.name));
   else if(state.cb.sort==='LOCATION') rows.sort((a,b)=>a.loc.localeCompare(b.loc));
   else if(state.cb.sort==='STATUS') rows.sort((a,b)=>a.status.localeCompare(b.status));
-  // BUS (default): group by location prefix, matching the capture's original order otherwise
-
   let list = '';
   rows.forEach(r=>{
-    const ratingCell = r.pullable
-      ? `<span class="cb-rating">${r.rating}</span>`
-      : `<span class="cb-rating circled">${r.rating}</span>`;
-    const statusCell = `<span class="${r.status==='IN'?'green':'white'} cb-status">${r.status}</span>`;
-    const dd = r.pullable
-      ? `<span class="cb-dd" onclick="cbToggle(${r.i})">▾</span>`
-      : '';
-    list += `<div class="cb-row"><span class="cb-name">${r.name}</span><span class="cb-loc">${r.loc}</span>${ratingCell}${statusCell}${dd}</div>`;
+    const rating = r.pullable ? `<span class="cbp-rt">${r.rating}</span>` : `<span class="cbp-rt ring">${r.rating}</span>`;
+    const st = `<span class="cbp-st ${r.status==='IN'?'in':'out'}">${r.status}</span>`;
+    const dd = r.pullable ? `<span class="cbp-pull" onclick="cbToggle(${r.i})">▼</span>` : '';
+    list += `<div class="cbp-row"><span class="cbp-nm">${r.name}</span><span class="cbp-lc">${r.loc}</span>${rating}${st}${dd}</div>`;
   });
-
+  setTimeout(cbSyncThumb,0);
   return `
-  <div class="row" style="margin-bottom:8px; gap:14px;">
-    <div><div class="grey" style="font-size:9.5px;">SORT BY:</div><span class="dropdown" onclick="cbCycleSort()">${state.cb.sort} <span class="arrow">▼</span></span></div>
-    <div><div class="grey" style="font-size:9.5px;">FILTER:</div><span class="dropdown" onclick="cbCycleFilter()">${state.cb.filter} <span class="arrow">▼</span></span></div>
-    <span class="btn" style="margin-left:auto; align-self:flex-end;" onclick="cbRefresh()">⟳</span>
-  </div>
-  <div class="cb-hdr"><span class="cb-name">NAME</span><span class="cb-loc">LOCATION</span><span class="cb-rating">RATING</span><span class="cb-status">STATUS</span></div>
-  <div class="cb-list">${list}</div>
-  `;
+  <div class="cbp">
+    <div class="cbp-lbls"><span class="l1">SORT BY:</span><span class="l2">FILTER:</span><span class="cbp-sim${state.cb.sim?' on':''}" onclick="cbSim()">SIM: ${state.cb.sim?'FAULTS':'NO FAULTS'}</span></div>
+    <div class="cbp-ctl">
+      <span class="cbp-dd d1" onclick="cbCycleSort()"><span class="in">${state.cb.sort}</span><span class="ar">▼</span></span>
+      <span class="cbp-dd d2" onclick="cbCycleFilter()"><span class="in">${state.cb.filter}</span><span class="ar">▼</span></span>
+      <span class="cbp-ref" onclick="cbRefresh()"><svg viewBox="0 0 40 30" width="100%" height="100%"><g fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M9 16a11 9 0 0 1 20-5"/><path d="M31 14a11 9 0 0 1-20 5"/></g><path d="M31 3v10h-10z" fill="#fff"/><path d="M9 27V17h10z" fill="#fff"/></svg></span>
+    </div>
+    <div class="cbp-hdr"><span class="nm">NAME</span><span class="lc">LOCATION</span><span class="rt">RATING</span><span class="st">STATUS</span></div>
+    <div class="cbp-body">
+      <div class="cbp-list" id="cbpList" onscroll="cbSyncThumb()">${list}</div>
+      <div class="cbp-sb"><span class="cbp-sbb dis" id="cbpUp" onclick="cbScrollBy(-1)">▲</span><div class="cbp-track" id="cbpTrack"><div class="cbp-thumb" id="cbpThumb"></div></div><span class="cbp-sbb" id="cbpDn" onclick="cbScrollBy(1)">▼</span></div>
+    </div>
+  </div>`;
 }
 
 const SYN_PAGES = {
@@ -4688,16 +4769,18 @@ function pageSynMain(){
 
 /* ---------- Modal dialog system (represents FMS "dialog box" pattern) ---------- */
 function openModal(title, bodyHtml){
+  closeCornerPopup();
   state.modalTitle = title;
   state.modalBody = bodyHtml;
-  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on','dp-on','dt-on','tc-on','mc-on','tm-on','ai-on');
+  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on','dp-on','dt-on','tc-on','mc-on','tm-on','ai-on','csc-on','fc-on','fx-on','mg-on','th-on','gi-on','ad-on');
   document.getElementById('modalOverlay').style.display = 'flex';
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').innerHTML = bodyHtml;
 }
 function closeModal(){
+  closeModal2();
   document.getElementById('modalOverlay').style.display = 'none';
-  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on','dp-on','dt-on','tc-on','mc-on','tm-on','ai-on');
+  document.getElementById('modalOverlay').classList.remove('nap-on','hd-on','dp-on','dt-on','tc-on','mc-on','tm-on','ai-on','csc-on','fc-on','fx-on','mg-on','th-on','gi-on','ad-on');
 }
 function openCornerPopup(headerHtml, bodyHtml){
   document.getElementById('cornerOverlay').style.display = 'block';
@@ -4752,24 +4835,28 @@ function toggleActMenu(ev){
 
 /* ---------- MSG... soft switch (FCOM 22-02-101) ---------- */
 function openMsgDialog(){
-  let html = '<div class="lbl" style="margin-bottom:6px;">NEW MESSAGES</div>';
-  if(state.messages.new.length===0){
-    html += '<div class="grey" style="margin-bottom:14px;">NONE</div>';
-  } else {
-    state.messages.new.forEach(m=>{
-      html += `<div class="${m.level==='caution'?'yellow':'val'}" style="margin-bottom:4px;">${m.text}</div>`;
-    });
-  }
-  html += '<div class="hr"></div><div class="lbl" style="margin:10px 0 6px;">OLD MESSAGES</div>';
-  if(state.messages.old.length===0){
-    html += '<div class="grey">NONE</div>';
-  } else {
-    state.messages.old.forEach(m=>{
-      html += `<div class="grey" style="margin-bottom:4px;">${m.text}</div>`;
-    });
-  }
-  html += `<div class="right" style="margin-top:18px;"><span class="btn" onclick="doneMsg()">DONE</span></div>`;
-  openModal('MESSAGES — FMS', html);
+  const X=x=>(x/3.85).toFixed(2)+'%', Y=y=>(y/5.12).toFixed(2)+'%', C=p=>(p/3.85).toFixed(2)+'cqw';
+  const T=(x,y,t,col,fs)=>`<div class="hd-t" style="left:${X(x)};top:${Y(y)};color:${col};font-size:${C(fs)};letter-spacing:0">${t}</div>`;
+  const LN=(x,y,w)=>`<div style="position:absolute;left:${X(x)};top:${Y(y)};width:${C(w)};height:${C(1.6)};background:#b9bdc0"></div>`;
+  const M=state.messages, n=M.new.length||1, o=M.old.length||1;
+  const step=Math.min(35,(455-60-2*34-8)/(n+o+0.0));
+  let y=60, b='';
+  b+=T(7,22,'MESSAGES - FMS','#c9cdd0',24);
+  b+=`<div style="position:absolute;left:0;right:0;top:${Y(40)};height:${C(2.6)};background:#171717"></div>`;
+  b+=T(49,y,'NEW MESSAGES','#c9cdd0',19)+LN(49,y+13,274);
+  y+=34;
+  if(!M.new.length){ b+=T(49,y,'NONE','#959b9f',24); y+=step; }
+  else M.new.forEach(m=>{ b+=T(49,y,m.text,m.level==='caution'?'#f2d12f':'#fbfbf8',24); y+=step; });
+  y+=Math.max(0,34-step)+0;
+  b+=T(49,y,'OLD MESSAGES','#c9cdd0',19)+LN(49,y+13,274);
+  y+=34;
+  if(!M.old.length){ b+=T(49,y,'NONE','#959b9f',24); }
+  else M.old.forEach(m=>{ b+=T(49,y,m.text,'#fbfbf8',24); y+=step; });
+  b+=`<div style="position:absolute;left:0;right:0;top:${Y(455)};bottom:0;background:#000"></div>`;
+  b+=T(6,468,(IS_FRAME?'FMS2':'FMS1'),'#e040e0',19);
+  b+=`<div class="hd-b" style="left:${X(291)};top:${Y(457)};width:${C(85)};height:${C(46)};font-size:${C(22)}" onclick="doneMsg()">DONE</div>`;
+  openModal('MESSAGES - FMS', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','mg-on');
 }
 function doneMsg(){
   state.messages.old = state.messages.old.concat(state.messages.new);
@@ -4802,43 +4889,37 @@ function openThrustDialog(){
     const toLbl = state.toThrust + (aprOn ? ' + APR' : flexOn ? ' + FLEX' : '');
     const rows = [['TO', toLbl], ['GA','GA'], ['MCT','MCT'], ['CLB','CLB'], ['CLB-1','CLB-1'], ['CLB-2','CLB-2']];
     const nextRow = (auto && !F.airborne) ? (F.clbThrust==='CLB'?'CLB':F.clbThrust) : null;
-    const list = rows.map(([k,lab])=>{
-      const on = (k==='TO' ? act==='TO' : act===k);
-      const nxt = nextRow===k ? '<span class="white" style="position:absolute; left:-44px; font-size:11px;">NEXT</span>' : '';
-      const flex = (k==='TO' && on && flexOn) ? `<span class="cyan val" style="margin-left:14px;">FLEX ${state.perf.entry.flex} °C</span>` : '';
-      return `<div class="row" style="position:relative; padding:5px 0; ${auto?'':'cursor:pointer;'}" onclick="thrustPick('${k}')">
-        ${nxt}<span class="${on?colr:'grey'}" style="width:22px;">${on?'◉':'○'}</span>
-        <span class="${on?colr:'val'} val" style="min-width:110px; white-space:nowrap;">${lab}</span>
-        <span class="grey" style="min-width:48px; text-align:right;">---</span><span class="grey" style="font-size:10px;">&nbsp;%N1</span>${flex}</div>`;
-    }).join('');
-    const alts = oei
-      ? `<div><div class="lbl">CRZ ALT</div><span class="val">${E.crzAlt||'-----'}</span></div>
-         <div><div class="lbl">DRIFTDOWN</div><span class="grey">-----</span></div>
-         <div><div class="lbl">OEI CLB</div><span class="grey">-----</span></div>`
-      : `<div><div class="lbl">CRZ ALT</div><span class="val">${E.crzAlt||'-----'}</span></div>
-         <div><div class="lbl">OPT ALT</div><span class="val">FL380</span></div>
-         <div><div class="lbl">MAX ALT</div><span class="val">FL380</span></div>`;
-    const html = `
-      <div class="row" style="align-items:flex-start; margin-bottom:10px; gap:18px;">
-        <div><div class="lbl">MODE TRANS</div><span class="dropdown" onclick="thrustToggleTrans()">${F.modeTrans} <span class="arrow">▼</span></span></div>
-        <div class="grid g3" style="flex:1; gap:14px;">${alts}</div>
-      </div>
-      <div class="hr"></div>
-      <div class="row" style="align-items:flex-start; gap:12px;">
-        <div style="flex:1; padding-left:44px;">${list}</div>
-        <div style="text-align:right;">
-          <div class="lbl">OEI FMS PERF</div>
-          ${oei ? `<span class="btn" onclick="thrustOeiCancel()">CNCL</span>` : `<span class="btn disabled" style="opacity:.4;">CNCL</span>`}
-        </div>
-      </div>
-      <div class="hr" style="margin-top:8px;"></div>
-      <div class="row" style="margin-top:10px; align-items:center;">
-        ${oei ? `<span class="yellow val">ENGINE OUT</span>`
-              : `<span class="checkbox" style="cursor:pointer;" onclick="state.fms.engineSync=!state.fms.engineSync; state.dlgRedraw();"><span class="box">${F.engineSync?'✓':''}</span></span><span class="grey">ENGINE SYNC</span>
-                 <span class="btn" style="margin-left:16px; opacity:.7;" onclick="state.fms.oei=true; state.dlgRedraw(); render();">SIM OEI</span>`}
-        <span class="right" style="margin-left:auto;"><span class="btn" onclick="state.dlgRedraw=null; closeModal();">DONE</span></span>
-      </div>`;
-    openModal('THRUST', html);
+    const X=x=>(x/6.45).toFixed(2)+'%', Y=y=>(y/4.22).toFixed(2)+'%', C=p=>(p/6.45).toFixed(2)+'cqw';
+    const MG='#e040e0', CY='#7fd4d9', cc = auto?MG:CY;
+    const T=(x,y,t,col,fs,st)=>`<div class="hd-t" style="left:${X(x)};top:${Y(y)};color:${col};font-size:${C(fs)};letter-spacing:0;${st||''}">${t}</div>`;
+    let b = T(9,18,'THRUST','#c9cdd0',25);
+    b += T(68,66,'MODE TRANS','#959b9f',18);
+    b += `<div class="hd-b" style="left:${X(69)};top:${Y(83)};width:${C(125)};height:${C(45)};justify-content:flex-start" onclick="thrustToggleTrans()"><div style="margin-left:${C(4)};width:${C(84)};height:${C(33)};background:#141214;display:flex;align-items:center;padding-left:${C(5)};font-size:${C(27)}">${F.modeTrans==='AUTO'?'AUT':'MAN'}</div><span style="margin-left:${C(11)};font-size:${C(24)}">▼</span></div>`;
+    const altCols = oei ? [['CRZ ALT',E.crzAlt||'-----'],['DRIFTDOWN','-----'],['OEI CLB','-----']] : [['CRZ ALT',E.crzAlt||'-----'],['OPT ALT','FL380'],['MAX ALT','FL380']];
+    [292,431,557].forEach((x,i)=>{ b += T(x,94,altCols[i][0],'#959b9f',18) + T(x,123,altCols[i][1],'#fbfbf8',22); });
+    [394,518].forEach(x=>{ b += `<div style="position:absolute;left:${X(x)};top:${Y(83)};width:${C(2)};height:${C(54)};background:#a9aeb2"></div>`; });
+    rows.forEach(([k,lab],i)=>{
+      const on = (k==='TO' ? act==='TO' : act===k), yy=176+i*35.4;
+      b += `<div style="position:absolute;left:${X(0)};top:${Y(yy-17)};width:${C(400)};height:${C(35)};${auto?'':'cursor:pointer;'}" onclick="thrustPick('${k}')"></div>`;
+      if(nextRow===k) b += T(1,yy,'NEXT','#fbfbf8',23);
+      b += `<div style="position:absolute;left:${X(66)};top:${Y(yy-11)};width:${C(22)};height:${C(22)};border-radius:50%;border:${C(3)} solid #959b9f;background:${on?`radial-gradient(circle,${cc} 0 46%,#2a2a2a 50% 100%)`:'#2a2a2a'};pointer-events:none"></div>`;
+      b += T(100,yy,lab,on?cc:'#fbfbf8',28);
+      b += `<div class="hd-t" style="left:${X(246)};top:${Y(yy)};width:${C(100)};text-align:right;color:${on?cc:'#fbfbf8'};font-size:${C(22)};letter-spacing:0">---</div>`;
+      b += T(357,yy,'%N1',on?cc:'#959b9f',22);
+    });
+    const flexRow = rows.findIndex(r=>r[0]==='TO');
+    if(act==='TO' && flexOn) b += T(439,176,`FLEX &nbsp;${state.perf.entry.flex}°C`,cc,24);
+    b += T(439,213,'OEI FMS PERF','#959b9f',21);
+    b += `<div class="hd-b ${oei?'':'dis'}" style="left:${X(439)};top:${Y(233)};width:${C(145)};height:${C(45)};font-size:${C(27)}" ${oei?'onclick="thrustOeiCancel()"':''}>CNCL</div>`;
+    if(oei) b += T(70,397,'ENGINE OUT','#f2d12f',24);
+    else {
+      b += `<div style="position:absolute;left:${X(70)};top:${Y(385)};width:${C(24)};height:${C(24)};border:${C(2.5)} solid #959b9f;background:#141214;color:#fbfbf8;font-size:${C(20)};display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="state.fms.engineSync=!state.fms.engineSync; state.dlgRedraw();">${F.engineSync?'✓':''}</div>`;
+      b += T(104,397,'ENGINE SYNC','#959b9f',21);
+      b += `<div class="hd-b" style="left:${X(300)};top:${Y(380)};width:${C(120)};height:${C(36)};font-size:${C(20)}" onclick="state.fms.oei=true; state.dlgRedraw(); render();">SIM OEI</div>`;
+    }
+    b += `<div class="hd-b" style="left:${X(558)};top:${Y(374)};width:${C(85)};height:${C(46)};font-size:${C(22)}" onclick="state.dlgRedraw=null; closeModal();">DONE</div>`;
+    openModal('THRUST', b);
+    document.getElementById('modalOverlay').classList.add('hd-on','th-on');
   };
   state.dlgRedraw=draw; draw();
 }
@@ -5741,7 +5822,7 @@ function fixCompute(F){
   const t=Math.round(etd+ttg)%1440;
   const fp=fuelPlan(); const fuel = isNaN(fp.atDest)||fp.atDest==null ? null : null;
   const blk=parseInt(E.fuelBlock,10)||parseInt(E.fob,10);
-  F.res={ll:pt.ll, dtg:Math.round(pt.along), ttg, eta:String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0'),
+  F.res={ll:pt.ll, dtg:Math.round(pt.along), dtgx:pt.along, ttg, eta:String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0'),
          fuel: blk ? Math.max(0, Math.round(blk-(parseInt(E.fuelTaxi,10)||0)-ttg/60*FF_CRZ)) : null};
 }
 function fixSetType(type, val, display){
@@ -5766,55 +5847,69 @@ function fixAbeam(){
   openFixDialog();
 }
 function fixGo(d){ state.fixPage=Math.max(0,Math.min(9,state.fixPage+d)); openFixDialog(); }
+function fixClear(){ state.fixes[state.fixPage]={ref:'',type:'',val:'',res:null,msg:''}; openFixDialog(); render(); }
+function fixInsert(){
+  const F=fixPageData(), r=F.res; if(!r){ dlgErr(); return; }
+  const E=state.fpln.entry; if(E.viaTo10To||E.viaTo10Via){ dlgErr('FPLN FULL'); return; }
+  const name='FIX'+String(state.fixPage+1).padStart(2,'0');
+  const w={name, lat:r.ll[0], lon:r.ll[1], basis:'FIX'};
+  const i=state.pilotWpts.findIndex(x=>x.name===name); if(i>=0) state.pilotWpts[i]=w; else state.pilotWpts.push(w);
+  let pos=1; const R=fixRoute();
+  if(R){ for(let k=1;k<=10;k++){ const t=E['viaTo'+k+'To']; if(!t) continue; const wi=wptInfo(t); if(!wi) continue;
+    let best=null; R.samples.forEach(sm=>{ const d=gcNm(wi.ll,sm.ll); if(!best||d<best.d) best={d,al:sm.along}; });
+    if(best && best.al<=r.dtgx) pos=k+1; } }
+  pos=Math.min(10,pos);
+  modTouch(); viaToShiftDown(pos); E['viaTo'+pos+'To']=name;
+  state.dlgRedraw=null; closeModal(); render();
+}
 function openFixDialog(){
   state.dlgRedraw = openFixDialog;
-  const F=fixPageData(), ref=F.ref?wptInfo(F.ref):null;
-  const set=(t,ph,key)=> `<span class="field ${F.type===t?'':'blank'}" style="cursor:pointer;" onclick="dlgPaste('${key}')">${F.type===t?F.disp:ph}</span>`;
-  let refInfo='';
-  if(ref){
-    const o=airportLL(state.fpln.entry.origin);
-    if(o){ const dtg=Math.round(gcNm(o,ref.ll)), ttg=dtg/FIX_GS*60;
-      const E=state.fpln.entry, etd=E.etd&&/^\d{4}$/.test(E.etd)?+E.etd.slice(0,2)*60+ +E.etd.slice(2):720, t=Math.round(etd+ttg)%1440;
-      const blk=parseInt(E.fuelBlock,10)||parseInt(E.fob,10);
-      refInfo=`<div class="grid g2" style="margin-bottom:6px;">
-        <div><div class="lbl">TTG</div><span class="val">${Math.floor(ttg/60)}:${String(Math.round(ttg%60)).padStart(2,'0')}</span></div>
-        <div><div class="lbl">DTG</div><span class="val">${dtg} NM</span></div></div>
-        <div class="grid g2" style="margin-bottom:12px;">
-        <div><div class="lbl">ALONG TRK ETA</div><span class="val">${String(Math.floor(t/60)).padStart(2,'0')}:${String(t%60).padStart(2,'0')}</span></div>
-        <div><div class="lbl">FUEL</div><span class="val">${blk?Math.max(0,Math.round(blk-(parseInt(E.fuelTaxi,10)||0)-ttg/60*FF_CRZ)):'-----'}</span></div></div>`;
-    }
+  const F=fixPageData(), ref=F.ref?wptInfo(F.ref):null, r=F.res, pg=state.fixPage;
+  const X=x=>(x/13.66).toFixed(2)+'%', Y=y=>(y/9.18).toFixed(2)+'%', W=w=>(w/13.66).toFixed(2)+'cqw', H=h=>(h/13.66).toFixed(2)+'cqw';
+  const T=(x,y,t,cls,st)=>`<div class="hd-t ${cls}" style="left:${X(x)};top:${Y(y)};${st||''}">${t}</div>`;
+  const G=(x,y,t)=>T(x,y,t,'hd-g','font-size:2.65cqw;letter-spacing:0;color:#c9cdd0');
+  const fld=(x,y,w,h,txt,key,al)=>`<div class="hd-f" style="left:${X(x)};top:${Y(y)};width:${W(w)};height:${H(h)};border-radius:.6cqw;justify-content:${al||'flex-start'};font-size:3.9cqw;" onclick="dlgPaste('${key}')">${txt}</div>`;
+  const pad3=n=>String(Math.round(n)).padStart(3,'0');
+  // values (typed, or computed from the crossing point)
+  let rad=F.type==='RAD'?F.disp:null, dist=F.type==='DIST'?F.val:null, eta=F.type==='ETA'?F.disp:null;
+  if(r && ref){
+    if(rad==null) rad=pad3(((brgTo(ref.ll,r.ll)-ref.magvar)%360+360)%360)+'°';
+    if(dist==null) dist=gcNm(ref.ll,r.ll).toFixed(1);
   }
-  const r=F.res;
-  const out = r ? `
-    <div class="hr"></div>
-    <div class="lbl" style="margin:8px 0 4px;">FIX${String(state.fixPage+1).padStart(2,'0')}</div>
-    <div class="cyan val" style="margin-bottom:6px;">${fmtLL(r.ll)}</div>
-    <div class="grid g2" style="margin-bottom:6px;">
-      <div><div class="lbl">DTG</div><span class="val">${r.dtg} NM</span></div>
-      <div><div class="lbl">TTG</div><span class="val">${Math.floor(r.ttg/60)}:${String(Math.round(r.ttg%60)).padStart(2,'0')}</span></div></div>
-    <div class="grid g2" style="margin-bottom:6px;">
-      <div><div class="lbl">ETA</div><span class="val">${r.eta}</span></div>
-      <div><div class="lbl">FUEL</div><span class="val">${r.fuel==null?'-----':r.fuel}</span></div></div>` : '';
-  const showLatLon = F.type==='LAT' && r ? fmtLon(r.ll[1]) : (F.type==='LON' && r ? fmtLat(r.ll[0]) : null);
-  const html = `
-    <div class="row" style="margin-bottom:10px;"><span class="lbl" style="margin-right:10px;">REF</span>${dlgField('fxRef','-----')}
-      <span class="right" style="margin-left:auto;">
-        <span class="btn" onclick="fixGo(-1)">◂</span> <span class="val">${state.fixPage+1}/10</span> <span class="btn" onclick="fixGo(1)">▸</span></span></div>
-    ${refInfo}
-    <div class="hr"></div>
-    <div class="row" style="margin:10px 0 8px;"><span class="lbl">ABEAM</span><span class="checkbox" onclick="fixAbeam()" style="cursor:pointer;"><span class="box">${F.type==='ABEAM'?'✓':''}</span></span></div>
-    <div class="row" style="margin-bottom:8px;"><span class="lbl">RAD CROSS</span>${set('RAD','---°','fxRad')}</div>
-    <div class="row" style="margin-bottom:8px;"><span class="lbl">DIST CROSS</span>${set('DIST','--- NM','fxDist')}</div>
-    <div class="row" style="margin-bottom:8px;"><span class="lbl">TIME OFST</span>${set('TIME','--- MIN','fxTime')}</div>
-    <div class="row" style="margin-bottom:8px;"><span class="lbl">ALONG TRK ETA</span>${set('ETA','--:--','fxEta')}</div>
-    <div class="grid g2" style="margin-bottom:6px;">
-      <div><div class="lbl">LAT CROSS</div>${F.type==='LON' && showLatLon ? `<span class="val">${showLatLon}</span>` : set('LAT','---°--.--','fxLat')}</div>
-      <div><div class="lbl">LON CROSS</div>${F.type==='LAT' && showLatLon ? `<span class="val">${showLatLon}</span>` : set('LON','----°--.--','fxLon')}</div>
-    </div>
-    ${out}
-    ${F.msg ? `<div class="yellow val" style="margin:8px 0;">${F.msg}</div>` : ''}
-    <div class="right" style="margin-top:8px;"><span class="btn" onclick="closeModal()">CLOSE</span></div>`;
-  openModal('FIX', html);
+  if(r && eta==null) eta=r.eta;
+  const dash=n=>'-'.repeat(n);
+  const latTxt = F.type==='LAT'?F.disp:(F.type==='LON'&&r?fmtLat(r.ll[0]):'---°--.--');
+  const lonTxt = F.type==='LON'?F.disp:(F.type==='LAT'&&r?fmtLon(r.ll[1]):'----°--.--');
+  let b = T(22,42,'FIX','hd-g','font-size:4.4cqw;color:#c9cdd0');
+  b += `<div style="position:absolute;left:0;right:0;top:${Y(78)};height:.4cqw;background:#1b1c1d"></div>`;
+  b += T(22,130,'FIX'+String(pg+1).padStart(2,'0'),'hd-w','font-size:4cqw');
+  b += G(22,190,'REFERENCE')+G(318,190,'RAD CROSS')+G(575,190,'DIST CROSS')+G(858,190,'ALONG TRACK ETA');
+  b += fld(25,229,254,71,F.ref||dash(5),'fxRef');
+  b += fld(322,229,135,71,rad?rad.replace('°',''):dash(3),'fxRad','center')+T(468,262,'°','hd-g','font-size:3.4cqw;color:#c9cdd0');
+  b += fld(580,229,177,71,dist!=null?dist:dash(4),'fxDist','flex-end')+T(773,262,'NM','hd-g','font-size:2.65cqw;letter-spacing:0;color:#c9cdd0');
+  b += fld(863,229,191,71,eta||dash(5),'fxEta','center');
+  b += G(22,343,'LAT CROSS')+G(363,343,'LON CROSS')+G(858,343,'TIME OFFSET');
+  b += fld(25,383,301,70,latTxt,'fxLat')+fld(368,383,335,70,lonTxt,'fxLon');
+  b += fld(863,383,130,70,F.type==='TIME'?F.disp.replace(' MIN',''):dash(3),'fxTime','center')+T(1010,418,'MIN','hd-g','font-size:2.65cqw;letter-spacing:0;color:#c9cdd0');
+  const ab=F.type==='ABEAM';
+  b += `<div class="hd-b" style="left:${X(20)};top:${Y(487)};width:${W(342)};height:${H(100)};font-size:3.7cqw;letter-spacing:.35cqw;${ab?'background:#6a7075;':''}" onclick="fixAbeam()">ABEAM REF</div>`;
+  if(r){
+    const ttg=`${Math.floor(r.ttg/60)}:${String(Math.round(r.ttg%60)).padStart(2,'0')}`;
+    b += T(20,638,ab?'ABEAM '+F.ref:'','hd-w','font-size:2.6cqw;letter-spacing:0')+T(285,638,'TTG','hd-g','font-size:3cqw;letter-spacing:0;color:#c9cdd0')+T(403,638,ttg,'hd-w','font-size:3cqw;letter-spacing:0')
+      + T(580,638,'DTG','hd-g','font-size:3cqw;letter-spacing:0;color:#c9cdd0')+T(686,638,r.dtgx.toFixed(1),'hd-w','font-size:3cqw;letter-spacing:0')+T(795,638,'NM','hd-g','font-size:3cqw;letter-spacing:0;color:#c9cdd0')
+      + T(905,638,'FUEL','hd-g','font-size:3cqw;letter-spacing:0;color:#c9cdd0')+T(1036,638,r.fuel==null?'-----':r.fuel,'hd-w','font-size:3cqw;letter-spacing:0')+T(1168,638,'KG','hd-g','font-size:3cqw;letter-spacing:0;color:#c9cdd0');
+  } else if(F.msg){ b += T(20,638,F.msg,'hd-w','font-size:3cqw;letter-spacing:0;color:#f2d12f'); }
+  b += `<div class="hd-b" style="left:${X(20)};top:${Y(690)};width:${W(217)};height:${H(102)};font-size:3.9cqw;letter-spacing:.35cqw" onclick="fixClear()">CLEAR</div>`;
+  b += `<div class="hd-b ${r?'':'dis'}" style="left:${X(882)};top:${Y(690)};width:${W(468)};height:${H(102)};font-size:3.9cqw;letter-spacing:.35cqw" ${r?'onclick="fixInsert()"':''}>INSERT AS WPT</div>`;
+  b += `<div class="hd-b" style="left:${X(1162)};top:${Y(808)};width:${W(188)};height:${H(104)};font-size:3.9cqw" onclick="closeModal()">DONE</div>`;
+  // scrollbar: pages 1..10
+  const trk=313, th=100, tp=(trk-th)*pg/9;
+  b += `<div class="hd-b ${pg===0?'dis':''}" style="left:${X(1252)};top:${Y(165)};width:${W(98)};height:${H(97)};font-size:5cqw" onclick="fixGo(-1)">▲</div>`;
+  b += `<div style="position:absolute;left:${X(1252)};top:${Y(262)};width:${W(10)};height:${H(316)};background:#1b1c1d;border-left:.3cqw solid #8f9599"></div>`;
+  b += `<div style="position:absolute;left:${X(1260)};top:${Y(265+tp)};width:${W(27)};height:${H(th)};background:#8f9599;border:.3cqw solid;border-color:#b4babe #53575a #53575a #b4babe"></div>`;
+  b += `<div class="hd-b ${pg===9?'dis':''}" style="left:${X(1252)};top:${Y(578)};width:${W(98)};height:${H(99)};font-size:5cqw" onclick="fixGo(1)">▼</div>`;
+  openModal('FIX', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','fx-on');
 }
 
 function copyToSec(){
@@ -5944,28 +6039,52 @@ function openSatDeselect(){
   openModal('SAT DESELECT', html);
 }
 /* GNSS INFORMATION — PG 10-130 */
+state.gnssSvc = state.gnssSvc || {1:{WAAS:true,EGNOS:true,MSAS:false,GAGAN:false}, 2:{WAAS:true,EGNOS:true,MSAS:false,GAGAN:false}};
+function closeModal2(){
+  const o=document.getElementById('modalOverlay2'); if(!o) return;
+  o.style.display='none'; o.classList.remove('hd-on','gs-on');
+}
 function openGnssInfo(){
-  const html = `
-    <table class="simple" style="margin-bottom:12px;">
-      <tr><th></th><th>GNSS1</th><th>GNSS2</th></tr>
-      <tr><td class="grey">ALTITUDE</td><td class="grey">not specified</td><td class="grey">not specified</td></tr>
-      <tr><td class="grey">HEIGHT</td><td class="grey">not specified</td><td class="grey">not specified</td></tr>
-      <tr><td class="grey">MODE</td><td class="grey">not specified</td><td class="grey">not specified</td></tr>
-      <tr><td class="grey">INTEGRITY</td><td class="grey">not specified</td><td class="grey">not specified</td></tr>
-    </table>
-    <div class="yellow" style="font-size:10px; margin-bottom:12px;">When SAT FAULT is shown the satellite is not working correctly. No pilot action is required — the indication comes directly from the GNSS, not the FMS. Some GNSS measurements relate to LPV approaches and are hidden when the LPV function is disabled.</div>
-    <div class="row"><span class="btn" onclick="openServicesDialog()">SERVICES...</span>
-      <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeModal()">CLOSE</span></span></div>
-  `;
-  openModal('GNSS INFORMATION', html);
+  const X=x=>(x/6.14).toFixed(2)+'%', Y=y=>(y/4.08).toFixed(2)+'%', C=p=>(p/6.14).toFixed(2)+'cqw';
+  const T=(x,y,t,col,fs,st)=>`<div class="hd-t" style="left:${X(x)};top:${Y(y)};color:${col};font-size:${C(fs)};letter-spacing:.02em;${st||''}">${t}</div>`;
+  const LN=(x,y,w)=>`<div style="position:absolute;left:${X(x)};top:${Y(y)};width:${C(w)};height:${C(1.6)};background:#b9bdc0"></div>`;
+  const G='#959b9f', W='#fbfbf8';
+  let b=T(11,28,'GNSS INFORMATION','#c9cdd0',23);
+  b+=`<div style="position:absolute;left:0;right:0;top:${Y(48)};height:${C(2.4)};background:#171717"></div>`;
+  b+=T(67,83,'ALT (FT)',G,17)+T(246,83,'HT (FT)',G,17)+LN(67,97,281);
+  b+=`<div class="hd-b" style="left:${X(361)};top:${Y(58)};width:${C(227)};height:${C(40)};justify-content:flex-start"><div style="margin-left:${C(5)};width:${C(190)};height:${C(30)};background:#141214;display:flex;align-items:center;padding-left:${C(4)};font-size:${C(19)};white-space:nowrap;overflow:hidden">HDOP/VDOP/ HUL</div><span style="margin-left:${C(6)};font-size:${C(20)}">▼</span></div>`;
+  [1,2].forEach((n,i)=>{
+    const y=114+i*31;
+    b+=T(11,y,'GNSS'+n,G,16)+T(96,y,'---',W,25)+T(272,y,'---',W,25)+T(381,y,'-.-',W,25)+T(447,y,'-.-',W,25)+T(533,y,'--',W,25)+T(565,y+2,'NM',G,15);
+  });
+  b+=T(67,173,'MODE',G,17)+LN(67,187,216);
+  b+=T(11,204,'GNSS1',G,16)+T(70,204,'---',W,22)+T(11,234,'GNSS2',G,16)+T(70,234,'---',W,22);
+  b+=T(67,266,'SVC IN USE',G,17)+LN(67,279,282);
+  b+=T(11,303,'GNSS1',G,16)+T(70,303,'---',W,22)+T(11,345,'GNSS2',G,16)+T(70,345,'---',W,22);
+  b+=`<div class="hd-b" style="left:${X(371)};top:${Y(275)};width:${C(148)};height:${C(42)};font-size:${C(22)}" onclick="openGnssServices(1)">SERVICES...</div>`;
+  b+=`<div class="hd-b" style="left:${X(371)};top:${Y(323)};width:${C(148)};height:${C(42)};font-size:${C(22)}" onclick="openGnssServices(2)">SERVICES...</div>`;
+  b+=`<div class="hd-b" style="left:${X(527)};top:${Y(357)};width:${C(77)};height:${C(44)};font-size:${C(21)}" onclick="closeModal()">DONE</div>`;
+  openModal('GNSS INFORMATION', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','gi-on');
 }
 /* SERVICES — PG 10-132: enable/disable SBAS service providers */
-function openServicesDialog(){
-  const html = `
-    <div class="right"><span class="btn" onclick="openGnssInfo()">BACK</span></div>
-  `;
-  openModal('SERVICES', html);
+function gnssSvcToggle(n,k){ state.gnssSvc[n][k]=!state.gnssSvc[n][k]; openGnssServices(n); }
+function openGnssServices(n){
+  const X=x=>(x/5.16).toFixed(2)+'%', Y=y=>(y/1.74).toFixed(2)+'%', C=p=>(p/5.16).toFixed(2)+'cqw';
+  const T=(x,y,t,col,fs)=>`<div class="hd-t" style="left:${X(x)};top:${Y(y)};color:${col};font-size:${C(fs)};letter-spacing:.02em">${t}</div>`;
+  let b=T(12,21,'SERVICES - GNSS'+n,'#e8eaeb',20);
+  b+=`<div style="position:absolute;left:0;right:0;top:${Y(34)};height:${C(2.4)};background:#171717"></div>`;
+  [['WAAS',28],['EGNOS',148],['MSAS',269],['GAGAN',391]].forEach(([k,x])=>{
+    const on=state.gnssSvc[n][k];
+    b+=`<div style="position:absolute;left:${X(x)};top:${Y(69)};width:${C(23)};height:${C(23)};border:${C(2.4)} solid #c9cdd0;background:#141214;color:#3fb4f0;font-size:${C(24)};display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1" onclick="gnssSvcToggle(${n},'${k}')">${on?'✓':''}</div>`;
+    b+=`<div class="hd-t" style="left:${X(x+34)};top:${Y(80)};color:${on?'#3fb4f0':'#fbfbf8'};font-size:${C(21)};letter-spacing:.02em;pointer-events:none">${k}</div>`;
+  });
+  b+=`<div class="hd-b" style="left:${X(428)};top:${Y(124)};width:${C(77)};height:${C(42)};font-size:${C(21)}" onclick="closeModal2()">DONE</div>`;
+  const o=document.getElementById('modalOverlay2');
+  document.getElementById('modalBody2').innerHTML=b;
+  o.classList.add('hd-on','gs-on'); o.style.display='flex';
 }
+function openServicesDialog(){ openGnssServices(1); }
 /* NAVAID INHIBIT — PG 10-117: up to 25 NAVAIDs, list resets after a cold start */
 function openNavaidInhibit(){
   let grid = '<div class="grid g4" style="margin-bottom:12px;">';
@@ -6500,20 +6619,28 @@ function openArrivalsDialog(){
   openCornerPopup(header, body);
 }
 function openArrivalData(){
-  const html = `
-    <div class="grid g2" style="margin-bottom:10px;">
-      <div><div class="lbl">GS ANGLE</div><span class="grey">not specified</span></div>
-      <div><div class="lbl">FINAL APPR CRS</div>${finalApprCrs()?`<span class="val">${finalApprCrs()}</span>`:'<span class="grey">not specified</span>'}</div>
-    </div>
-    <div class="grid g2" style="margin-bottom:12px;">
-      <div><div class="lbl">LOC FREQ</div><span class="grey">not specified</span></div>
-      <div><div class="lbl">WGS-84</div><span class="grey">not specified</span></div>
-    </div>
-    <div class="yellow" style="font-size:10.5px; margin-bottom:14px;">Information on this dialog box is for reference only. To change it, select a new approach through the ARRIVALS dialog box.</div>
-    <div class="row"><span class="btn" onclick="openArrivalsDialog()">ARRIVALS...</span>
-      <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeModal()">CLOSE</span></span></div>
-  `;
-  openModal('ARRIVAL DATA', html);
+  const X=x=>(x/7.75).toFixed(2)+'%', Y=y=>(y/7.82).toFixed(2)+'%', C=p=>(p/7.75).toFixed(2)+'cqw';
+  const T=(x,y,t,col,fs)=>`<div class="hd-t" style="left:${X(x)};top:${Y(y)};color:${col};font-size:${C(fs)};letter-spacing:0">${t}</div>`;
+  const G='#c3c7ca', W='#fbfbf8', E=state.fpln.entry, A=state.fpln.arr;
+  const crs=finalApprCrs()||'---°';
+  const hdr=((E.dest||'----')+' '+(A.appr||'')).trim();
+  let b=T(10,23,'ARRIVAL DATA',G,36)+T(598,22,'ACT',W,36)+T(693,24,state.fplnMode==='ACT'?'FPLN':state.fplnMode+' FPLN',G,25);
+  b+=`<div style="position:absolute;left:0;right:0;top:${Y(46)};height:${C(3)};background:#1d1d1d"></div>`;
+  b+=T(175,85,hdr,W,36);
+  const dd=(x,y,w,h,fx,fw,fh,txt)=>`<div class="hd-b" style="left:${X(x)};top:${Y(y)};width:${C(w)};height:${C(h)};justify-content:flex-start;cursor:default"><div style="margin-left:${C(fx)};width:${C(fw)};height:${C(fh)};background:#141214;display:flex;align-items:center;padding-left:${C(8)};font-size:${C(36)}">${txt}</div><span style="margin-left:${C(w-fx-fw-34)};font-size:${C(30)}">▼</span></div>`;
+  b+=T(14,145,'APPROACH MODE',G,29)+dd(14,168,276,70,16,192,48,'---');
+  b+=T(14,253,'CHANNEL',G,29)+T(14,300,'-----',W,36);
+  b+=T(445,261,'FINAL APPR CRS',G,29)+T(445,300,crs,W,36);
+  b+=T(14,369,'RWY THRESHOLD ELEV',G,29)+T(14,412,'---',W,36)+T(140,412,'FT',W,36);
+  b+=T(445,369,'GP ANGLE',G,29)+T(445,410,'-.--°',W,36);
+  b+=T(14,478,'RNP FAF-MAP / EPU',G,29)+T(14,533,'---',W,36)+T(225,533,'-.--',W,36)+T(308,531,'NM',G,25);
+  b+=T(445,478,'GP MODE',G,29)+dd(424,499,214,71,17,126,48,'---');
+  b+=T(433,637,'WGS-84',G,29)+T(433,685,'---',W,36);
+  b+=`<div style="position:absolute;left:0;right:0;top:${Y(710)};bottom:0;background:#000"></div>`;
+  b+=`<div class="hd-b" style="left:${X(14)};top:${Y(627)};width:${C(248)};height:${C(70)};font-size:${C(34)}" onclick="closeModal(); openArrivalsDialog()">ARRIVALS...</div>`;
+  b+=`<div class="hd-b" style="left:${X(628)};top:${Y(698)};width:${C(132)};height:${C(70)};font-size:${C(34)}" onclick="closeModal()">DONE</div>`;
+  openModal('ARRIVAL DATA', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','ad-on');
 }
 
 /* ---------- TEMP COMP dialog (PG 10-135..137) ---------- */
@@ -6527,16 +6654,27 @@ function openTempComp(){
   const T=(x,y,t,cls,st)=>`<div class="hd-t ${cls}" style="left:${X(x)};top:${Y(y)};${st||''}">${t}</div>`;
   const on = state.fms.tempComp==='ON';
   const dest=(state.fpln.entry.dest||'').toUpperCase()||'----';
-  let b = T(22,45,'TEMP COMP - <span style="color:#fbfbf8">'+dest+'</span>','hd-g','font-size:4.8cqw')+`<div class="hd-t" style="right:2%;top:${Y(50)}"><span class="hd-w" style="font-size:4.4cqw">${state.fplnMode}</span> <span class="hd-g" style="font-size:3.4cqw">FPLN</span></div><div class="hd-hr" style="top:9.3%"></div>`;
-  b += T(58,200,'OAT','hd-g')+`<div class="hd-f" style="left:${X(152)};top:${Y(165)};width:${W(161)};height:${H(70)};justify-content:flex-end;${hot?'color:#f2d12f;':''}" onclick="dlgPaste('tcOat')">${oat===null||oat===undefined?'<span style="color:#959b9f">---</span>':oat}</div>`+T(325,200,'°C','hd-g');
-  b += T(630,200,'ISAΔ','hd-g')+T(770,200,isaDelta===null?'---':(isaDelta>0?'+':'')+isaDelta,'hd-w',hot?'color:#f2d12f':'')+T(835,200,'°C','hd-g');
+  let b = T(22,45,'TEMP COMP - '+dest,'hd-g','font-size:5.6cqw;color:#c9cdd0')+`<div class="hd-t" style="right:2%;top:${Y(50)}"><span class="hd-w" style="font-size:5.8cqw">${state.fplnMode}</span> <span class="hd-g" style="font-size:4.2cqw;color:#c9cdd0">FPLN</span></div><div class="hd-hr" style="top:9.3%"></div>`;
+  b += T(50,200,'OAT','hd-g','font-size:4.4cqw;color:#c9cdd0')+`<div class="hd-f" style="left:${X(152)};top:${Y(165)};width:${W(161)};height:${H(70)};justify-content:flex-end;font-size:5.6cqw;${hot?'color:#f2d12f;':''}" onclick="dlgPaste('tcOat')">${oat===null||oat===undefined?'<span style="color:#959b9f">---</span>':oat}</div>`+T(325,200,'°C','hd-g','font-size:4.6cqw;color:#c9cdd0');
+  b += T(625,200,'ISAΔ','hd-g','font-size:4.4cqw;color:#c9cdd0')+T(762,200,isaDelta===null?'---':(isaDelta>0?'+':'')+isaDelta,'hd-w','font-size:4.4cqw;'+(hot?'color:#f2d12f':''))+T(838,200,'°C','hd-g','font-size:4.6cqw;color:#c9cdd0');
   b += `<div class="hd-f ${canArm?'':'dim'}" style="left:${X(68)};top:${Y(320)};width:${W(60)};height:${H(55)};justify-content:center;color:#7fd4d9;font-size:5cqw;${canArm?'':'opacity:.4;'}" ${canArm?`onclick="state.fms.tempComp='${on?'OFF':'ON'}';modTouch&&0;openTempComp();render()"`:''}>${on?'✓':''}</div>`;
-  b += T(152,348,'TEMP COMP ON','hd-g',`font-size:5cqw;color:${on?'#7fd4d9':'#959b9f'}`);
+  b += T(152,348,'TEMP COMP ON','hd-g',`font-size:6.2cqw;color:${on?'#4fc3f7':'#959b9f'}`);
+  if(on){
+    const msl=state.tcMsl?+state.tcMsl:null, dc=(state.fpln.entry.dest||'').toUpperCase(), ap=NAV.a[dc], elev=ap&&ap[3]!=null?ap[3]:null;
+    let corr=null;
+    if(msl!=null && elev!=null && isaDelta!==null){
+      const hgt=Math.max(0,msl-elev); corr=Math.round(hgt*(-isaDelta)/(273+oat-0.5*0.00198*hgt)); if(corr<0) corr=0;
+    }
+    b += T(144,564,'MSL ALTITUDE','hd-g','font-size:4.4cqw;color:#c9cdd0')+`<div class="hd-f" style="left:${X(636)};top:${Y(526)};width:${W(196)};height:${H(74)};justify-content:flex-end;font-size:5.6cqw" onclick="dlgPaste('tcMsl')">${msl!=null?msl:'<span style="color:#959b9f">-----</span>'}</div>`+T(852,564,'FT','hd-g','font-size:4.4cqw;color:#c9cdd0');
+    b += T(144,646,'CORRECTION','hd-g','font-size:4.4cqw;color:#c9cdd0')+`<div class="hd-t hd-w" style="right:${W(145).replace('cqw','')}%;top:${Y(646)};font-size:4.4cqw">${corr!=null?corr:'---'}</div>`+T(852,646,'FT','hd-g','font-size:4.4cqw;color:#c9cdd0');
+    b += T(144,729,'CORRECTED ALTITUDE','hd-g','font-size:4.4cqw;color:#c9cdd0')+`<div class="hd-t hd-w" style="right:${W(145).replace('cqw','')}%;top:${Y(729)};font-size:4.4cqw">${corr!=null?msl+corr:'---'}</div>`+T(852,729,'FT','hd-g','font-size:4.4cqw;color:#c9cdd0');
+  }
   b += `<div class="hd-bar" style="left:${X(10)};top:${Y(818)};width:${W(710)};height:${H(78)}"></div>`+(hot?T(24,857,'UNABLE TEMP COMP','hd-w'):'');
-  b += `<div class="hd-b" style="left:${X(738)};top:${Y(797)};width:${W(177)};height:${H(98)}" onclick="closeModal()">DONE</div>`;
+  b += `<div class="hd-b" style="left:${X(738)};top:${Y(797)};width:${W(177)};height:${H(98)};font-size:5.4cqw" onclick="closeModal()">DONE</div>`;
   openModal('TEMP COMP', b);
   document.getElementById('modalOverlay').classList.add('hd-on','tc-on');
 }
+DLG_HANDLERS.tcMsl = t=>{ if(!/^\d{3,5}$/.test(t)) return false; state.tcMsl=t; return true; };
 DLG_HANDLERS.tcOat = t=>{ if(!/^-?\d{1,2}$/.test(t)) return false; setTempCompOatSilent(+t); return true; };
 function setTempCompOatSilent(v){
   if((v-15)>0 && state.fms.tempComp==='ON') pushMessage('UNABLE TEMP COMP');
@@ -6550,40 +6688,89 @@ function setTempCompOat(v){
 }
 
 /* ---------- CSC dialog (PG 10-95) ---------- */
+function cscScroll(side,d){
+  const n=legsWaypoints().length, k='csc'+side; state.dlg=state.dlg||{};
+  state.dlg[k]=Math.max(0,Math.min(Math.max(0,n-4),(state.dlg[k]||0)+d)); openCscDialog();
+}
+function cscPick(side,w){ state.csc=state.csc||{}; state.csc[side]=w; openCscDialog(); render(); }
+function cscDelete(){ state.csc={spd:'',entry:'',exit:''}; state.dlg=state.dlg||{}; state.dlg.cscentry=0; state.dlg.cscexit=0; openCscDialog(); render(); }
+DLG_HANDLERS.cscSpd = t=>{
+  if(!/^(\d{3})?(\/?\.\d{2})?$/.test(t) || !t) return false;
+  state.csc=state.csc||{}; state.csc.spd=t; return true;
+};
 function openCscDialog(){
-  const html = `
-    <div class="row" style="margin-bottom:10px;"><span class="lbl">SPD</span>${field('---/.--',{blank:true})}</div>
-    <div class="grid g2" style="margin-bottom:10px;">
-      <div><div class="lbl">ENTRY WPT</div>${field('-----',{blank:true})}</div>
-      <div><div class="lbl">EXIT WPT</div>${field('-----',{blank:true})}</div>
-    </div>
-    <div class="row"><span class="btn" onclick="closeModal()">DELETE CSC</span>
-      <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeModal()">CLOSE</span></span></div>
-  `;
-  openModal('CSC', html);
+  state.csc = state.csc || {spd:'',entry:'',exit:''}; state.dlg = state.dlg || {};
+  state.dlgRedraw = openCscDialog;
+  const X=x=>(x/5.58).toFixed(2)+'%', Y=y=>(y/7.58).toFixed(2)+'%', W=w=>(w/5.58).toFixed(2)+'cqw', H=h=>(h/5.58).toFixed(2)+'cqw';
+  const T=(x,y,t,cls,st)=>`<div class="hd-t ${cls}" style="left:${X(x)};top:${Y(y)};${st||''}">${t}</div>`;
+  const C=state.csc, wps=legsWaypoints();
+  let b = T(14,40,'CSC','hd-g','font-size:7.4cqw')
+    + `<div class="hd-t" style="right:2%;top:${Y(40)}"><span class="hd-w" style="font-size:7cqw">${state.fplnMode}</span> <span class="hd-g" style="font-size:5.4cqw">FPLN</span></div>`;
+  b += T(14,118,'SPD','hd-g','font-size:6.2cqw');
+  b += `<div class="hd-f" style="left:${X(101)};top:${Y(88)};width:${W(136)};height:${H(56)};justify-content:center;font-size:${C.spd?'7.8cqw':'5cqw'};${C.spd?'':'color:#959b9f;'}" onclick="dlgPaste('cscSpd')">${C.spd||'---/.--'}</div>`;
+  b += T(14,202,'ENTRY WPT','hd-g','font-size:6.2cqw')+T(286,202,'EXIT WPT','hd-g','font-size:6.2cqw');
+  [['entry',12],['exit',284]].forEach(([side,x0])=>{
+    const sel=C[side]||'', off=Math.min(state.dlg['csc'+side]||0, Math.max(0,wps.length-4));
+    b += `<div style="position:absolute;left:${X(x0)};top:${Y(225)};width:${W(256)};height:${H(65)};background:#000;color:#7fd4d9;font-size:9cqw;display:flex;align-items:center;padding-left:${W(22)}">${sel||''}</div>`;
+    b += `<div style="position:absolute;left:${X(x0)};top:${Y(296)};width:${W(256)};height:${H(342)};background:#000;border:.25cqw solid #8f9599"></div>`;
+    wps.slice(off,off+4).forEach((w,i)=>{
+      b += `<div class="hd-t" style="left:${X(x0+22)};top:${Y(332+78*i)};color:${w===sel?'#7fd4d9':'#fbfbf8'};font-size:7cqw;cursor:pointer;" onclick="cscPick('${side}','${w}')">${w}</div>`;
+    });
+    const n=wps.length, trk=160, th=n>4?Math.max(30,trk*4/n):trk, tp=n>4?(trk-th)*off/(n-4):0;
+    b += `<div class="hd-b" style="left:${X(x0+168)};top:${Y(300)};width:${W(83)};height:${H(87)};font-size:7cqw" onclick="cscScroll('${side}',-1)">▲</div>`;
+    b += `<div class="hd-b" style="left:${X(x0+168)};top:${Y(547)};width:${W(83)};height:${H(83)};font-size:7cqw" onclick="cscScroll('${side}',1)">▼</div>`;
+    b += `<div style="position:absolute;left:${X(x0+168)};top:${Y(387+(n>4?tp:0))};width:${W(30)};height:${H(n>4?th:trk)};background:#8f9599;border:.35cqw solid;border-color:#b4babe #53575a #53575a #b4babe"></div>`;
+  });
+  b += `<div class="hd-b" style="left:${X(15)};top:${Y(656)};width:${W(330)};height:${H(86)};font-size:8cqw" onclick="cscDelete()">DELETE CSC</div>`;
+  b += `<div class="hd-b" style="left:${X(385)};top:${Y(656)};width:${W(158)};height:${H(86)};font-size:8cqw" onclick="closeModal()">DONE</div>`;
+  openModal('CSC', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','csc-on');
 }
 
 /* ---------- FUEL CALCULATOR dialog (PG 10-129) ---------- */
+function fcWpt(id){ const w=wptInfo(id); return w?w.ll:null; }
+function fcCalc(){
+  const F=state.fc||{}; let dist=null;
+  const a=F.fromPpos ? (airportLL((state.gnssOrigin||'').toUpperCase())||null) : (F.from?fcWpt(F.from):null);
+  const t=F.to?fcWpt(F.to):null;
+  if(a&&t) dist=Math.round(gcNm(a,t)); else if(F.dist) dist=+F.dist;
+  const gs=F.gs?+F.gs:null, ff=F.ff?+F.ff:null;
+  let req=null, ete=null;
+  if(dist!=null && gs){ const hrs=dist/gs; ete=Math.round(hrs*60); if(ff) req=Math.round(hrs*ff); }
+  return {dist,gs,ff,req,ete};
+}
+function fcSet(k,v){ state.fc=state.fc||{}; state.fc[k]=v; }
+DLG_HANDLERS.fcFrom = t=>{ if(!wptInfo(t)) return 'ID NOT FOUND'; fcSet('from',t); fcSet('fromPpos',false); fcSet('dist',''); return true; };
+DLG_HANDLERS.fcTo = t=>{ if(!wptInfo(t)) return 'ID NOT FOUND'; fcSet('to',t); fcSet('dist',''); return true; };
+DLG_HANDLERS.fcDist = t=>{ if(!/^\d{1,4}$/.test(t)) return false; fcSet('dist',t); return true; };
+DLG_HANDLERS.fcFf = t=>{ if(!/^\d{3,5}$/.test(t)) return false; fcSet('ff',t); return true; };
+DLG_HANDLERS.fcGs = t=>{ if(!/^\d{2,3}$/.test(t)) return false; fcSet('gs',t); return true; };
+function fcPpos(){ if(!airportLL((state.gnssOrigin||'').toUpperCase())) return; fcSet('fromPpos',true); fcSet('from',''); fcSet('dist',''); openFuelCalc(); render(); }
+function fcClear(){ state.fc={from:'',to:'',dist:'',ff:'',gs:'',fromPpos:false}; openFuelCalc(); render(); }
 function openFuelCalc(){
-  const html = `
-    <div class="grid g2" style="margin-bottom:10px;">
-      <div><div class="lbl">FROM</div>${field('-----',{blank:true})}</div>
-      <div><div class="lbl">TO</div>${field('-----',{blank:true})}</div>
-    </div>
-    <div class="grid g3" style="margin-bottom:12px;">
-      <div><div class="lbl">DIST</div>${field('---- NM',{blank:true})}</div>
-      <div><div class="lbl">FUEL FLOW</div>${field('---- KG/HR',{blank:true})}</div>
-      <div><div class="lbl">GS</div>${field('--- KT',{blank:true})}</div>
-    </div>
-    <div class="grid g2" style="margin-bottom:14px;">
-      <div><div class="lbl">FUEL REQUIRED</div><span class="grey">—</span></div>
-      <div><div class="lbl">ETE</div><span class="grey">—</span></div>
-    </div>
-    <div class="row"><span class="btn" onclick="openFuelCalc()">PPOS</span>
-      <span class="btn" onclick="closeModal()">CLEAR</span>
-      <span class="right" style="margin-left:auto;"><span class="btn" onclick="closeModal()">CLOSE</span></span></div>
-  `;
-  openModal('FUEL CALCULATOR', html);
+  state.fc = state.fc || {from:'',to:'',dist:'',ff:'',gs:'',fromPpos:false};
+  state.dlgRedraw = openFuelCalc;
+  const F=state.fc, R=fcCalc();
+  const X=x=>(x/5.95).toFixed(2)+'%', Y=y=>(y/3.5).toFixed(2)+'%', W=w=>(w/5.95).toFixed(2)+'cqw', H=h=>(h/5.95).toFixed(2)+'cqw';
+  const T=(x,y,t,cls,st)=>`<div class="hd-t ${cls}" style="left:${X(x)};top:${Y(y)};${st||''}">${t}</div>`;
+  const fld=(x,y,w,h,txt,key,al)=>`<div class="hd-f" style="left:${X(x)};top:${Y(y)};width:${W(w)};height:${H(h)};border-radius:.9cqw;justify-content:${al||'flex-start'};font-size:4.2cqw;font-weight:bold;" onclick="dlgPaste('${key}')">${txt}</div>`;
+  const dash=(n)=>'-'.repeat(n);
+  const fromTxt = F.fromPpos ? 'PPOS' : (F.from||dash(5));
+  let b = T(12,22,'FUEL CALCULATOR','hd-w','font-size:4.8cqw;letter-spacing:.1cqw');
+  b += `<div style="position:absolute;left:0;right:0;top:${Y(41)};height:.35cqw;background:#1b1c1d"></div>`;
+  b += T(12,90,'FROM','hd-g','font-size:3cqw')+fld(74,73,323,34,fromTxt,'fcFrom');
+  b += `<div class="hd-b" style="left:${X(403)};top:${Y(62)};width:${W(92)};height:${H(50)};font-size:5.2cqw" onclick="fcPpos()">PPOS</div>`;
+  b += T(12,127,'TO','hd-g','font-size:3cqw')+fld(74,112,323,33,F.to||dash(5),'fcTo');
+  b += T(12,167,'DIST','hd-g','font-size:3cqw')+fld(74,150,97,34,R.dist!=null?R.dist:dash(4),'fcDist','center')+T(182,167,'NM','hd-g','font-size:3cqw');
+  b += T(279,166,'FUEL FLOW','hd-g','font-size:3cqw')+fld(394,150,98,34,F.ff||dash(4),'fcFf','center')+T(503,167,'KG/H','hd-g','font-size:3cqw');
+  b += T(12,208,'GND SPD','hd-g','font-size:3cqw')+fld(110,190,68,34,F.gs||dash(3),'fcGs','center')+T(193,208,'KTS','hd-g','font-size:3cqw');
+  b += T(12,261,'FUEL REQ','hd-g','font-size:3cqw')+T(120,261,R.req!=null?R.req:'','hd-w','font-size:3.8cqw')+T(193,261,'KG','hd-g','font-size:3cqw');
+  b += T(268,261,'ETE','hd-g','font-size:3cqw')+T(312,261,R.ete!=null?Math.floor(R.ete/60)+'+'+String(R.ete%60).padStart(2,'0'):'','hd-w','font-size:3.8cqw');
+  b += `<div class="hd-b" style="left:${X(461)};top:${Y(232)};width:${W(111)};height:${H(51)};font-size:5.2cqw" onclick="fcClear()">CLEAR</div>`;
+  b += `<div class="hd-bar" style="left:0;top:${Y(293)};width:${W(474)};height:${H(49)}"></div>`;
+  b += `<div class="hd-b" style="left:${X(479)};top:${Y(290)};width:${W(93)};height:${H(51)};font-size:5.2cqw" onclick="closeModal()">DONE</div>`;
+  openModal('FUEL CALCULATOR', b);
+  document.getElementById('modalOverlay').classList.add('hd-on','fc-on');
 }
 
 /* SPD STRATEGY — PG 10-51/57/62: SEL is the only selection.
@@ -6684,7 +6871,7 @@ function renderTabs(){
     st.style.display = 'none';
   }
 
-  document.querySelector('.toprow').style.display = (state.app==='CNS' || state.app==='SYN' || state.app==='CHKL' || state.app==='MAP') ? 'none' : '';
+  document.querySelector('.toprow').style.display = (state.app==='CNS' || state.app==='SYN' || state.app==='CHKL' || state.app==='MAP' || state.app==='DATA') ? 'none' : '';
   if(state.app==='SYN'){ const c=document.getElementById('content'); if(c) c.style.setProperty('--tk', Math.min(1, c.clientWidth/632)); }
   // top-left page ID label
   document.getElementById('appLabel').textContent = state.app==='FMS' ? (IS_FRAME?'FMS2':'FMS1') : state.app;
@@ -7440,7 +7627,7 @@ function pagePerfArr(){
   ${C(246,163,`<div class="lbl">TRANS</div><div class="val dv">${state.fpln.arr.trans||''}</div>`)}
   ${C(381,163,`<div class="lbl">APPR</div><div class="val dv">${state.fpln.arr.appr||''}</div>`)}
   ${C(10,245,`<span class="btn abtn" style="width:${W(218)}" onclick="openArrivalsDialog()">ARRIVALS...</span>`)}
-  ${C(236,245,`<span class="btn abtn${(state.fpln.arr.appr||state.fpln.arr.rwy)?'':' disabled'}" style="width:${W(252)}"${(state.fpln.arr.appr||state.fpln.arr.rwy)?` onclick="openArrivalData()"`:''}>ARRIVAL DATA...</span>`)}
+  ${C(236,245,`<span class="btn abtn" style="width:${W(252)}" onclick="openArrivalData()">ARRIVAL DATA...</span>`)}
   ${C(497,245,`<span class="btn abtn" style="width:${W(200)}" onclick="openTempComp()">TEMP COMP...</span><div class="vsmsg ${state.fms.tempComp==='ON'?'':'grey'}" style="width:${W(200)}; ${state.fms.tempComp==='ON'?'color:#00e000;':''}">${state.fms.tempComp}</div>`)}
   <div class="dhr" style="top:${Y(308)}"></div>
   ${C(10,320,`<div class="lbl">AIRPORT (PERF)</div><div class="fw" style="width:${W(240)}">${state.arrAirport==='ORIG'?'':''}<span class="dropdown" onclick="state.arrAirport = (state.arrAirport==='DEST'?'ORIG':'DEST'); render(); event.stopPropagation();"><span class="dd-txt">${state.arrAirport==='ORIG'?`${state.fpln.entry.origin||'----'} (ORIG)`:`${state.fpln.entry.dest||'----'} (DEST)`}</span> <span class="arrow">▼</span></span></div>`)}
@@ -8619,7 +8806,7 @@ setInterval(function(){
 /* ================= Dual FMS =================
    Host document = FMS1. FMS2 = same page in an iframe (name "fms2").
    Shared data syncs both ways via postMessage; page/dialog/map UI stays local. */
-const LOCAL_KEYS = new Set(['app','main','sub','chklSub','defaultsSelect','fplnMode','modalTitle','modalBody','eclPhase','eclScroll','eclAutoPage','nn','holdExitArmed','map','nap','dlg','dlgRedraw','fixPage','legsPage','posRepPage','fltLogPage','synPage','dataSelect','dataDsplL','dataDsplR','proc','guide','modIdle']);
+const LOCAL_KEYS = new Set(['app','main','sub','chklSub','defaultsSelect','fplnMode','modalTitle','modalBody','eclPhase','eclScroll','eclAutoPage','nn','holdExitArmed','map','nap','dlg','dlgRedraw','fixPage','legsPage','posRepPage','fltLogPage','synPage','dataSelect','dataIn','dataCam','dataMenu','dataDsplL','dataDsplR','proc','guide','modIdle']);
 var __lastSync='';
 function sharedObj(){ const o={}; for(const k in state){ if(LOCAL_KEYS.has(k)||typeof state[k]==='function') continue; o[k]=state[k]; } return o; }
 function sharedSnap(){ return JSON.stringify(sharedObj()); }
@@ -8659,6 +8846,8 @@ window.addEventListener('message',function(e){
   else if(d.fms==='ready' && !IS_FRAME){ syncOut(true); }
   else if(d.fmsActive && !IS_FRAME){ setActiveSide(2); const m=document.getElementById('duMenu'); if(m) m.remove(); }
   else if(d.fmsCmd==='menu' && IS_FRAME){ toggleDuMenu({stopPropagation(){}},true); }
+  else if(d.fmsCmd==='getLocal' && IS_FRAME){ const o={}; LOCAL_KEYS.forEach(k=>{ if(typeof state[k]!=='function') o[k]=state[k]; }); parent.postMessage({fmsLocal:JSON.stringify(o)},'*'); }
+  else if(d.fmsLocal && !IS_FRAME){ finishSingle(d.fmsLocal); }
   else if(d.fmsCmd==='closemenu' && IS_FRAME){ const m=document.getElementById('duMenu'); if(m) m.remove(); }
 });
 function setActiveSide(n){
@@ -8682,11 +8871,32 @@ function toggleDual(){
     f.srcdoc=__FRAME_SRC;
     tab.textContent='SINGLE FMS';
   } else {
-    const b=document.getElementById('fms2Box'); if(b) b.remove();
-    window.__dual=false; w.classList.remove('dual','act1','act2');
-    tab.textContent='DUAL FMS';
+    if(window.__activeSide===2 && !window.__takingLocal){
+      // keep the selected (FMS2) screen: pull its page state into this document first
+      window.__takingLocal=true;
+      window.__localTimer=setTimeout(function(){ finishSingle(null); },400);
+      dualPeer().postMessage({fmsCmd:'getLocal'},'*');
+      return;
+    }
+    finishSingle(null);
   }
   setTimeout(fitApp,0); fitApp();
+}
+function finishSingle(localJson){
+  clearTimeout(window.__localTimer); window.__takingLocal=false;
+  if(!window.__dual) return;
+  const w=document.getElementById('appWrap'), tab=document.getElementById('navReopen');
+  if(localJson){
+    try{ const o=JSON.parse(localJson); const skip=new Set(['guide','dlg','modalTitle','modalBody','modIdle']);
+      for(const k in o){ if(!skip.has(k)) state[k]=o[k]; }
+      if(typeof closeModal==='function') closeModal();
+      const m=document.getElementById('duMenu'); if(m) m.remove();
+    }catch(_){}
+  }
+  const b=document.getElementById('fms2Box'); if(b) b.remove();
+  window.__dual=false; w.classList.remove('dual','act1','act2'); window.__activeSide=1;
+  tab.textContent='DUAL FMS';
+  render(); setTimeout(fitApp,0); fitApp();
 }
 document.addEventListener('pointerdown',function(e){
   if(IS_FRAME){ if(!e.target.closest) return; parent.postMessage({fmsActive:2},'*'); return; }
@@ -8702,6 +8912,15 @@ function dualUiFit(){
 }
 window.addEventListener('resize',dualUiFit); window.addEventListener('orientationchange',dualUiFit);
 dualUiFit();
+(function(){
+  const mo=document.getElementById('modalOverlay'), co=document.getElementById('cornerOverlay');
+  if(mo) mo.addEventListener('click',function(e){ if(e.target===mo) closeModal(); });
+  const m2=document.getElementById('modalOverlay2');
+  if(m2) m2.addEventListener('click',function(e){ if(e.target!==m2) return;
+    const r=mo.querySelector('.modal-box').getBoundingClientRect();
+    if(mo.style.display!=='none' && e.clientX>=r.left && e.clientX<=r.right && e.clientY>=r.top && e.clientY<=r.bottom) closeModal2(); else closeModal(); });
+  if(co){ co.style.pointerEvents='auto'; co.addEventListener('click',function(e){ if(!e.composedPath().some(function(n){return n.id==='cornerBox';})) closeCornerPopup(); }); }
+})();
 window.__syncReady=true;
 if(IS_FRAME){ window.addEventListener('load',function(){ parent.postMessage({fms:'ready'},'*'); }); }
 </script>
