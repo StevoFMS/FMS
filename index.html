@@ -1697,6 +1697,13 @@
   .pr-bar{flex:0 0 calc(var(--sw,584px)*.065); padding:0;}
 
 
+  .enum-menu.dd-menu{background:#000 !important; border:2px solid #b4b8bb !important; box-shadow:none !important; padding:0 !important; max-width:none !important; min-width:0 !important; box-sizing:border-box; overflow-y:auto; font-family:'Arial Narrow','Roboto Condensed',Arial,Helvetica,sans-serif;}
+  .dd-menu .enum-item{font-weight:400 !important; color:#fbfbf8; font-size:var(--ff,26px); height:var(--rh,34px); display:flex; align-items:center; padding:0 0 0 var(--pl,14px); line-height:1; white-space:nowrap; letter-spacing:0; background:transparent !important; box-sizing:border-box;}
+  .dd-menu .enum-item .txt{color:#fbfbf8 !important;}
+  .dd-menu .enum-item.dis .txt{color:#6b7075 !important;}
+  .dd-menu .enum-item.cur{color:#4db8f0 !important;}
+  .dd-menu .enum-item.cur .txt{color:#4db8f0 !important;}
+  .dd-menu .enum-item:hover,.dd-menu .enum-item:active{outline:2px solid #4db8f0; outline-offset:-2px;}
   .enum-menu.fctn-menu{background:#222 !important; border:2px solid #7c7c7c !important; box-shadow:none !important; padding:calc(var(--fz,1px)*4) 0 !important; min-width:0 !important; box-sizing:border-box; max-width:none !important; font-family:'Arial Narrow','Roboto Condensed',Arial,Helvetica,sans-serif;}
   .fctn-menu .enum-item{font-weight:400 !important;color:#fff; font-size:var(--ff,26px); padding:2px 9px; line-height:1.45; white-space:nowrap; letter-spacing:0; background:transparent !important;}
   .fctn-menu .enum-item.dash{color:#8a8a8a; opacity:1 !important;}
@@ -1829,7 +1836,7 @@
   .ifp-ack.dis{color:#bdbdbd; cursor:default;}
   /* ---- dual FMS ---- */
   html.frame, html.frame body{padding:0; margin:0; background:transparent; display:block; height:auto; overflow:hidden;}
-  html.frame .scratchwin, html.frame .guide-panel, html.frame .guide-reopen, html.frame .nav-reopen, html.frame .nav-panel{display:none !important;}
+  html.frame .trainnote, html.frame .scratchwin, html.frame .guide-panel, html.frame .guide-reopen, html.frame .nav-reopen, html.frame .nav-panel{display:none !important;}
   #appWrap.dual{display:grid; grid-template-columns:auto auto; column-gap:28px; justify-content:center;}
   #appWrap.dual .scratchwin{grid-column:1 / -1; justify-self:center;}
   #appWrap.dual .bezel, #appWrap.dual #fms2Box{outline:2px solid transparent; outline-offset:3px; border-radius:14px; transition:outline-color .15s;}
@@ -1984,6 +1991,7 @@
   .subtab.active::before{inset:2px 2px 0 2px;}
 
   /* scratchpad: separate window below the FMS display */
+  .trainnote{position:fixed; left:0; right:0; bottom:6px; text-align:center; font:500 10px/1.2 Arial,Helvetica,sans-serif; letter-spacing:.12em; color:#6b7075; user-select:none; pointer-events:none; z-index:5;}
   .scratchwin{width:628px; margin-top:8px; padding:8px 14px; box-sizing:border-box;
     background:linear-gradient(160deg,#2b2f33,#17191c 60%); border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,.5), inset 0 0 0 1px #000;}
   .scratchwin .scratchbar{height:34px; border:1px solid #333; border-radius:3px; font-size:16px; box-shadow:inset 0 0 8px rgba(0,0,0,.9);}
@@ -2365,6 +2373,39 @@
   .avp .av-c.dim .av-r.on .av-dot{background:#c4c8cb; box-shadow:inset 0 0 0 .5cqw #2a2c2e;}
   .avp .av-c.dim .av-r.on .av-rt{color:#c4c8cb;}
   .avp .av-c.dim .av-std{opacity:.6;}
+  /* hover highlight: blue outline on any selectable item */
+  .btn:hover:not(.dis):not(.disabled),
+  .dropdown:hover:not(.dis):not(.disabled),
+  .field:hover:not(.dis):not(.disabled),
+  .maintab:hover:not(.dis):not(.disabled),
+  .subtab:hover:not(.dis):not(.disabled),
+  .botbtn:hover:not(.dis):not(.disabled),
+  .syn-tile:hover:not(.dis):not(.disabled),
+  .cns-tab:hover:not(.dis):not(.disabled),
+  .cns-soft:hover:not(.dis):not(.disabled),
+  .cns-lsk:hover:not(.dis):not(.disabled),
+  .dukey:hover:not(.dis):not(.disabled),
+  .tn-soft:hover:not(.dis):not(.disabled),
+  .enum-item:hover:not(.dis):not(.disabled),
+  .act-menu-item:hover:not(.dis):not(.disabled),
+  .dep-item:hover:not(.dis):not(.disabled),
+  .task-item:hover:not(.dis):not(.disabled),
+  .nn-item:hover:not(.dis):not(.disabled),
+  .ecl-item:hover:not(.dis):not(.disabled),
+  .ecl-sr:hover:not(.dis):not(.disabled),
+  .ecl-phase-row:hover:not(.dis):not(.disabled),
+  .dlk-box:hover:not(.dis):not(.disabled),
+  .om-r:hover:not(.dis):not(.disabled),
+  .tm2-i:hover:not(.dis):not(.disabled),
+  .init-origin-opt:hover:not(.dis):not(.disabled),
+  .hd-b:hover:not(.dis):not(.disabled),
+  .hd-f:hover:not(.dis):not(.disabled),
+  .map-hot:hover:not(.dis):not(.disabled),
+  .nav-item:hover:not(.dis):not(.disabled),
+  .guide-item:hover:not(.dis):not(.disabled){outline:2px solid #4db8f0 !important; outline-offset:-2px;}
+  .maintab:hover:not(.dis):not(.disabled){border-radius:4px;}
+  /* trapezoid subtabs: outline would be clipped, so the 2px rim is recoloured instead */
+  .screen:not([data-app="CHKL"]) .subtab:hover:not(.dis):not(.disabled){outline:none !important; background:#4db8f0 !important;}
 </style>
 </head>
 <body>
@@ -2407,6 +2448,7 @@
   <div class="sw-exec"><div class="sw-light" id="swLight"></div><div class="sw-key sw-execk" onclick="swExec()">EXEC</div></div>
 </div>
 </div>
+<div class="trainnote" id="trainNote">TRAINING ONLY — NOT FOR NAVIGATION OR OPERATIONAL USE</div>
 <div class="guide-panel" id="guidePanel" style="display:none !important;">
   <div class="guide-header">
     <div>
@@ -4263,7 +4305,7 @@ function airacPeriods(){
   const now=new Date(), today=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate());
   const start=REF+Math.floor((today-REF)/CYC)*CYC;
   const f=function(t){const d=new Date(t);return String(d.getUTCDate()).padStart(2,'0')+MON[d.getUTCMonth()]+String(d.getUTCFullYear()).slice(2);};
-  return {prev:[f(start-CYC),f(start)], cur:[f(start),f(start+CYC)]};
+  return {prev:[f(start-CYC),f(start-DAY)], cur:[f(start),f(start+CYC-DAY)]};
 }
 
 function scratchKey(e){
@@ -4327,9 +4369,9 @@ function scratchMobileInputHandler(e){
 
 function fitApp(){ const w=document.getElementById('appWrap'); if(!w) return;
   if(WK){ w.style.zoom=''; w.style.transform='none'; if(IS_FRAME){ setSw(); return; } const h=w.offsetHeight, ww=w.offsetWidth;
-    const k=Math.min(1.25,(innerWidth-32)/ww,(innerHeight-32)/h); w.style.transform='scale('+Math.max(.3,k)+')'; setSw(); return; }
+    const k=Math.min(1.25,(innerWidth-32)/ww,(innerHeight-52)/h); w.style.transform='scale('+Math.max(.3,k)+')'; setSw(); return; }
   w.style.zoom=1; if(IS_FRAME){ setSw(); return; } const h=w.offsetHeight, ww=w.offsetWidth;
-  const k=Math.min(1.25,(innerWidth-32)/ww,(innerHeight-32)/h); w.style.zoom=Math.max(.3,k); setSw(); }
+  const k=Math.min(1.25,(innerWidth-32)/ww,(innerHeight-52)/h); w.style.zoom=Math.max(.3,k); setSw(); }
 window.addEventListener('resize', fitApp);
 function setSw(){ const sc=document.querySelector('.screen'); if(sc) document.documentElement.style.setProperty('--sw', sc.clientWidth+'px'); }
 window.addEventListener('resize', setSw);
@@ -4588,7 +4630,7 @@ function avioCycle(side, key, opts){
   render();
 }
 function avioDd(side, key, opts){
-  return `<span class="dropdown avio-dd" onclick="avioCycle('${side}','${key}',${JSON.stringify(opts).replace(/"/g,'&quot;')})">${state.avio[side][key]} <span class="arrow">▼</span></span>`;
+  return `<span class="dropdown avio-dd" onclick="ddMenu(event,${JSON.stringify(opts).replace(/"/g,'&quot;')},state.avio['${side}']['${key}'],o=>{state.avio['${side}']['${key}']=o;render();})">${state.avio[side][key]} <span class="arrow">▼</span></span>`;
 }
 function avioRadio(side, key, val, label, activeCls){
   const on = state.avio[side][key]===val;
@@ -4768,6 +4810,7 @@ function cbKeepScroll(fn){
   const l=document.getElementById('cbpList'); const t=l?l.scrollTop:0;
   fn(); const n=document.getElementById('cbpList'); if(n){ n.scrollTop=t; cbSyncThumb(); }
 }
+function cbStatusOf(i){ return CB_DATA[i]?CB_DATA[i].status:''; }
 function cbToggle(i){
   const c = CB_DATA[i];
   if(!c.pullable) return;
@@ -4809,7 +4852,7 @@ function pageSynCb(){
   rows.forEach(r=>{
     const rating = r.pullable ? `<span class="cbp-rt">${r.rating}</span>` : `<span class="cbp-rt ring">${r.rating}</span>`;
     const st = `<span class="cbp-st ${r.status==='IN'?'in':'out'}">${r.status}</span>`;
-    const dd = r.pullable ? `<span class="cbp-pull" onclick="cbToggle(${r.i})">▼</span>` : '';
+    const dd = r.pullable ? `<span class="cbp-pull" onclick="ddMenu(event,['IN','OUT'],'',o=>{ if(o!==cbStatusOf(${r.i})) cbToggle(${r.i}); })">▼</span>` : '';
     list += `<div class="cbp-row"><span class="cbp-nm">${r.name}</span><span class="cbp-lc">${r.loc}</span>${rating}${st}${dd}</div>`;
   });
   setTimeout(cbSyncThumb,0);
@@ -4817,8 +4860,8 @@ function pageSynCb(){
   <div class="cbp">
     <div class="cbp-lbls"><span class="l1">SORT BY:</span><span class="l2">FILTER:</span><span class="cbp-sim${state.cb.sim?' on':''}" onclick="cbSim()">SIM: ${state.cb.sim?'FAULTS':'NO FAULTS'}</span></div>
     <div class="cbp-ctl">
-      <span class="cbp-dd d1" onclick="cbCycleSort()"><span class="in">${state.cb.sort}</span><span class="ar">▼</span></span>
-      <span class="cbp-dd d2" onclick="cbCycleFilter()"><span class="in">${state.cb.filter}</span><span class="ar">▼</span></span>
+      <span class="cbp-dd d1" onclick="ddMenu(event,['BUS','NAME','LOCATION','STATUS'],state.cb.sort,o=>{state.cb.sort=o;render();})"><span class="in">${state.cb.sort}</span><span class="ar">▼</span></span>
+      <span class="cbp-dd d2" onclick="ddMenu(event,['ALL','IN','OUT'],state.cb.filter,o=>{state.cb.filter=o;render();})"><span class="in">${state.cb.filter}</span><span class="ar">▼</span></span>
       <span class="cbp-ref" onclick="cbRefresh()"><svg viewBox="0 0 40 30" width="100%" height="100%"><g fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M9 16a11 9 0 0 1 20-5"/><path d="M31 14a11 9 0 0 1-20 5"/></g><path d="M31 3v10h-10z" fill="#fff"/><path d="M9 27V17h10z" fill="#fff"/></svg></span>
     </div>
     <div class="cbp-hdr"><span class="nm">NAME</span><span class="lc">LOCATION</span><span class="rt">RATING</span><span class="st">STATUS</span></div>
@@ -4878,31 +4921,8 @@ function closeCornerPopup(){
 /* ---------- ACT / MOD / SEC flight-plan tile (FCOM 22-02-16..19) ---------- */
 function toggleActMenu(ev){
   ev.stopPropagation();
-  const existing = document.getElementById('actMenu');
-  if(existing){ existing.remove(); return; }
-  const menu = document.createElement('div');
-  menu.id = 'actMenu';
-  menu.className = 'act-menu';
-  const opts = [
-    ['ACT','ACT (Active flight plan)'],
-    ['MOD', state.pendingMod ? 'MOD (pending changes)' : 'MOD (no pending changes)'],
-    ['SEC','SEC (Secondary flight plan)']
-  ];
-  opts.forEach(([key,label])=>{
-    const item = document.createElement('div');
-    item.className = 'act-menu-item' + ((key==='MOD' && !state.pendingMod) ? ' disabled' : '');
-    item.textContent = label;
-    item.onclick = (e)=>{
-      e.stopPropagation();
-      if(key==='MOD' && !state.pendingMod) return;
-      state.fplnMode = key;
-      menu.remove();
-      render();
-    };
-    menu.appendChild(item);
-  });
-  ev.currentTarget.appendChild(menu);
-  document.addEventListener('click', function h(){ const m=document.getElementById('actMenu'); if(m) m.remove(); document.removeEventListener('click', h); });
+  if(document.getElementById('enumMenu')){ closeEnumMenu(); return; }
+  openDdList(ev.currentTarget, ['ACT','MOD','SEC'], state.fplnMode, o=>{ state.fplnMode=o; render(); }, state.pendingMod?[]:['MOD']);
 }
 
 /* ---------- MSG... soft switch (FCOM 22-02-101) ---------- */
@@ -4925,7 +4945,7 @@ function openMsgDialog(){
   if(!M.old.length){ b+=T(49,y,'NONE','#959b9f',24); }
   else M.old.forEach(m=>{ b+=T(49,y,m.text,'#fbfbf8',24); y+=step; });
   b+=`<div style="position:absolute;left:0;right:0;top:${Y(455)};bottom:0;background:#000"></div>`;
-  b+=T(6,468,(IS_FRAME?'FMS2':'FMS1'),'#e040e0',19);
+  b+=T(6,468,('FMS'+fmsNo()),'#e040e0',19);
   b+=`<div class="hd-b" style="left:${X(291)};top:${Y(457)};width:${C(85)};height:${C(46)};font-size:${C(22)}" onclick="doneMsg()">DONE</div>`;
   openModal('MESSAGES - FMS', b);
   document.getElementById('modalOverlay').classList.add('hd-on','mg-on');
@@ -4966,7 +4986,7 @@ function openThrustDialog(){
     const T=(x,y,t,col,fs,st)=>`<div class="hd-t" style="left:${X(x)};top:${Y(y)};color:${col};font-size:${C(fs)};letter-spacing:0;${st||''}">${t}</div>`;
     let b = T(9,18,'THRUST','#c9cdd0',25);
     b += T(68,66,'MODE TRANS','#959b9f',18);
-    b += `<div class="hd-b" style="left:${X(69)};top:${Y(83)};width:${C(125)};height:${C(45)};justify-content:flex-start" onclick="thrustToggleTrans()"><div style="margin-left:${C(4)};width:${C(84)};height:${C(33)};background:#141214;display:flex;align-items:center;padding-left:${C(5)};font-size:${C(27)}">${F.modeTrans==='AUTO'?'AUT':'MAN'}</div><span style="margin-left:${C(11)};font-size:${C(24)}">▼</span></div>`;
+    b += `<div class="hd-b" style="left:${X(69)};top:${Y(83)};width:${C(125)};height:${C(45)};justify-content:flex-start" onclick="ddMenu(event,['AUT','MAN'],'',o=>{ if((o==='AUT')!==(state.fms.modeTrans==='AUTO')) thrustToggleTrans(); })"><div style="margin-left:${C(4)};width:${C(84)};height:${C(33)};background:#141214;display:flex;align-items:center;padding-left:${C(5)};font-size:${C(27)}">${F.modeTrans==='AUTO'?'AUT':'MAN'}</div><span style="margin-left:${C(11)};font-size:${C(24)}">▼</span></div>`;
     const altCols = oei ? [['CRZ ALT',E.crzAlt||'-----'],['DRIFTDOWN','-----'],['OEI CLB','-----']] : [['CRZ ALT',E.crzAlt||'-----'],['OPT ALT','FL380'],['MAX ALT','FL380']];
     [292,431,557].forEach((x,i)=>{ b += T(x,94,altCols[i][0],'#959b9f',18) + T(x,123,altCols[i][1],'#fbfbf8',22); });
     [394,518].forEach(x=>{ b += `<div style="position:absolute;left:${X(x)};top:${Y(83)};width:${C(2)};height:${C(54)};background:#a9aeb2"></div>`; });
@@ -6056,30 +6076,64 @@ function closeEnumMenu(){
   const m = document.getElementById('enumMenu');
   if(m) m.remove();
 }
-function openEnumMenu(key, ev){
-  ev.stopPropagation();
+function openDdList(el, opts, cur, pick, dis){
   const existing = document.getElementById('enumMenu');
-  if(existing){ existing.remove(); return; }
-  const def = FMS_ENUMS[key];
-  if(!def) return;
-  const cur = fmsGet(key);
+  if(existing){ existing.remove(); }
+  if(!opts.some(o=>String(o)===String(cur))){
+    const tx=((el.querySelector&&el.querySelector('.dd-txt,.in'))||el).textContent.replace(/[▼▾]/g,'').trim();
+    const m=opts.find(o=>String(o)===tx)||opts.find(o=>tx&&String(o).indexOf(tx+' ')===0);
+    cur = m!=null ? m : null;
+  }
   const menu = document.createElement('div');
   menu.id = 'enumMenu';
-  menu.className = 'enum-menu';
-  let html = '';
-  def.opts.forEach(o=>{
-    html += `<div class="enum-item ${o===cur?'on':''}" onclick="fmsSet('${key}','${o.replace(/'/g,"\\'")}')">
-      <span class="dot"></span><span class="txt">${o}</span></div>`;
+  menu.className = 'enum-menu dd-menu';
+  opts.forEach((o,i)=>{
+    const it=document.createElement('div');
+    it.className='enum-item'+(dis&&dis.indexOf(o)>=0?' dis':'')+(cur!=null&&String(o)===String(cur)?' cur':'');
+    it.innerHTML='<span class="txt"></span>'; it.firstChild.textContent=o;
+    it.onclick=function(e){ if(it.classList.contains('dis')){ e.stopPropagation(); return; } closeEnumMenu(); pick(o); e.stopPropagation(); };
+    menu.appendChild(it);
   });
-  if(def.unlisted){
-    html += `<div class="enum-note">Further options are shown only in the Pilot Guide figure, which is a scanned image — not transcribed here rather than guessed.</div>`;
+  const sc = document.querySelector('.screen').getBoundingClientRect();
+  const r = el.getBoundingClientRect();
+  menu.style.setProperty('--ff', (r.height*0.56)+'px');
+  menu.style.setProperty('--rh', (r.height*1.02)+'px');
+  menu.style.setProperty('--pl', (Math.min(r.width,sc.width*0.3)*0.13)+'px');
+  if(el.closest && el.closest('.dep')){
+    const t = el.querySelector('.dd-txt');
+    if(t && t.firstChild){
+      const rg = document.createRange(); rg.selectNodeContents(t);
+      const tr = rg.getBoundingClientRect();
+      menu.style.setProperty('--pl', Math.max(0, tr.left - r.left - 2)+'px');   // 2px = menu border
+    }
   }
-  html += ``;
-  menu.innerHTML = html;
+  menu.style.setProperty('min-width', r.width+'px', 'important');
+  menu.style.maxHeight = (sc.height-16)+'px';
+  menu.style.zIndex = 300;
   document.body.appendChild(menu);
-  const r = ev.currentTarget.getBoundingClientRect();
-  menu.style.left = Math.min(r.left, window.innerWidth - menu.offsetWidth - 8) + 'px';
-  menu.style.top  = (r.bottom + 4) + 'px';
+  const mw=menu.offsetWidth, mh=menu.offsetHeight;
+  let left = Math.max(sc.left+4, Math.min(r.left, sc.right-mw-4));
+  let top = r.bottom;
+  if(top+mh > sc.bottom){
+    const roomBelow = sc.bottom-r.bottom, roomAbove = r.top-sc.top;
+    if(roomAbove >= mh) top = r.top-mh;                 // fits above: open above
+    else if(roomAbove > roomBelow){ menu.style.maxHeight=(roomAbove-2)+'px'; top = sc.top+2; }
+    else { menu.style.maxHeight=(roomBelow-2)+'px'; }   // otherwise stay below and scroll
+  }
+  menu.style.left = left+'px';
+  menu.style.top = top+'px';
+}
+function openEnumMenu(key, ev){
+  ev.stopPropagation();
+  if(document.getElementById('enumMenu')){ closeEnumMenu(); return; }
+  const def = FMS_ENUMS[key];
+  if(!def) return;
+  openDdList(ev.currentTarget, def.opts, fmsGet(key), o=>fmsSet(key,o));
+}
+function ddMenu(ev, opts, cur, pick, dis){
+  ev.stopPropagation();
+  if(document.getElementById('enumMenu')){ closeEnumMenu(); return; }
+  openDdList(ev.currentTarget, opts, cur, pick, dis);
 }
 document.addEventListener('click', ()=>closeEnumMenu());
 
@@ -6946,7 +7000,7 @@ function renderTabs(){
   document.querySelector('.toprow').style.display = (state.app==='CNS' || state.app==='SYN' || state.app==='CHKL' || state.app==='MAP' || state.app==='DATA') ? 'none' : '';
   if(state.app==='SYN'){ const c=document.getElementById('content'); if(c) c.style.setProperty('--tk', Math.min(1, c.clientWidth/632)); }
   // top-left page ID label
-  document.getElementById('appLabel').textContent = state.app==='FMS' ? (IS_FRAME?'FMS2':'FMS1') : state.app;
+  document.getElementById('appLabel').textContent = state.app==='FMS' ? ('FMS'+fmsNo()) : state.app;
 
   // fpln tile label
   document.getElementById('fplnTileLabel').textContent = state.fplnMode;
@@ -7031,22 +7085,20 @@ function pageDbaseStatus(){
   const R=(xr,y,html,cls)=>`<div class="dc rt ${cls||''}" style="right:${(100-xr/7.84).toFixed(2)}%;top:${Y(y)};">${html}</div>`;
   const ab=state.fms.airborne;
   const radio=(i,txt,cls,y)=>C(166,y,`<div class="rdo ${state.activePeriod===i?'on '+cls:''}" style="${ab?'opacity:.45;':''}" onclick="${ab?'':`state.activePeriod=${i}; render();`}"><span class="rd"><span class="rdi"></span></span><span class="rt2 ${state.activePeriod===i?cls:''}">${txt}</span></div>`);
-  const row=(lab,y)=>R(125,y+3,`<span class="grey sv">${lab}</span>`)+C(165,y,`<span class="val sb">BD-500-1A11</span>`)+C(447,y,`<span class="val sb">123-4567-890</span>`);
+  const row=(lab,y,pn)=>R(125,y+3,`<span class="grey sv">${lab}</span>`)+C(165,y,`<span class="val sb">BD-500-1A11</span>`)+C(447,y,`<span class="val sb">${pn}</span>`);
   return `
   <div class="pd dep st">
-  ${C(163,121,`<div class="lbl">A/C VARIANT</div><div class="val sb">CS 100</div>`)}
-  ${C(427,121,`<div class="lbl">ENGINE VARIANT</div><div class="val sb">PW1524G</div>`)}
-  ${C(165,293,`<div class="lbl">NAV DATA BASE</div><div class="val sb">J61 WORLD 00</div>`)}
+  ${C(163,121,`<div class="lbl">A/C VARIANT</div><div class="val sb">A220-300</div>`)}
+  ${C(427,121,`<div class="lbl">ENGINE VARIANT</div><div class="val sb">PW1524G-3</div>`)}
+  ${C(165,293,`<div class="lbl">NAV DATA BASE</div><div class="val sb">J61-WORLD-ARNV</div>`)}
   ${C(168,411,`<div class="lbl">ACTIVE PERIOD</div>`)}
   ${radio(0,`${airac.prev[0]}&nbsp;&nbsp;${airac.prev[1]}`,'yellow',445)}
   ${radio(1,`${airac.cur[0]}&nbsp;&nbsp;${airac.cur[1]}`,'green',490)}
-  ${C(560,432,`<span class="btn abtn" style="width:${W(215)}" onclick="simAirborneToggle()">SIM: ${ab?'AIRBORNE':'ON GROUND'}</span>`)}
   ${C(312,643,`<div class="lbl">DATA BASES</div>`)}
   ${C(165,699,`<div class="lbl">A/C MODEL</div>`)}${C(447,699,`<div class="lbl">PART NUMBER</div>`)}
   <div class="dhr" style="top:${Y(726)}; left:${X(165)}; width:${W(168)}"></div>
   <div class="dhr" style="top:${Y(726)}; left:${X(447)}; width:${W(180)}"></div>
-  ${row('PERF',731)}${row('VSPEED',778)}${row('WT&amp;BAL',829)}
-  ${C(19,903,`<span class="btn abtn" style="width:${W(252)}" onclick="openPrintReports()">PRINT REPORT...</span>`)}
+  ${row('PERF',731,'096-9286-021')}${row('VSPEED',778,'096-9284-004')}${row('WT&amp;BAL',829,'096-9285-003')}
   </div>
   `;
 }
@@ -7111,7 +7163,7 @@ function pageDbaseDefaults(){
   const F=(x,y,w,t,dim)=>C(x,y-18,`<span class="fw${dim&&!unl?' dimf':''}" style="display:block;width:${W(w)}">${field(t)}</span>`,'',36);
   const D=(x,y,w,html,dim)=>C(x,y-24,`<span class="ddw${dim&&!unl?' dimf':''}" style="display:block;width:${W(w)}">${html}</span>`,'',48);
   const u=(x,y,t)=>C(x,y-15,`<span class="grey pu">${t}</span>`,'',19);
-  const menu = `<span class="dropdown" onclick="toggleDefaultsSelect(event)"><span class="dd-txt">${state.defaultsSelect}</span> <span class="arrow">▼</span></span>`;
+  const menu = `<span class="dropdown" onclick="ddMenu(event,['FPLN/PERF','FUEL MGMT'],state.defaultsSelect,o=>{state.defaultsSelect=o;render();})"><span class="dd-txt">${state.defaultsSelect}</span> <span class="arrow">▼</span></span>`;
   let h = L(8,195,'SELECT')+D(91,196,194,menu);
   if(isFuel){
     const rows=[['RESERVE/CONTINGENCY','5.0 %'],['RESERVE/CONTINGENCY MAX','---.- %',1],['RESERVE/CONTINGENCY MIN','---.- %',1],['TAXI FUEL','---- KG',1],['FUEL FACTOR','0.0 %'],['FINAL TIME','0:30']];
@@ -7533,7 +7585,7 @@ function pagePerfDep(){
   ${C(603,248,`<div class="lbl">CLB THRUST</div><div class="fw" style="width:${W(143)}">${ddSel('clbThrust')}</div>`)}
   ${C(8,344,`<div class="lbl">APR</div><div class="fw" style="width:${W(160)}">${state.toThrust==='TO'
       ? `${ddDisabled('DISARM')}`
-      : `<span class="dropdown" onclick="modTouch(); state.apr=!state.apr; state.fms.vspeedStatus=''; state.vspeedsComplete=false; render(); event.stopPropagation();"><span class="dd-txt">${state.apr?'ARMED':'DISARM'}</span> <span class="arrow">▼</span></span>`}</div>`)}
+      : `<span class="dropdown" onclick="ddMenu(event,['ARMED','DISARM'],state.apr?'ARMED':'DISARM',o=>{ if((o==='ARMED')===state.apr) return; modTouch(); state.apr=!state.apr; state.fms.vspeedStatus=''; state.vspeedsComplete=false; render(); })"><span class="dd-txt">${state.apr?'ARMED':'DISARM'}</span> <span class="arrow">▼</span></span>`}</div>`)}
   ${C(300,433,`<div class="lbl">V1</div><div class="fw vb">${pfField('v1')}</div>`)}
   ${C(383,433,`<div class="lbl">VR</div><div class="fw vb">${pfField('vr')}</div>`)}
   ${C(466,433,`<div class="lbl">V2</div><div class="fw vb">${pfField('v2')}</div>`)}
@@ -7679,7 +7731,7 @@ function pagePerfArr(){
   const addNum = parseInt(state.perf.entry.vrefAdd, 10) || 0;
   const vac = hasVref ? (vrefNum + addNum + 1) : null;
   const vga = hasVref ? (vrefNum + addNum + 11) : null;
-  const arrApt = `<span class="dropdown" onclick="state.arrAirport = (state.arrAirport==='DEST'?'ORIG':'DEST'); render(); event.stopPropagation();">${state.arrAirport==='ORIG'?`${state.fpln.entry.origin||'----'} (ORIG)`:`${state.fpln.entry.dest||'----'} (DEST)`} <span class="arrow">▼</span></span>`;
+  const arrApt = `<span class="dropdown" onclick="ddMenu(event,[(state.fpln.entry.dest||'----')+' (DEST)',(state.fpln.entry.origin||'----')+' (ORIG)'],'',o=>{ state.arrAirport=/\\(ORIG\\)$/.test(o)?'ORIG':'DEST'; render(); })">${state.arrAirport==='ORIG'?`${state.fpln.entry.origin||'----'} (ORIG)`:`${state.fpln.entry.dest||'----'} (DEST)`} <span class="arrow">▼</span></span>`;
   const lwTxt = (function(){
     const zfw = parseInt(state.fpln.entry.zfwWt,10);
     if(isNaN(zfw)) return '----- KG';
@@ -7702,7 +7754,7 @@ function pagePerfArr(){
   ${C(236,245,`<span class="btn abtn" style="width:${W(252)}" onclick="openArrivalData()">ARRIVAL DATA...</span>`)}
   ${C(497,245,`<span class="btn abtn" style="width:${W(200)}" onclick="openTempComp()">TEMP COMP...</span><div class="vsmsg ${state.fms.tempComp==='ON'?'':'grey'}" style="width:${W(200)}; ${state.fms.tempComp==='ON'?'color:#00e000;':''}">${state.fms.tempComp}</div>`)}
   <div class="dhr" style="top:${Y(308)}"></div>
-  ${C(10,320,`<div class="lbl">AIRPORT (PERF)</div><div class="fw" style="width:${W(240)}">${state.arrAirport==='ORIG'?'':''}<span class="dropdown" onclick="state.arrAirport = (state.arrAirport==='DEST'?'ORIG':'DEST'); render(); event.stopPropagation();"><span class="dd-txt">${state.arrAirport==='ORIG'?`${state.fpln.entry.origin||'----'} (ORIG)`:`${state.fpln.entry.dest||'----'} (DEST)`}</span> <span class="arrow">▼</span></span></div>`)}
+  ${C(10,320,`<div class="lbl">AIRPORT (PERF)</div><div class="fw" style="width:${W(240)}">${state.arrAirport==='ORIG'?'':''}<span class="dropdown" onclick="ddMenu(event,[(state.fpln.entry.dest||'----')+' (DEST)',(state.fpln.entry.origin||'----')+' (ORIG)'],'',o=>{ state.arrAirport=/\\(ORIG\\)$/.test(o)?'ORIG':'DEST'; render(); })"><span class="dd-txt">${state.arrAirport==='ORIG'?`${state.fpln.entry.origin||'----'} (ORIG)`:`${state.fpln.entry.dest||'----'} (DEST)`}</span> <span class="arrow">▼</span></span></div>`)}
   ${C(10,424,`<div class="lbl">OAT</div><div class="fw u">${pfField('oatArr')}</div>`)}
   ${C(197,424,`<div class="lbl">RWY WIND</div><div class="fw" style="width:${W(153)}">${pfField('rwyWindArr')}</div>`)}
   ${C(418,462,`<div class="val dv">/</div>`)}
@@ -8915,7 +8967,8 @@ window.addEventListener('message',function(e){
   if(IS_FRAME){ if(e.source!==parent) return; }
   else { const f=document.getElementById('fms2Frame'); if(!f||e.source!==f.contentWindow) return; }
   if(d.fmsSync){ applySync(d.fmsSync); }
-  else if(d.fms==='ready' && !IS_FRAME){ syncOut(true); }
+  else if(d.fms==='ready' && !IS_FRAME){ syncOut(true); if(window.__pendingLocal){ dualPeer().postMessage({fmsSetLocal:window.__pendingLocal},'*'); window.__pendingLocal=null; } }
+  else if(d.fmsSetLocal && IS_FRAME){ applyLocal(d.fmsSetLocal); render(); }
   else if(d.fmsActive && !IS_FRAME){ setActiveSide(2); const m=document.getElementById('duMenu'); if(m) m.remove(); }
   else if(d.fmsCmd==='menu' && IS_FRAME){ toggleDuMenu({stopPropagation(){}},true); }
   else if(d.fmsCmd==='getLocal' && IS_FRAME){ const o={}; LOCAL_KEYS.forEach(k=>{ if(typeof state[k]!=='function') o[k]=state[k]; }); parent.postMessage({fmsLocal:JSON.stringify(o)},'*'); }
@@ -8930,6 +8983,15 @@ function menuKey(ev){
   if(window.__dual && window.__activeSide===2){ ev.stopPropagation(); dualPeer().postMessage({fmsCmd:'menu'},'*'); return; }
   toggleDuMenu(ev,true);
 }
+function localStateJson(){ const o={}; LOCAL_KEYS.forEach(k=>{ if(typeof state[k]!=='function') o[k]=state[k]; }); return JSON.stringify(o); }
+function applyLocal(j){
+  try{ const o=JSON.parse(j); const skip=new Set(['guide','dlg','modalTitle','modalBody','modIdle']);
+    for(const k in o){ if(!skip.has(k)) state[k]=o[k]; }
+    if(typeof closeModal==='function') closeModal();
+    const m=document.getElementById('duMenu'); if(m) m.remove();
+  }catch(_){}
+}
+function fmsNo(){ return IS_FRAME?2:(window.__fmsNum||1); }
 function toggleDual(){
   if(IS_FRAME) return;
   const w=document.getElementById('appWrap'), tab=document.getElementById('navReopen');
@@ -8939,12 +9001,14 @@ function toggleDual(){
     const f=document.createElement('iframe'); f.id='fms2Frame'; f.name='fms2'; f.setAttribute('scrolling','no');
     f.style.cssText='width:'+bz.offsetWidth+'px;height:'+bz.offsetHeight+'px;border:0;display:block;background:transparent;border-radius:14px';
     box.appendChild(f); bz.after(box);
-    window.__dual=true; w.classList.add('dual'); setActiveSide(1);
+    window.__pendingLocal=null;
+    if(window.__fmsNum===2 && window.__otherLocal){ window.__pendingLocal=localStateJson(); applyLocal(window.__otherLocal); }
+    else { window.__pendingLocal = window.__otherLocal || localStateJson(); }
+    window.__dual=true; var prev=window.__fmsNum||1; window.__fmsNum=1; render(); w.classList.add('dual'); setActiveSide(prev);
     f.srcdoc=__FRAME_SRC;
     tab.textContent='SINGLE FMS';
   } else {
-    if(window.__activeSide===2 && !window.__takingLocal){
-      // keep the selected (FMS2) screen: pull its page state into this document first
+    if(!window.__takingLocal){
       window.__takingLocal=true;
       window.__localTimer=setTimeout(function(){ finishSingle(null); },400);
       dualPeer().postMessage({fmsCmd:'getLocal'},'*');
@@ -8957,14 +9021,10 @@ function toggleDual(){
 function finishSingle(localJson){
   clearTimeout(window.__localTimer); window.__takingLocal=false;
   if(!window.__dual) return;
+  const sel=window.__activeSide||1;
   const w=document.getElementById('appWrap'), tab=document.getElementById('navReopen');
-  if(localJson){
-    try{ const o=JSON.parse(localJson); const skip=new Set(['guide','dlg','modalTitle','modalBody','modIdle']);
-      for(const k in o){ if(!skip.has(k)) state[k]=o[k]; }
-      if(typeof closeModal==='function') closeModal();
-      const m=document.getElementById('duMenu'); if(m) m.remove();
-    }catch(_){}
-  }
+  if(localJson && sel===2){ window.__otherLocal=localStateJson(); applyLocal(localJson); window.__fmsNum=2; }
+  else { window.__otherLocal = localJson||null; window.__fmsNum=1; }
   const b=document.getElementById('fms2Box'); if(b) b.remove();
   window.__dual=false; w.classList.remove('dual','act1','act2'); window.__activeSide=1;
   tab.textContent='DUAL FMS';
